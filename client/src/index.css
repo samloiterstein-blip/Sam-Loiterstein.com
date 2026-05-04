@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  body {
+    @apply bg-cream text-ink-800 font-sans;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background-color: theme("colors.sage.200");
+    color: theme("colors.sage.900");
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-sage-500 ring-offset-2 ring-offset-cream;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-sage-700;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-8 bg-sage-400;
+  }
+
+  .heading {
+    @apply font-display text-3xl font-medium leading-[1.1] tracking-tightish text-ink-900 sm:text-4xl md:text-5xl;
+  }
+
+  .subheading {
+    @apply mt-4 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-1 text-ink-900 transition-colors hover:text-sage-700;
+  }
+
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-300 ease-out;
+  }
+
+  .link-underline:hover::after {
+    @apply scale-x-100;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genre Intelligence Engine Case Study</title>
+    <link rel="stylesheet" href="/case-studies/styles.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="back" href="/">← Back to site</a>
+      <h1>Genre Intelligence Engine</h1>
+      <div class="meta">2025 • ML and analytics case study</div>
+      <div class="stack">
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">R</span>
+        <span class="chip">JavaScript</span>
+        <span class="chip">TypeScript</span>
+      </div>
+
+      <section class="card">
+        <h2>Problem</h2>
+        <p>
+          Music and event platforms often treat genres as static labels, which limits discovery and recommendation quality.
+          I built a data mining system that learns real relationships between genres from artist and event behavior.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Approach</h2>
+        <ul>
+          <li>Built a two-stage pipeline: preprocessing and mining.</li>
+          <li>Cleaned and normalized genre signals from large JamBase-style artist and event datasets.</li>
+          <li>Enriched missing metadata, built genre co-occurrence maps, and generated taxonomy paths.</li>
+          <li>Trained embeddings and clustering outputs to support user preference scoring and feed ranking.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Outputs</h2>
+        <ul>
+          <li>Genre taxonomy paths and cluster keys for explainable grouping.</li>
+          <li>Event clusters and artist embedding clusters for recommendation candidate generation.</li>
+          <li>User preference and affinity outputs for personalization.</li>
+          <li>A ranked personalized feed proof of concept.</li>
+        </ul>
+      </section>
+
+      <div class="actions">
+        <a class="btn" href="/reports/data-mining-report-revised.docx" target="_blank" rel="noreferrer">Open full report</a>
+      </div>
+    </main>
+  </body>
+  </html>

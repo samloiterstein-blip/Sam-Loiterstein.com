@@ -1,0 +1,24 @@
+{
+  "name": "sam-loiterstein-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal website for Sam Loiterstein. Vite and React frontend, Express backend for the contact form.",
+  "scripts": {
+    "dev": "concurrently -k -n client,server -c green,cyan \"npm:dev:client\" \"npm:dev:server\"",
+    "dev:client": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run dev",
+    "build": "npm --prefix client run build && npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "build:server": "npm --prefix server run build",
+    "start": "npm --prefix server run start",
+    "preview": "npm --prefix client run preview",
+    "install:all": "npm install && npm --prefix client install && npm --prefix server install",
+    "lint": "npm --prefix client run lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}
