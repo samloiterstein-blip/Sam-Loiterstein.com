@@ -1,0 +1,11 @@
+{
+  "installCommand": "npm --prefix client install --include=dev && npm --prefix server install --include=dev",
+  "buildCommand": "npm --prefix client run build",
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    }
+  ]
+}
