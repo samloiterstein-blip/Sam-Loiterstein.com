@@ -1,6 +1,6 @@
 /**
  * Single source of truth for site copy.
- * All entries follow AI-Policy.md and STYLE-GUIDE.md.
+ * All entries follow AI-Policy.md, config-tone.txt, and STYLE-GUIDE.md.
  *
  * Editing rules:
  *  - No em dashes or en dashes. Use commas, periods, colons, parentheses, or "to".
@@ -20,7 +20,7 @@ export const site = {
   initials: "SL",
   tagline: "Builder. Operator. Growth partner.",
   description:
-    "I help early stage teams turn messy ideas into usable products, repeatable systems, and sharper go to market motion.",
+    "I help early stage teams turn early concepts into usable products, repeatable systems, and defined go to market motion.",
   email: "samloiterstein@gmail.com",
   location: "Washington, DC",
   resumeUrl: "/Sam-Loiterstein-Resume.pdf",
@@ -64,14 +64,14 @@ export const about = {
   values: [
     {
       title: "Build patiently",
-      body: "Durable companies come from clear systems, consistent feedback loops, and less performative urgency.",
+      body: "Durable companies come from clear systems, consistent feedback loops, and measured release cadence.",
     },
     {
       title: "Operator's eye",
-      body: "Good strategy has to survive the calendar, the CRM, the team meeting, and the customer call.",
+      body: "Strategy has to survive the calendar, the CRM, the team meeting, and the customer call.",
     },
     {
-      title: "Taste matters",
+      title: "Surface signals",
       body: "Products, decks, workflows, and brands communicate before anyone reads the fine print.",
     },
   ],
@@ -98,10 +98,14 @@ export const about = {
 
 export type TimelineEntry = {
   period: string;
+  startYear: number;
+  endYear: number | "present";
+  barColor: string;
   title: string;
   org: string;
   logoLabel?: string;
   logoSrc?: string;
+  logoBackground?: string;
   location?: string;
   description: string;
   highlights?: string[];
@@ -123,15 +127,22 @@ export const resume = {
   experience: [
     {
       period: "2025 to Present",
+      startYear: 2025,
+      endYear: "present",
+      barColor: "#ff007f",
       title: "Founder",
       org: "Synth Inc",
       logoLabel: "SY",
       logoSrc: "/logos/synth.png",
+      logoBackground: "#000000",
       description:
         "Building a live music platform for discovering shows, connecting with fans, and turning concerts back into shared experiences.",
     },
     {
       period: "2024 to Present",
+      startYear: 2024,
+      endYear: "present",
+      barColor: "#0a0a0a",
       title: "Co-Founder and CEO",
       org: "Nexus Consulting",
       logoLabel: "NX",
@@ -141,6 +152,9 @@ export const resume = {
     },
     {
       period: "2025",
+      startYear: 2025,
+      endYear: 2025,
+      barColor: "#1b3a6b",
       title: "Revenue Operations",
       org: "SBI, The Growth Advisory",
       logoLabel: "SBI",
@@ -150,6 +164,9 @@ export const resume = {
     },
     {
       period: "2024 to 2025",
+      startYear: 2024,
+      endYear: 2025,
+      barColor: "#5c2d91",
       title: "Movement Building and Operations",
       org: "BBYO",
       logoLabel: "BBYO",
@@ -159,6 +176,9 @@ export const resume = {
     },
     {
       period: "2023",
+      startYear: 2023,
+      endYear: 2023,
+      barColor: "#2d5a27",
       title: "Financial Management Intern",
       org: "Federal Reserve Bank of St. Louis",
       logoLabel: "FR",
@@ -170,6 +190,9 @@ export const resume = {
   education: [
     {
       period: "2023 to 2027",
+      startYear: 2023,
+      endYear: 2027,
+      barColor: "#002856",
       title: "BS, Business Analytics, Honors Program",
       org: "The George Washington University",
       logoSrc: "/logos/gwu.png",
@@ -178,21 +201,15 @@ export const resume = {
     },
     {
       period: "2025 to 2026",
+      startYear: 2025,
+      endYear: 2026,
+      barColor: "#0077b6",
       title: "Student in residence AI / Machine Learning",
       org: "Vrije Universiteit Amsterdam",
       logoLabel: "VU",
       logoSrc: "/logos/vu.png",
       description:
         "International exchange focused on analytics, European go to market patterns, and applied business research.",
-    },
-    {
-      period: "2019 to 2023",
-      title: "High School",
-      org: "Ladue Horton Watkins High School",
-      logoLabel: "LHW",
-      logoSrc: "/logos/ladue.png",
-      description:
-        "Completed core college preparatory coursework and co-curricular leadership activities.",
     },
   ] satisfies TimelineEntry[],
   credentialsTitle: "Licenses and certifications",
@@ -273,6 +290,21 @@ export type Project = {
   href?: string;
 };
 
+export type FeaturedProject = Project & {
+  href: string;
+  logoSrc: string;
+  logoAlt: string;
+  brand: {
+    accent: string;
+    accentMuted: string;
+    surface: string;
+    border: string;
+    tagBg: string;
+    tagText: string;
+    logoBackground?: string;
+  };
+};
+
 export const projectsSection = {
   eyebrow: "Work",
   title: "Past work, services, and use cases",
@@ -280,23 +312,73 @@ export const projectsSection = {
     "Selected ventures plus the engagements and operating problems I help solve.",
 };
 
-export const projects: Project[] = [
+export const featuredProjectsSection = {
+  eyebrow: "Founder work",
+  title: "Ventures I am building",
+  description: "",
+};
+
+export const featuredProjects: FeaturedProject[] = [
   {
     title: "Synth",
     year: "2025",
     description:
-      "Live music discovery and fan connection platform built to make concerts more social and accessible.",
+      "Live music discovery and fan connection platform built to make concerts more social and accessible. Synth helps music lovers find shows, match with friends going to the same events, and share the live experience in one mobile-first community, from discovery through encore.",
     tags: ["Product", "Consumer", "Music", "Mobile"],
     href: "https://getsynth.app",
+    logoSrc: "/logos/synth.png",
+    logoAlt: "Synth logo",
+    brand: {
+      accent: "#ff007f",
+      accentMuted: "#ffe5f0",
+      surface: "#fff8fb",
+      border: "#ffc2dc",
+      tagBg: "#ffe5f0",
+      tagText: "#9d0049",
+      logoBackground: "#000000",
+    },
   },
   {
     title: "Nexus Consulting",
     year: "2024",
     description:
-      "Student powered consulting firm scaled from 4 founders to 200+ analysts and 20+ clients.",
+      "Student-powered consulting firm scaled from four founders into a 200+ analyst organization serving 20+ clients. Nexus trains analysts and delivers strategy, operations, and business development for client teams.",
     tags: ["Consulting", "Operations", "Growth"],
     href: "https://nxsconsultants.com",
+    logoSrc: "/logos/nexus.png",
+    logoAlt: "Nexus Consulting logo",
+    brand: {
+      accent: "#0a0a0a",
+      accentMuted: "#f5f5f5",
+      surface: "#fafafa",
+      border: "#e5e5e5",
+      tagBg: "#f0f0f0",
+      tagText: "#262626",
+      logoBackground: "#ffffff",
+    },
   },
+  {
+    title: "SDR-as-a-Service",
+    year: "2026",
+    description:
+      "Custom integrated environment for JamBase across LinkedIn, Apollo, and HubSpot. Supports marketing, PR, comms, prep, research, execution, outbound, and CRM management across one sales motion.",
+    tags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
+    href: "https://data.jambase.com",
+    logoSrc: "/logos/sdr.svg",
+    logoAlt: "SDR-as-a-Service for JamBase",
+    brand: {
+      accent: "#1e3a5f",
+      accentMuted: "#e8eef5",
+      surface: "#f7f9fc",
+      border: "#c5d4e8",
+      tagBg: "#e8eef5",
+      tagText: "#1e3a5f",
+      logoBackground: "#1e3a5f",
+    },
+  },
+];
+
+export const projects: Project[] = [
   {
     title: "Genre Intelligence Engine",
     year: "2025",
@@ -319,7 +401,7 @@ export const projects: Project[] = [
     description:
       "Built and deployed a Node and Express mapping platform with ingest workflows, geocoding, media-kit generation, and optional Supabase persistence for 24/7 response operations.",
     tags: ["JavaScript", "TypeScript", "Python", "SQL"],
-    href: "/case-studies/nacs-foundation-partner-map.html",
+    href: "https://www.conveniencecares.org/24-7-Day",
   },
   {
     title: "Sustainable AI Data Centers Research",
@@ -333,17 +415,9 @@ export const projects: Project[] = [
     title: "Enterprise LinkedIn Voice + Analytics",
     year: "2025",
     description:
-      "Designed a white-label enterprise platform for AI-assisted LinkedIn thought leadership with automated posting workflows, team analytics, and human-like voice controls.",
+      "Designed a multi-tenant enterprise platform for AI-assisted LinkedIn publishing with automated posting workflows, team analytics, and configurable voice controls.",
     tags: ["AI", "Analytics", "JavaScript", "TypeScript"],
     href: "/case-studies/enterprise-linkedin-voice-analytics.html",
-  },
-  {
-    title: "SDR Automation Application",
-    year: "2026",
-    description:
-      "Built SDRBase, a HubSpot-backed RevOps platform that unifies prospecting, sequence workflows, AI news signals, and forecasting into one operating dashboard.",
-    tags: ["JavaScript", "TypeScript", "SQL", "AI"],
-    href: "/case-studies/sdr-automation-application.html",
   },
 ];
 
@@ -407,10 +481,10 @@ export const servicesSection = {
   eyebrow: "Work with me",
   title: "Ways I can help",
   description:
-    "I take on a small number of engagements at a time. If anything below maps to where you are stuck or where you are headed, send a note.",
+    "I take on a small number of engagements at a time. If anything below matches your scope, send a note.",
   ctaPrompt: "Have a different problem?",
   ctaSubcopy:
-    "Tell me what you are working on. If it is not a fit, I will refer you to someone who is.",
+    "Tell me what you are working on. I will refer mismatched inquiries elsewhere.",
   ctaButton: "Contact",
 };
 
@@ -418,7 +492,7 @@ export const services: Service[] = [
   {
     title: "Startup GTM and growth strategy",
     description:
-      "For founders who need clearer ICPs, tighter positioning, better sales motion, and useful experiments.",
+      "For founders defining ICP, positioning, sales motion, and shipping experiments.",
     bullets: ["ICP and positioning", "Sales motion", "Experiments that ship"],
     icon: LineChart,
   },
@@ -439,7 +513,7 @@ export const services: Service[] = [
   {
     title: "Student powered research and execution",
     description:
-      "For companies that need sharp research, market mapping, competitive analysis, or execution capacity.",
+      "For companies running research, market mapping, competitive analysis, or execution sprints.",
     bullets: ["Market mapping", "Competitive analysis", "Execution capacity"],
     icon: Sparkles,
   },
@@ -460,7 +534,7 @@ export const insights = {
     "Essays on building, operating, and writing. Published when there is something to say.",
   drafts: [
     {
-      title: "Why live music needs better social infrastructure",
+      title: "Live music social infrastructure",
       tag: "Product",
       date: "Coming soon",
     },
@@ -475,7 +549,7 @@ export const insights = {
       date: "Coming soon",
     },
     {
-      title: "Taste is a growth function",
+      title: "Taste in growth systems",
       tag: "Strategy",
       date: "Coming soon",
     },

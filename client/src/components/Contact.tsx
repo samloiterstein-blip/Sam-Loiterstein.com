@@ -122,7 +122,9 @@ export function Contact() {
             className="rounded-2xl border border-ink-100 bg-white p-6 shadow-soft sm:p-8"
           >
             <div aria-hidden className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
-              <label htmlFor="company">Company (do not fill)</label>
+              <label htmlFor="company" className="sr-only">
+                Company
+              </label>
               <input
                 id="company"
                 type="text"

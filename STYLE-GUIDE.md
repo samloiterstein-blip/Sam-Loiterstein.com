@@ -1,6 +1,6 @@
 # Site Style Guide
 
-This guide governs all written content on `sam-loiterstein.com`. It builds on `AI-Policy.md`. The policy is the floor. This guide adds project-specific rules and conventions on top.
+This guide governs all written content on `sam-loiterstein.com`. It builds on `AI-Policy.md` and `config-tone.txt`. The policy is the floor. The tone file defines register. This guide adds project-specific rules and conventions on top.
 
 When this guide and the policy conflict, the policy wins. When two guide rules conflict, follow the order in `AI-Policy.md` section 8.
 
@@ -51,7 +51,7 @@ Avoid trailing ellipsis (`…` or `...`) in body copy. Loading states may use `S
 
 ## 3. Voice and Tone
 
-Inherits `AI-Policy.md` section 3. Site-specific defaults:
+Inherits `AI-Policy.md` section 3 and `config-tone.txt`. Site-specific defaults:
 
 - First person singular: `I`. Never `we` (single founder voice).
 - Address the reader as `you` only when describing services. Avoid generic `you` framing in About copy.
@@ -142,4 +142,4 @@ Allowed factual modifiers when verifiably accurate: `early stage`, `student powe
 
 - All site-visible copy lives in `client/src/data/content.ts` whenever possible.
 - Pull requests that introduce em dashes, en dashes, interpuncts, or banned phrasing are not merged until rewritten.
-- Generated copy from any AI tool must be reviewed against `AI-Policy.md` before being committed. The tool's output is not exempt from review.
+- Generated copy from any AI tool must be reviewed against `AI-Policy.md`, `config-tone.txt`, and this guide before being committed. The tool's output is not exempt from review.

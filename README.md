@@ -2,13 +2,14 @@
 
 Personal website for Sam Loiterstein. Vite plus React on the frontend with Tailwind CSS and Framer Motion. Express backend handles the contact form.
 
-All copy on the site complies with `AI-Policy.md` and `STYLE-GUIDE.md`.
+All copy on the site complies with `AI-Policy.md`, `config-tone.txt`, and `STYLE-GUIDE.md`.
 
 ## Layout
 
 ```
 sam-loiterstein.com/
   AI-Policy.md
+  config-tone.txt
   STYLE-GUIDE.md
   package.json            workspace scripts
   client/                 Vite, React, TypeScript, Tailwind, Framer Motion

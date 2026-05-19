@@ -1,10 +1,17 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Section } from "./ui/Section";
 import { Tag } from "./ui/Tag";
 import { Button } from "./ui/Button";
-import { projects, projectsSection, services, servicesSection } from "@/data/content";
+import {
+  featuredProjects,
+  featuredProjectsSection,
+  projects,
+  projectsSection,
+  services,
+  servicesSection,
+} from "@/data/content";
 
 export function Projects() {
   const [selectedSkill, setSelectedSkill] = useState("All");
@@ -32,6 +39,93 @@ export function Projects() {
       description={projectsSection.description}
     >
       <div className="space-y-10">
+        <div>
+          <div className="text-xs uppercase tracking-[0.16em] text-ink-500">
+            {featuredProjectsSection.eyebrow}
+          </div>
+          {featuredProjectsSection.description && (
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-600">
+              {featuredProjectsSection.description}
+            </p>
+          )}
+          <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {featuredProjects.map((p, i) => (
+              <motion.a
+                key={p.title}
+                href={p.href}
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -3 }}
+                style={
+                  {
+                    "--brand-accent": p.brand.accent,
+                    "--brand-accent-muted": p.brand.accentMuted,
+                    "--brand-surface": p.brand.surface,
+                    "--brand-border": p.brand.border,
+                    "--brand-tag-bg": p.brand.tagBg,
+                    "--brand-tag-text": p.brand.tagText,
+                    "--brand-logo-bg": p.brand.logoBackground ?? "#ffffff",
+                  } as CSSProperties
+                }
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--brand-border)] bg-[var(--brand-surface)] p-6 shadow-soft transition-all duration-300 hover:border-[var(--brand-accent)] hover:shadow-[0_16px_40px_-16px_color-mix(in_srgb,var(--brand-accent)_35%,transparent)] sm:p-7"
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-[var(--brand-accent)]"
+                />
+
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex min-w-0 items-center gap-4">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-2xl border border-[var(--brand-border)] bg-[var(--brand-logo-bg)] p-2 shadow-sm">
+                      <img
+                        src={p.logoSrc}
+                        alt={p.logoAlt}
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--brand-accent)]">
+                        {p.year}
+                      </div>
+                      <h3 className="font-display text-2xl text-ink-900 sm:text-[1.75rem]">{p.title}</h3>
+                    </div>
+                  </div>
+                  <ArrowUpRight
+                    size={20}
+                    className="shrink-0 text-ink-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--brand-accent)]"
+                  />
+                </div>
+
+                <p className="mt-5 text-sm leading-relaxed text-ink-700 sm:text-[15px]">{p.description}</p>
+
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {p.tags.map((t) => (
+                    <Tag
+                      key={t}
+                      className="border-transparent bg-[var(--brand-tag-bg)] text-[var(--brand-tag-text)]"
+                    >
+                      {t}
+                    </Tag>
+                  ))}
+                </div>
+
+                <div className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--brand-accent)]">
+                  Visit site
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                  />
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
         <div>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="text-xs uppercase tracking-[0.16em] text-ink-500">Selected past work</div>

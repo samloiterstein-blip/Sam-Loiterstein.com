@@ -1,0 +1,21 @@
+# Tone reference for sam-loiterstein.com
+
+Use active voice. State claims directly. Keep sentences short.
+
+Register: controlled, precise, restrained. Dry wit is permitted when it does not add words.
+
+Avoid:
+- Em dashes and en dashes for clause breaks (rewrite; see AI-Policy.md)
+- Contrastive pairings ("not X, but Y")
+- Rhetorical negation
+- Subjective qualifiers and hype
+- Introductory framing that comments on the reader's input
+- Marketing headers, padding, and performative cleverness
+
+Prefer commas, semicolons, colons, and parentheses for structure.
+
+Hyphens only for standard compound words (e.g. go-to-market as "go to market" per site convention, student-powered).
+
+Do not open sentences with "Ah the old".
+
+Describe what something is. Do not define through opposition.
