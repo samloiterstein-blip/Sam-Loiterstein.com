@@ -16,7 +16,13 @@
     "lint": "npm --prefix client run lint"
   },
   "devDependencies": {
+    "@types/nodemailer": "^6.4.16",
+    "@vercel/node": "^3.2.29",
     "concurrently": "^9.0.1"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.15",
+    "resend": "^6.12.3"
   },
   "engines": {
     "node": ">=18.18"

@@ -20,7 +20,7 @@ export const site = {
   initials: "SL",
   tagline: "Builder. Operator. Growth partner.",
   description:
-    "I help early stage teams turn early concepts into usable products, repeatable systems, and defined go to market motion.",
+    "Helps early stage teams turn early concepts into usable products, repeatable systems, and defined go to market motion.",
   email: "samloiterstein@gmail.com",
   location: "Washington, DC",
   resumeUrl: "/Sam-Loiterstein-Resume.pdf",
@@ -42,13 +42,6 @@ export const navItems = [
 
 export const hero = {
   eyebrow: "Washington, DC. Open to new engagements.",
-  stats: [
-    { value: "200+", label: "Analysts scaled" },
-    { value: "20+", label: "Clients served" },
-    { value: "$51M+", label: "Pipeline analyzed" },
-    { value: "6", label: "Product lines supported" },
-    { value: "4+", label: "Product launches" },
-  ],
 } as const;
 
 // About
@@ -116,8 +109,6 @@ export type CredentialEntry = {
   issuer: string;
   logoSrc?: string;
   logoLabel?: string;
-  credentialId?: string;
-  credentialUrl?: string;
 };
 
 export const resume = {
@@ -218,13 +209,11 @@ export const resume = {
       title: "LinkedIn Developer",
       issuer: "LinkedIn",
       logoSrc: "/logos/linkedin.svg",
-      credentialUrl: "https://www.linkedin.com/in/sam-loiterstein",
     },
     {
       title: "Investment Foundations Certificate",
       issuer: "CFA Institute",
       logoSrc: "/logos/cfa-institute.svg",
-      credentialId: "125881533",
     },
     {
       title: "Storytelling with Data",
@@ -309,13 +298,17 @@ export const projectsSection = {
   eyebrow: "Work",
   title: "Past work, services, and use cases",
   description:
-    "Selected ventures plus the engagements and operating problems I help solve.",
+    "Selected ventures plus the engagements and operating problems Sam helps solve.",
 };
 
 export const featuredProjectsSection = {
   eyebrow: "Founder work",
-  title: "Ventures I am building",
+  title: "Ventures in build",
   description: "",
+};
+
+export const pastProjectsSection = {
+  title: "Selected past projects, presentations, and products",
 };
 
 export const featuredProjects: FeaturedProject[] = [
@@ -468,7 +461,7 @@ export const media: MediaItem[] = [
   },
 ];
 
-// Services / Ways I can help
+// Services / Ways Sam can help
 
 export type Service = {
   title: string;
@@ -478,13 +471,13 @@ export type Service = {
 };
 
 export const servicesSection = {
-  eyebrow: "Work with me",
-  title: "Ways I can help",
+  eyebrow: "Work with Sam",
+  title: "Ways Sam can help",
   description:
-    "I take on a small number of engagements at a time. If anything below matches your scope, send a note.",
+    "Sam takes on a small number of engagements at a time. If anything below matches your scope, send a note.",
   ctaPrompt: "Have a different problem?",
   ctaSubcopy:
-    "Tell me what you are working on. I will refer mismatched inquiries elsewhere.",
+    "Share what you are working on. Mismatched inquiries are referred elsewhere.",
   ctaButton: "Contact",
 };
 
@@ -511,7 +504,7 @@ export const services: Service[] = [
     icon: Hammer,
   },
   {
-    title: "Student powered research and execution",
+    title: "Research and execution",
     description:
       "For companies running research, market mapping, competitive analysis, or execution sprints.",
     bullets: ["Market mapping", "Competitive analysis", "Execution capacity"],
@@ -560,9 +553,9 @@ export const insights = {
 
 export const contact = {
   eyebrow: "Contact",
-  title: "Let's talk.",
+  title: "Get in touch.",
   description:
-    "Reach out about an engagement, a project, or an introduction. I read everything that lands here.",
+    "Reach out about an engagement, a project, or an introduction. Sam reads everything that lands here.",
   emailLabel: "Email",
   emailHint: "For project and engagement inquiries.",
   currently: {
@@ -573,13 +566,13 @@ export const contact = {
     placeholders: {
       name: "Your name",
       email: "you@company.com",
-      message: "Tell me what you are working on.",
+      message: "Share what you are working on.",
     },
     sendButton: "Send message",
     sendingLabel: "Sending",
     successHeading: "Message sent.",
     successBody:
-      "Thanks for reaching out. I will reply within 24 hours. Connect on LinkedIn in the meantime.",
+      "Thanks for reaching out. Sam replies within 24 hours. Connect on LinkedIn in the meantime.",
     successAction: "Send another message",
     validation: {
       nameRequired: "Please enter your name.",
@@ -597,4 +590,9 @@ export const contact = {
 
 export const footer = {
   builtNote: "",
+  fanLabel: "For real fans:",
+  fanLinks: [
+    { label: "Library", href: "https://library.sam-loiterstein.com" },
+    { label: "Menu", href: "https://menu.sam-loiterstein.com" },
+  ],
 } as const;

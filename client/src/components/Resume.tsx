@@ -364,19 +364,6 @@ function Credentials({ items }: { items: readonly CredentialEntry[] }) {
             <div className="min-w-0">
               <div className="font-display text-lg leading-tight text-ink-900">{item.title}</div>
               <div className="mt-1 text-sm text-sage-800">{item.issuer}</div>
-              {item.credentialId ? (
-                <div className="mt-1 text-xs text-ink-500">Credential ID {item.credentialId}</div>
-              ) : null}
-              {item.credentialUrl ? (
-                <a
-                  href={item.credentialUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-2 inline-block text-xs font-medium text-sage-700 underline-offset-4 hover:underline"
-                >
-                  Show credential
-                </a>
-              ) : null}
             </div>
           </div>
         </motion.article>

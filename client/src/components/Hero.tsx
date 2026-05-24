@@ -45,7 +45,7 @@ export function Hero() {
           variants={fade}
           className="mt-6 font-display text-[44px] font-medium leading-[1.02] tracking-tightish text-ink-900 sm:text-6xl lg:text-7xl"
         >
-          Hi, I'm <span className="text-sage-800">{site.name}</span>.
+          <span className="text-sage-800">{site.name}</span>.
           <br className="hidden sm:block" />
           <span className="text-ink-700">{site.tagline}</span>
         </motion.h1>
@@ -94,28 +94,7 @@ export function Hero() {
             <ArrowUpRight size={16} />
           </Button>
         </motion.div>
-
-        <motion.div
-          custom={4}
-          initial="hidden"
-          animate="visible"
-          variants={fade}
-          className="mt-20 grid grid-cols-2 gap-y-8 gap-x-6 border-t border-ink-100 pt-10 sm:grid-cols-3 sm:gap-x-10 lg:grid-cols-5"
-        >
-          {hero.stats.map((s) => (
-            <Stat key={s.label} label={s.label} value={s.value} />
-          ))}
-        </motion.div>
       </div>
     </section>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="font-display text-3xl font-medium text-ink-900 sm:text-4xl">{value}</div>
-      <div className="mt-1 text-sm leading-snug text-ink-500">{label}</div>
-    </div>
   );
 }

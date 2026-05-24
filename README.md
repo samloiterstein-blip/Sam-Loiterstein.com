@@ -74,9 +74,9 @@ From the repo root:
 
 ## Contact form
 
-`POST /api/contact` accepts `{ name, email, message }`. The server validates the payload, rate limits per IP, and ignores honeypot submissions. If `SMTP_HOST` is set in `server/.env`, the message is sent through `nodemailer` using the configured provider. Without SMTP, the message is written to the server console.
+`POST /api/contact` accepts `{ name, email, message }`. The server validates the payload, rate limits per IP, and ignores honeypot submissions. Delivery uses the Resend API when `RESEND_API_KEY` is set. SMTP is supported as a fallback when `SMTP_HOST` is configured with a real provider (not the placeholder `smtp.example.com`).
 
-Set `CONTACT_TO` to the destination address. Set `CONTACT_FROM` to a sender address that the provider has verified. See `server/.env.example` for every variable.
+Set `CONTACT_TO` to the destination address (`samloiterstein@gmail.com`). Set `CONTACT_FROM` to a sender address on a verified domain for inbox placement. See `server/.env.example` for every variable.
 
 ## Production
 

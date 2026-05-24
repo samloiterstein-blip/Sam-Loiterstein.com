@@ -1,12 +1,13 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown } from "lucide-react";
 import { Section } from "./ui/Section";
 import { Tag } from "./ui/Tag";
 import { Button } from "./ui/Button";
 import {
   featuredProjects,
   featuredProjectsSection,
+  pastProjectsSection,
   projects,
   projectsSection,
   services,
@@ -126,74 +127,86 @@ export function Projects() {
           </div>
         </div>
 
-        <div>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="text-xs uppercase tracking-[0.16em] text-ink-500">Selected past work</div>
-            <label className="inline-flex items-center gap-2 text-xs text-ink-600">
-              <span className="uppercase tracking-[0.12em] text-ink-500">Sort by skill</span>
-              <select
-                value={selectedSkill}
-                onChange={(e) => setSelectedSkill(e.target.value)}
-                className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs text-ink-700 outline-none transition focus:border-sage-400"
-              >
-                {skillOptions.map((skill) => (
-                  <option key={skill} value={skill}>
-                    {skill}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {sortedProjects.map((p, i) => {
-              const Wrapper = p.href ? motion.a : motion.div;
-              const linkProps = p.href
-                ? { href: p.href, target: "_blank", rel: "noreferrer" }
-                : {};
+        <details className="group rounded-3xl border border-ink-100 bg-white shadow-soft">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 marker:content-none [&::-webkit-details-marker]:hidden">
+            <span className="text-xs uppercase tracking-[0.16em] text-ink-500">
+              {pastProjectsSection.title}
+            </span>
+            <ChevronDown
+              size={18}
+              className="shrink-0 text-ink-400 transition-transform duration-300 group-open:rotate-180"
+              aria-hidden
+            />
+          </summary>
 
-              return (
-                <Wrapper
-                  key={p.title}
-                  {...(linkProps as object)}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -2 }}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white p-5 shadow-soft transition-all duration-300 hover:border-sage-300 hover:shadow-[0_12px_32px_-12px_rgba(35,54,42,0.18)]"
+          <div className="border-t border-ink-100 px-6 pb-6 pt-5">
+            <div className="flex flex-wrap items-center justify-end gap-3">
+              <label className="inline-flex items-center gap-2 text-xs text-ink-600">
+                <span className="uppercase tracking-[0.12em] text-ink-500">Sort by skill</span>
+                <select
+                  value={selectedSkill}
+                  onChange={(e) => setSelectedSkill(e.target.value)}
+                  className="rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs text-ink-700 outline-none transition focus:border-sage-400"
                 >
-                  <div className="flex items-start justify-end gap-4">
-                    {p.href && (
-                      <ArrowUpRight
-                        size={18}
-                        className="text-ink-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-sage-700"
-                      />
-                    )}
-                  </div>
+                  {skillOptions.map((skill) => (
+                    <option key={skill} value={skill}>
+                      {skill}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {sortedProjects.map((p, i) => {
+                const Wrapper = p.href ? motion.a : motion.div;
+                const linkProps = p.href
+                  ? { href: p.href, target: "_blank", rel: "noreferrer" }
+                  : {};
 
-                  <h3 className="mt-3 font-display text-2xl text-ink-900">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{p.description}</p>
+                return (
+                  <Wrapper
+                    key={p.title}
+                    {...(linkProps as object)}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -2 }}
+                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white p-5 shadow-soft transition-all duration-300 hover:border-sage-300 hover:shadow-[0_12px_32px_-12px_rgba(35,54,42,0.18)]"
+                  >
+                    <div className="flex items-start justify-end gap-4">
+                      {p.href && (
+                        <ArrowUpRight
+                          size={18}
+                          className="text-ink-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-sage-700"
+                        />
+                      )}
+                    </div>
 
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {p.tags.map((t) => (
-                      <Tag key={t}>{t}</Tag>
-                    ))}
-                  </div>
+                    <h3 className="mt-3 font-display text-2xl text-ink-900">{p.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-600">{p.description}</p>
 
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-sage-400 to-transparent transition-transform duration-500 group-hover:scale-x-100"
-                  />
-                </Wrapper>
-              );
-            })}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {p.tags.map((t) => (
+                        <Tag key={t}>{t}</Tag>
+                      ))}
+                    </div>
+
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-x-0 bottom-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-sage-400 to-transparent transition-transform duration-500 group-hover:scale-x-100"
+                    />
+                  </Wrapper>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </details>
 
         <div className="rounded-3xl border border-ink-100 bg-white p-6 shadow-soft sm:p-7">
           <div className="text-xs uppercase tracking-[0.16em] text-ink-500">Services and use cases</div>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-600">
-            Engagements I typically take on, and where teams usually need support.
+            Engagements Sam typically takes on, and where teams usually need support.
           </p>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2">

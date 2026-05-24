@@ -1,5 +1,5 @@
 import { ArrowUp } from "lucide-react";
-import { site } from "@/data/content";
+import { footer, site } from "@/data/content";
 
 export function Footer() {
   return (
@@ -9,6 +9,22 @@ export function Footer() {
           <div className="font-display text-lg text-ink-900">{site.name}</div>
           <p className="mt-1 text-sm text-ink-500">
             © {new Date().getFullYear()} {site.name}, {site.location}.
+          </p>
+          <p className="mt-3 text-sm text-ink-600">
+            <span className="text-ink-500">{footer.fanLabel}</span>{" "}
+            {footer.fanLinks.map((link, i) => (
+              <span key={link.href}>
+                {i > 0 ? " · " : null}
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="link-underline"
+                >
+                  {link.label}
+                </a>
+              </span>
+            ))}
           </p>
         </div>
 
