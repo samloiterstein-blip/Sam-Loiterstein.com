@@ -6,7 +6,7 @@ A past failure established a permanent rule: em dashes are never used. All sente
 
 ---
 
-## 2. Punctuation rules
+##  2. Punctuation rules
 
 ### 2.1 Disallowed forms
 

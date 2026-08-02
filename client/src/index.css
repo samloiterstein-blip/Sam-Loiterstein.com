@@ -68,6 +68,26 @@
   .link-underline:hover::after {
     @apply scale-x-100;
   }
+
+  .work-portal-demo {
+    @apply h-full min-h-0 overflow-hidden;
+  }
+
+  .work-portal-demo > * {
+    @apply h-full min-h-0;
+  }
+
+  .work-portal-demo .demo-panel {
+    @apply h-full min-h-0;
+  }
+
+  .work-portal-demo .demo-panel > div {
+    @apply h-full items-stretch justify-stretch;
+  }
+
+  .sdr-dense .sdr-demo main {
+    scrollbar-width: thin;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

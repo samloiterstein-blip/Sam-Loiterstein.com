@@ -12,3 +12,5 @@ coverage
 .idea
 .vscode
 .vercel
+server/secrets/*
+!server/secrets/.gitkeep

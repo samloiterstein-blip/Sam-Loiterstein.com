@@ -8,5 +8,5 @@
     "strict": true,
     "types": ["node"]
   },
-  "files": ["vite.config.ts"]
+  "files": ["vite.config.ts", "vite-plugin-prerender.ts"]
 }

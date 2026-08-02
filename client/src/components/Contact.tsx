@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,7 +18,7 @@ const ContactSchema = z.object({
     .min(1, v.emailRequired)
     .email(v.emailInvalid),
   message: z.string().trim().min(10, v.messageShort).max(5000, v.messageLong),
-  // Honeypot. Bots fill this in, humans do not see it.
+  intent: z.string().optional(),
   company: z.string().max(0, v.spam).optional().or(z.literal("")),
 });
 
@@ -31,27 +31,41 @@ type Status =
 
 export function Contact() {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [messagePlaceholder, setMessagePlaceholder] = useState<string>(
+    contact.form.placeholders.message
+  );
   const f = contact.form;
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactValues>({
     resolver: zodResolver(ContactSchema),
-    defaultValues: { name: "", email: "", message: "", company: "" },
+    defaultValues: { name: "", email: "", message: "", intent: "", company: "" },
     mode: "onTouched",
   });
 
+  const intentValue = watch("intent");
+
+  useEffect(() => {
+    const intent = contact.intents.find((i) => i.id === intentValue);
+    setMessagePlaceholder(intent?.placeholder ?? contact.form.placeholders.message);
+  }, [intentValue]);
+
   const onSubmit = handleSubmit(async (values) => {
     setStatus({ kind: "idle" });
+
+    const intentLabel = contact.intents.find((i) => i.id === values.intent)?.label;
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, intent: intentLabel ?? values.intent }),
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
 
@@ -134,6 +148,28 @@ export function Contact() {
               />
             </div>
 
+            <Field label={f.intentLabel} htmlFor="intent" className="mb-5">
+              <select
+                id="intent"
+                className={inputClasses(false)}
+                {...register("intent")}
+                onChange={(e) => {
+                  register("intent").onChange(e);
+                  if (!watch("message")) {
+                    const intent = contact.intents.find((i) => i.id === e.target.value);
+                    if (intent) setValue("message", "");
+                  }
+                }}
+              >
+                <option value="">{f.intentDefault}</option>
+                {contact.intents.map((intent) => (
+                  <option key={intent.id} value={intent.id}>
+                    {intent.label}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
             <div className="grid gap-5 sm:grid-cols-2">
               <Field label="Name" htmlFor="name" error={errors.name?.message}>
                 <input
@@ -163,7 +199,7 @@ export function Contact() {
                 id="message"
                 rows={5}
                 className={cn(inputClasses(!!errors.message), "min-h-[140px] resize-y")}
-                placeholder={f.placeholders.message}
+                placeholder={messagePlaceholder}
                 {...register("message")}
               />
             </Field>

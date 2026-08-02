@@ -1,9 +1,13 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { rateLimit } from "express-rate-limit";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import contactRouter from "./routes/contact.js";
+import substackRouter from "./routes/substack.js";
+import musicRouter from "./routes/music.js";
+import genreFeedRouter from "./routes/genreFeed.js";
 
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
@@ -14,7 +18,8 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:5173")
   .filter(Boolean);
 
 app.set("trust proxy", 1);
-app.use(express.json({ limit: "16kb" }));
+app.use(cookieParser());
+app.use(express.json({ limit: "32kb" }));
 
 app.use(
   cors({
@@ -24,6 +29,7 @@ app.use(
       return cb(new Error(`Origin ${origin} not allowed by CORS`));
     },
     methods: ["GET", "POST"],
+    credentials: true,
   })
 );
 
@@ -41,6 +47,9 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/contact", contactRouter);
+app.use("/api/substack-feed", substackRouter);
+app.use("/api/music", musicRouter);
+app.use("/api/demo/genre", genreFeedRouter);
 
 if (isProd) {
   const __filename = fileURLToPath(import.meta.url);

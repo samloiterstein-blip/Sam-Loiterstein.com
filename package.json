@@ -7,7 +7,7 @@
     "dev": "concurrently -k -n client,server -c green,cyan \"npm:dev:client\" \"npm:dev:server\"",
     "dev:client": "npm --prefix client run dev",
     "dev:server": "npm --prefix server run dev",
-    "build": "npm --prefix client run build && npm --prefix server run build",
+    "build": "npx tsx scripts/fetch-substack-feed.ts && npm --prefix client run build && npm --prefix server run build",
     "build:client": "npm --prefix client run build",
     "build:server": "npm --prefix server run build",
     "start": "npm --prefix server run start",
@@ -18,7 +18,8 @@
   "devDependencies": {
     "@types/nodemailer": "^6.4.16",
     "@vercel/node": "^3.2.29",
-    "concurrently": "^9.0.1"
+    "concurrently": "^9.0.1",
+    "tsx": "^4.19.1"
   },
   "dependencies": {
     "nodemailer": "^6.9.15",

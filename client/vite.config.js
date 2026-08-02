@@ -2,19 +2,22 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { prerenderSpa } from "./vite-plugin-prerender";
 var __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react(), prerenderSpa()],
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
         },
     },
     server: {
+        host: "127.0.0.1",
         port: 5173,
+        strictPort: true,
         proxy: {
             "/api": {
-                target: "http://localhost:4000",
+                target: "http://127.0.0.1:4000",
                 changeOrigin: true,
             },
         },

@@ -64,24 +64,63 @@ export function About() {
             ))}
           </div>
 
-          <ul className="mt-10 grid gap-4 sm:grid-cols-3">
-            {about.values.map((v, i) => (
+          <div className="mt-8 rounded-2xl border border-ink-100 bg-white/70 p-5 shadow-soft">
+            <div className="text-xs font-medium uppercase tracking-[0.16em] text-ink-500">
+              {about.builtAt.label}
+            </div>
+            <ul className="mt-4 flex flex-wrap gap-3">
+              {about.builtAt.orgs.map((org) => (
+                <li key={org.name}>
+                  {"href" in org && org.href ? (
+                    <a
+                      href={org.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-2.5 rounded-xl border border-ink-100 bg-cream/50 px-3 py-2 transition hover:border-sage-300 hover:bg-white"
+                    >
+                      <OrgMark org={org} />
+                      <span className="text-sm font-medium text-ink-800 group-hover:text-sage-800">
+                        {org.name}
+                      </span>
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2.5 rounded-xl border border-ink-100 bg-cream/50 px-3 py-2">
+                      <OrgMark org={org} />
+                      <span className="text-sm font-medium text-ink-800">{org.name}</span>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {about.narrativeThreads.map((thread, i) => (
               <motion.li
-                key={v.title}
+                key={thread.title}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -2 }}
-                className="rounded-2xl border border-ink-100 bg-white/60 p-5 backdrop-blur transition-shadow duration-300 hover:shadow-soft"
+                transition={{ duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-2xl border border-ink-100 bg-white/60 p-4 backdrop-blur"
               >
-                <div className="text-sm font-medium text-sage-800">{v.title}</div>
-                <p className="mt-2 text-sm leading-relaxed text-ink-600">{v.body}</p>
+                <div className="text-xs font-medium uppercase tracking-[0.14em] text-sage-800">
+                  {thread.title}
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-ink-600">{thread.body}</p>
               </motion.li>
             ))}
           </ul>
         </div>
       </div>
     </Section>
+  );
+}
+
+function OrgMark({ org }: { org: (typeof about.builtAt.orgs)[number] }) {
+  return (
+    <span className="grid h-8 w-8 shrink-0 place-items-center overflow-hidden rounded-lg border border-ink-100 bg-white p-1">
+      <img src={org.logoSrc} alt="" className="h-full w-full object-contain" loading="lazy" />
+    </span>
   );
 }

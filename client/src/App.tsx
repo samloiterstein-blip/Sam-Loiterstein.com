@@ -1,10 +1,10 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { About } from "./components/About";
-import { LinkedIn } from "./components/LinkedIn";
-import { Projects } from "./components/Projects";
+import { Approach } from "./components/Approach";
+import { WorkLab } from "./components/WorkLab";
+import { SubstackWriting } from "./components/Substack";
 import { Media } from "./components/Media";
-import { Resume } from "./components/Resume";
+import { Background } from "./components/Resume";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
@@ -15,11 +15,11 @@ export default function App() {
 
       <main>
         <Hero />
-        <About />
-        <LinkedIn />
-        <Projects />
+        <Approach />
+        <WorkLab />
+        <SubstackWriting />
         <Media />
-        <Resume />
+        <Background />
         <Contact />
       </main>
 

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import { Section } from "./ui/Section";
 import { Button } from "./ui/Button";
-import { resume, site, type CredentialEntry, type TimelineEntry } from "@/data/content";
+import { background, site, type CredentialEntry, type TimelineEntry } from "@/data/content";
 
 const YEAR_HEIGHT = 100;
 const AXIS_WIDTH = 40;
@@ -12,32 +12,54 @@ const LOGO_SIZE = 28;
 const MIN_BAR_HEIGHT = 48;
 const BAR_OPACITY = 0.55;
 
-export function Resume() {
+export function Background() {
   return (
     <Section
-      id="resume"
-      eyebrow={resume.eyebrow}
-      title={resume.title}
-      description={resume.description}
+      id="background"
+      eyebrow={background.eyebrow}
+      title={background.title}
+      description={background.description}
     >
-      <div className="mb-10 flex flex-wrap items-center gap-3">
-        <Button as="a" href={site.resumeUrl} download size="md">
+      <UnifiedTimeline experience={background.experience} education={background.education} />
+
+      <details className="group mt-14 rounded-2xl border border-ink-100 bg-white shadow-soft">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
+          <div>
+            <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
+              {background.credentialsTitle}
+            </h3>
+            <p className="mt-1 text-sm text-ink-600">{background.credentialsSummary}</p>
+          </div>
+          <span className="flex shrink-0 -space-x-2">
+            {background.credentials.slice(0, 5).map((c) => (
+              <span
+                key={c.title}
+                className="grid h-8 w-8 place-items-center overflow-hidden rounded-full border-2 border-white bg-cream p-1"
+              >
+                {c.logoSrc ? (
+                  <img src={c.logoSrc} alt="" className="h-full w-full object-contain" />
+                ) : null}
+              </span>
+            ))}
+          </span>
+        </summary>
+        <div className="border-t border-ink-100 px-5 pb-5 pt-4">
+          <Credentials items={background.credentials} />
+        </div>
+      </details>
+
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <Button as="a" href={site.resumeUrl} download size="md" variant="secondary">
           <Download size={16} />
-          {resume.pdfButtonLabel}
+          {background.pdfButtonLabel}
         </Button>
-      </div>
-
-      <UnifiedTimeline experience={resume.experience} education={resume.education} />
-
-      <div className="mt-14">
-        <h3 className="mb-6 text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
-          {resume.credentialsTitle}
-        </h3>
-        <Credentials items={resume.credentials} />
       </div>
     </Section>
   );
 }
+
+/** @deprecated Use Background */
+export const Resume = Background;
 
 type PositionedEntry = TimelineEntry & { resolvedEnd: number };
 

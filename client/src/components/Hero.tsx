@@ -13,28 +13,20 @@ const fade = {
 };
 
 export function Hero() {
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
+    <section id="top" className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[520px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(116,153,125,0.18),rgba(116,153,125,0)_70%)]" />
         <div className="absolute -left-32 top-40 h-72 w-72 rounded-full bg-sage-200/40 blur-3xl" />
         <div className="absolute -right-32 top-24 h-72 w-72 rounded-full bg-cream blur-3xl" />
       </div>
 
       <div className="container-page">
-        <motion.span
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={fade}
-          className="eyebrow"
-        >
+        <motion.span custom={0} initial="hidden" animate="visible" variants={fade} className="eyebrow">
           {hero.eyebrow}
         </motion.span>
 
@@ -69,29 +61,29 @@ export function Hero() {
         >
           <Button
             as="a"
-            href="#contact"
+            href="#work"
             size="lg"
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              scrollTo("work");
             }}
           >
-            Contact
-            <ArrowRight size={16} />
+            {hero.primaryCta}
+            <ArrowUpRight size={16} />
           </Button>
 
           <Button
             as="a"
-            href="#projects"
+            href="#contact"
             variant="secondary"
             size="lg"
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+              scrollTo("contact");
             }}
           >
-            View Work
-            <ArrowUpRight size={16} />
+            {hero.secondaryCta}
+            <ArrowRight size={16} />
           </Button>
         </motion.div>
       </div>

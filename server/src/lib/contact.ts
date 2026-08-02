@@ -7,6 +7,7 @@ export type ContactPayload = {
   name?: unknown;
   email?: unknown;
   message?: unknown;
+  intent?: unknown;
   company?: unknown;
 };
 
@@ -27,17 +28,26 @@ function escapeHtml(input: string): string {
     .replace(/'/g, "&#039;");
 }
 
-function buildMailContent(name: string, email: string, message: string) {
+function buildMailContent(name: string, email: string, message: string, intent?: string) {
   const to = process.env.CONTACT_TO?.trim() || "samloiterstein@gmail.com";
   const from =
     process.env.CONTACT_FROM?.trim() || "Sam Loiterstein Website <noreply@sam-loiterstein.com>";
-  const subject = `New contact form message from ${name}`;
-  const text = [`Name: ${name}`, `Email: ${email}`, "", "Message:", message].join("\n");
+  const subject = intent
+    ? `New contact: ${intent} from ${name}`
+    : `New contact form message from ${name}`;
+  const intentLine = intent ? `Topic: ${intent}` : "";
+  const text = [`Name: ${name}`, `Email: ${email}`, intentLine, "", "Message:", message]
+    .filter(Boolean)
+    .join("\n");
+  const intentHtml = intent
+    ? `<p style="margin:0 0 16px;"><strong>Topic:</strong> ${escapeHtml(intent)}</p>`
+    : "";
   const html = `
     <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif; color:#22221f; line-height:1.55;">
       <h2 style="margin:0 0 16px; font-weight:600;">New contact form message</h2>
       <p style="margin:0 0 4px;"><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p style="margin:0 0 16px;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></p>
+      ${intentHtml}
       <p style="margin:0 0 4px; color:#5e5e58; font-size:12px; text-transform:uppercase; letter-spacing:0.08em;">Message</p>
       <div style="white-space:pre-wrap; padding:12px 14px; background:#f3f7f4; border:1px solid #c6d8c9; border-radius:8px;">${escapeHtml(message)}</div>
     </div>
@@ -129,6 +139,7 @@ export async function handleContactSubmission(body: ContactPayload): Promise<Con
   const name = asString(body.name);
   const email = asString(body.email);
   const message = asString(body.message);
+  const intent = asString(body.intent);
 
   if (!name || !email || !message) {
     return { ok: false, status: 400, error: "All fields are required." };
@@ -140,7 +151,7 @@ export async function handleContactSubmission(body: ContactPayload): Promise<Con
     return { ok: false, status: 400, error: "Message is too long." };
   }
 
-  const mail = buildMailContent(name, email, message);
+  const mail = buildMailContent(name, email, message, intent || undefined);
   const isProduction = process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
 
   if (!mailConfigured()) {
