@@ -1,7 +1,8 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Approach } from "./components/Approach";
-import { WorkLab } from "./components/WorkLab";
+import { SystemsSection } from "./components/SystemsSection";
+import { EngagementsSection } from "./components/EngagementsSection";
 import { SubstackWriting } from "./components/Substack";
 import { Media } from "./components/Media";
 import { Background } from "./components/Resume";
@@ -16,10 +17,11 @@ export default function App() {
       <main>
         <Hero />
         <Approach />
-        <WorkLab />
+        <SystemsSection />
         <SubstackWriting />
         <Media />
         <Background />
+        <EngagementsSection />
         <Contact />
       </main>
 

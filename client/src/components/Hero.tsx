@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "./ui/Button";
@@ -12,10 +13,78 @@ const fade = {
   }),
 };
 
+const HOLD_MS = 2500;
+const TRANSITION_MS = 500;
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  return reduced;
+}
+
+function RotatingTitle({ titles }: { titles: readonly string[] }) {
+  const reducedMotion = usePrefersReducedMotion();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let cancelled = false;
+    let timer: number | undefined;
+
+    const schedule = () => {
+      timer = window.setTimeout(() => {
+        if (cancelled) return;
+        setIndex((current) => (current + 1) % titles.length);
+        schedule();
+      }, HOLD_MS + TRANSITION_MS);
+    };
+
+    schedule();
+
+    return () => {
+      cancelled = true;
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
+  }, [reducedMotion, titles.length]);
+
+  if (reducedMotion) {
+    return <span className="block text-ink-700">{titles[0]}</span>;
+  }
+
+  return (
+    <span aria-hidden="true" className="relative mt-1 block min-w-0 sm:mt-0">
+      <span className="grid overflow-hidden">
+        {titles.map((title) => (
+          <span key={title} className="invisible col-start-1 row-start-1 block text-ink-700">
+            {title}
+          </span>
+        ))}
+        <span key={titles[index]} className="hero-rotating-title col-start-1 row-start-1 block text-ink-700">
+          {titles[index]}
+        </span>
+      </span>
+    </span>
+  );
+}
+
 export function Hero() {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  const accessibleRoles = hero.rotatingTitles
+    .map((title) => title.replace(/\.$/, ""))
+    .join(", ")
+    .replace(/, ([^,]+)$/, ", and $1");
 
   return (
     <section id="top" className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48">
@@ -37,9 +106,9 @@ export function Hero() {
           variants={fade}
           className="mt-6 font-display text-[44px] font-medium leading-[1.02] tracking-tightish text-ink-900 sm:text-6xl lg:text-7xl"
         >
-          <span className="text-sage-800">{site.name}</span>.
-          <br className="hidden sm:block" />
-          <span className="text-ink-700">{site.tagline}</span>
+          <span className="text-sage-800">{site.name}</span>
+          <span className="sr-only"> {accessibleRoles}.</span>
+          <RotatingTitle titles={hero.rotatingTitles} />
         </motion.h1>
 
         <motion.p
@@ -49,7 +118,7 @@ export function Hero() {
           variants={fade}
           className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl"
         >
-          {site.description}
+          {hero.description}
         </motion.p>
 
         <motion.div

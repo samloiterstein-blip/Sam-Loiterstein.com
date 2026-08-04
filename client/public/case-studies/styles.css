@@ -120,3 +120,10 @@ img.poster {
   border: 1px solid var(--line);
   margin-top: 12px;
 }
+
+figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--muted, #5a6b62);
+  line-height: 1.5;
+}

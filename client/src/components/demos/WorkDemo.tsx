@@ -52,6 +52,13 @@ const portalMap: Record<string, ComponentType<{ embedded?: boolean }>> = {
   GenreExplorer: lazy(() =>
     import("./GenreFeedDemo").then((m) => ({ default: m.GenreFeedDemo }))
   ),
+  NexusEngagementMatcher: lazy(() =>
+    import("./NexusEngagementMatcher").then((m) => ({
+      default: function NexusPortal() {
+        return <m.NexusEngagementMatcher />;
+      },
+    }))
+  ),
 };
 
 const previewWithDrawer = new Set(["GenreExplorer", "DealClassifierPreview", "SdrBasePreview"]);

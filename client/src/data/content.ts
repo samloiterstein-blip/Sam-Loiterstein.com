@@ -32,87 +32,118 @@ export const navItems = [
   { id: "contact", label: "Contact" },
 ] as const;
 
-export const navDemoCta = "Explore demos";
-
 // Hero
 
 export const hero = {
   eyebrow: "Washington, DC. Open to new engagements.",
   primaryCta: "Explore systems",
   secondaryCta: "Start a conversation",
+  description:
+    "I turn early-stage ideas into usable products, repeatable revenue systems, and clear go-to-market motion. My work connects product, operations, data, and growth.",
+  rotatingTitles: [
+    "Founder & Operator.",
+    "Product Lead.",
+    "RevOps Architect.",
+    "GTM Strategist.",
+    "AI & Analytics.",
+    "Community Builder.",
+  ],
 } as const;
 
 // Approach
 
-export const approach = {
-  eyebrow: "Approach",
-  title: "Operating systems for community-facing companies",
-  manifesto:
-    "I work where community, product, and revenue meet. The pattern is the same whether the surface is a live music app, a consulting firm, or a sales stack: fragmented tools create fragmented judgment. I build the operating layer so teams can move with confidence as volume grows.",
-  builtAt: {
-    label: "Built at",
-    orgs: [
-      { name: "JamBase", logoSrc: "/logos/sdr.svg", href: "https://data.jambase.com" },
-      { name: "Federal Reserve Bank of St. Louis", logoSrc: "/logos/federal-reserve.png" },
-      { name: "BBYO", logoSrc: "/logos/bbyo.png", href: "https://bbyo.org" },
-      { name: "Nexus Consulting", logoSrc: "/logos/nexus.png", href: "https://nxsconsultants.com" },
-      { name: "The George Washington University", logoSrc: "/logos/gwu.png", href: "https://gwu.edu" },
-    ],
-  },
-  headshot: {
-    sources: [
-      "/images/about-headshot-tight.jpg",
-      "/Headshot.jpeg",
-      "/headshot.jpeg",
-      "/Headshot.jpg",
-      "/headshot.jpg",
-      "/Headshot.JPG",
-      "/Headshot.JPEG",
-    ],
-    alt: "Portrait of Sam Loiterstein.",
-    caption: "Sam Loiterstein, Washington, DC",
-  },
+const builtAt = {
+  label: "Built at",
+  orgs: [
+    { name: "JamBase", logoSrc: "/logos/jambase.png", href: "https://data.jambase.com" },
+    { name: "Federal Reserve Bank of St. Louis", logoSrc: "/logos/federal-reserve.png" },
+    { name: "BBYO", logoSrc: "/logos/bbyo.png", href: "https://bbyo.org" },
+    { name: "Nexus Consulting", logoSrc: "/logos/nexus.png", href: "https://nxsconsultants.com" },
+    { name: "The George Washington University", logoSrc: "/logos/gwu.png", href: "https://gwu.edu" },
+  ],
 } as const;
 
-export type Principle = {
+export const approach = {
+  eyebrow: "Approach",
+  title: "Build the system before the scale.",
+  manifesto:
+    "Across products, teams, and revenue operations, I’ve learned that growth holds only when the underlying system is clear. I build the workflows, data structures, governance, and feedback loops that turn promising work into repeatable execution.",
+} as const;
+
+export type ApproachCard = {
   title: string;
-  stakes: string;
   body: string;
-  workSlug: string;
   icon: LucideIcon;
 };
 
+export const approachSystem = {
+  summary:
+    "People set judgment and ownership. Workflow turns intent into repeatable execution. AI agents handle research, classification, and draft work at speed. Each layer feeds the others so the system stays accountable, understandable, and fast.",
+  nodes: [
+    {
+      id: "people",
+      label: "People",
+      blurb: "Leaders and operators who set priorities, approve decisions, and own outcomes.",
+    },
+    {
+      id: "workflow",
+      label: "Workflow",
+      blurb: "The process, data model, and handoffs that turn strategy into daily execution.",
+    },
+    {
+      id: "agent",
+      label: "AI Agent",
+      blurb: "Automated research, enrichment, and drafting that keeps the workflow moving.",
+    },
+  ],
+  stagesTitle: "How engagements run",
+  stages: [
+    {
+      title: "Discovery and alignment",
+      body: "Map your goals, stakeholders, data, and constraints before scoping the build.",
+    },
+    {
+      title: "Design and delivery",
+      body: "Build the workflow, tools, and integrations your team runs day to day.",
+    },
+    {
+      title: "Launch and adoption",
+      body: "Train owners, document the model, and embed the system in operations.",
+    },
+    {
+      title: "Improve and expand",
+      body: "Measure outcomes, refine the system, and extend scope where value holds.",
+    },
+  ],
+} as const;
+
+export type Principle = ApproachCard;
+
 export const principlesSection = {
   title: "How I build",
-};
+  cta: "Explore related systems",
+  ctaHref: "#work",
+} as const;
 
 export const principles: Principle[] = [
   {
-    title: "Systems before features",
-    stakes: "Relief when chaos becomes repeatable.",
-    body: "I sequence playbooks, handoffs, and delivery rails before adding surface area. Features without operating logic do not survive the second client or the second cohort.",
-    workSlug: "jambase-sdr",
+    title: "Design the operating model",
+    body: "Clarify workflow, ownership, and feedback loops before adding complexity.",
     icon: Layers,
   },
   {
-    title: "Governance is product",
-    stakes: "Trust when brand risk is real.",
-    body: "Approvals, role boundaries, and voice controls belong in the product layer, not in a policy doc nobody opens under deadline pressure.",
-    workSlug: "linkedin-voice",
+    title: "Build trust into the workflow",
+    body: "Put approvals, permissions, and decision rights inside the system.",
     icon: Shield,
   },
   {
-    title: "Data discipline at source",
-    stakes: "Confidence when forecasts lie.",
-    body: "I normalize signals before modeling. Pipeline stages, genre labels, and CRM fields need to reflect behavior, not wishful naming.",
-    workSlug: "genre-intelligence",
+    title: "Make the data usable",
+    body: "Standardize inputs and handoffs before models or dashboards.",
     icon: LineChart,
   },
   {
-    title: "Scale the org, not just code",
-    stakes: "Calm when headcount doubles.",
-    body: "Training cohorts, convention logistics, and analyst onboarding are systems problems. I design for the people running the system, not only the repository.",
-    workSlug: "nexus",
+    title: "Design for adoption",
+    body: "Training, documentation, and interfaces belong in the build.",
     icon: Users,
   },
 ];
@@ -321,6 +352,41 @@ export type WorkSystemBrand = {
 
 export type DemoKind = "interactive" | "live-product" | "narrative";
 
+export type HomepageTier = "selected" | "index";
+
+export type HomepageGroup = "founder-work" | "fractional-expertise";
+
+export type SystemCompetency =
+  | "product-community"
+  | "revenue-operations"
+  | "organization-operations"
+  | "data-ai"
+  | "research-communication"
+  | "media-community";
+
+export type ProofType =
+  | "live-product"
+  | "interactive-demo"
+  | "case-study"
+  | "article"
+  | "research"
+  | "external-project";
+
+export type HomepagePlacement = {
+  tier: HomepageTier;
+  group?: HomepageGroup;
+  order: number;
+  competency: SystemCompetency;
+  competencyLabel: string;
+  proofType: ProofType;
+  proofLabel: string;
+  displayTitle?: string;
+  cardDescription: string;
+  displayTags: string[];
+  secondaryProofType?: ProofType;
+  secondaryProofLabel?: string;
+};
+
 export type WorkSystem = {
   slug: string;
   title: string;
@@ -338,10 +404,13 @@ export type WorkSystem = {
   caseStudyPath?: string;
   logoSrc?: string;
   logoAlt?: string;
+  previewSrc?: string;
+  previewAlt?: string;
+  caseStudyImages?: { src: string; alt: string; caption?: string }[];
   stats?: CaseStudyStat[];
   demo?: { kind: DemoKind; component: string };
   brand: WorkSystemBrand;
-  featured: boolean;
+  homepage: HomepagePlacement;
   drawerSections?: { heading: string; bullets: string[] }[];
 };
 
@@ -353,17 +422,36 @@ export type ProblemPrompt = {
 
 export const workSection = {
   eyebrow: "Systems",
-  title: "Work lab",
+  title: "Selected systems",
   description:
-    "Operating systems I have designed and shipped. Try interactive demos, live products, and case depth.",
+    "Products and operating systems built across music, revenue, and organizational growth. Each entry links to working proof or a documented case.",
   problemPickerLabel: "What are you working through?",
   briefToggleShow: "Executive brief",
   briefToggleHide: "Full case",
-  earlierTitle: "Earlier systems",
-  engagementsEyebrow: "When I take an engagement",
-  engagementsBody:
+} as const;
+
+export const founderWorkSection = {
+  title: "Founder Work",
+} as const;
+
+export const fractionalExpertiseSection = {
+  title: "Fractional expertise",
+} as const;
+
+export const systemIndexSection = {
+  title: "More systems",
+  description: "Additional products, models, research, and publishing work.",
+} as const;
+
+export const engagementsSection = {
+  eyebrow: "When I take an engagement",
+  description:
     "I take on a small number of builds where a team needs someone who can own the system, not only the slide deck. If the scope below matches, send a note.",
-};
+} as const;
+
+export function systemDisplayTitle(system: WorkSystem): string {
+  return system.homepage.displayTitle ?? system.title;
+}
 
 export const problemPrompts: ProblemPrompt[] = [
   { id: "pipeline", label: "Pipeline numbers I cannot trust", workSlug: "revops-classification" },
@@ -396,8 +484,18 @@ export const workSystems: WorkSystem[] = [
       { value: "2025", label: "Founded" },
       { value: "Live", label: "getsynth.app" },
     ],
-    demo: { kind: "live-product", component: "SynthEmbed" },
-    featured: false,
+    homepage: {
+      tier: "selected",
+      group: "founder-work",
+      order: 1,
+      competency: "product-community",
+      competencyLabel: "Product and community",
+      proofType: "live-product",
+      proofLabel: "Visit Synth",
+      cardDescription:
+        "A mobile-first product for discovering concerts, finding friends headed to the same shows, and sharing the experience.",
+      displayTags: ["Product", "Consumer", "Music", "Mobile"],
+    },
     brand: {
       accent: "#ff007f",
       accentMuted: "#ffe5f0",
@@ -427,14 +525,39 @@ export const workSystems: WorkSystem[] = [
     tags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
     liveUrl: "https://data.jambase.com",
     caseStudyPath: "/case-studies/sdr-automation-application.html",
-    demo: { kind: "interactive", component: "SdrBasePreview" },
-    logoSrc: "/logos/sdr.svg",
-    logoAlt: "SDR-as-a-Service",
+    logoSrc: "/logos/jambase.png",
+    logoAlt: "JamBase logo",
+    previewSrc: "/logos/jambase.png",
+    previewAlt: "JamBase logo",
+    caseStudyImages: [
+      {
+        src: "/images/jambase-sdr-workflows.png",
+        alt: "SDRBase workflows diagram for JamBase sales, marketing, RevOps, and customer intelligence",
+        caption: "SDRBase workflows across sales, marketing, RevOps, and customer intelligence.",
+      },
+      {
+        src: "/images/jambase-sdr-flywheel.png",
+        alt: "SDRBase prospecting flywheel showing signal-to-pipeline automation",
+        caption: "Prospecting flywheel from signals and enrichment through outreach and CRM feedback.",
+      },
+    ],
     stats: [
       { value: "12", label: "Integrated modules" },
       { value: "1", label: "Unified sales motion" },
     ],
-    featured: true,
+    homepage: {
+      tier: "selected",
+      group: "fractional-expertise",
+      order: 2,
+      competency: "revenue-operations",
+      competencyLabel: "Revenue operations",
+      proofType: "case-study",
+      proofLabel: "Read case study",
+      displayTitle: "JamBase Revenue System",
+      cardDescription:
+        "A connected LinkedIn, Apollo, and HubSpot environment for research, outbound, and CRM execution.",
+      displayTags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
+    },
     drawerSections: [
       {
         heading: "System architecture",
@@ -488,8 +611,18 @@ export const workSystems: WorkSystem[] = [
       { value: "200+", label: "Analysts trained" },
       { value: "20+", label: "Clients served" },
     ],
-    demo: { kind: "narrative", component: "NexusEngagementMatcher" },
-    featured: false,
+    homepage: {
+      tier: "selected",
+      group: "founder-work",
+      order: 2,
+      competency: "organization-operations",
+      competencyLabel: "Organization and operations",
+      proofType: "external-project",
+      proofLabel: "Visit Nexus",
+      cardDescription:
+        "An operating model for training analysts, managing delivery, and serving clients as the organization scaled.",
+      displayTags: ["Consulting", "Operations", "Growth", "Training"],
+    },
     brand: {
       accent: "#0a0a0a",
       accentMuted: "#f5f5f5",
@@ -518,8 +651,17 @@ export const workSystems: WorkSystem[] = [
     stack: ["Python", "SQL", "ML", "R"],
     tags: ["Python", "SQL", "ML", "AI"],
     caseStudyPath: "/case-studies/genre-intelligence-engine.html",
-    demo: { kind: "interactive", component: "GenreExplorer" },
-    featured: false,
+    homepage: {
+      tier: "index",
+      order: 1,
+      competency: "data-ai",
+      competencyLabel: "Data and AI",
+      proofType: "case-study",
+      proofLabel: "Read case study",
+      cardDescription:
+        "A two-stage pipeline that turns artist and event metadata into genre taxonomies, embeddings, and personalized recommendations.",
+      displayTags: ["Python", "SQL", "Machine Learning", "AI"],
+    },
     drawerSections: [
       {
         heading: "Outputs",
@@ -558,8 +700,17 @@ export const workSystems: WorkSystem[] = [
     stack: ["Analytics", "JavaScript", "TypeScript", "RevOps"],
     tags: ["Analytics", "JavaScript", "TypeScript", "RevOps"],
     caseStudyPath: "/case-studies/indiagrowthcorp-revops-analytics.html",
-    demo: { kind: "interactive", component: "DealClassifierPreview" },
-    featured: false,
+    homepage: {
+      tier: "index",
+      order: 3,
+      competency: "revenue-operations",
+      competencyLabel: "Revenue operations",
+      proofType: "case-study",
+      proofLabel: "Read case study",
+      cardDescription:
+        "A revenue analytics framework for classifying pipeline behavior, improving forecast discipline, and prioritizing high-probability opportunities.",
+      displayTags: ["Analytics", "RevOps", "JavaScript"],
+    },
     brand: {
       accent: "#1b3a6b",
       accentMuted: "#e8eef5",
@@ -587,8 +738,17 @@ export const workSystems: WorkSystem[] = [
     stack: ["AI", "Analytics", "JavaScript", "TypeScript"],
     tags: ["AI", "Analytics", "JavaScript", "TypeScript"],
     caseStudyPath: "/case-studies/enterprise-linkedin-voice-analytics.html",
-    demo: { kind: "interactive", component: "VoiceCompare" },
-    featured: true,
+    homepage: {
+      tier: "index",
+      order: 2,
+      competency: "product-community",
+      competencyLabel: "Product and publishing",
+      proofType: "case-study",
+      proofLabel: "Read case study",
+      cardDescription:
+        "A multi-tenant publishing platform with AI-assisted drafting, configurable voice controls, approval workflows, and team analytics.",
+      displayTags: ["AI", "Analytics", "Publishing"],
+    },
     drawerSections: [
       {
         heading: "Enterprise controls",
@@ -632,10 +792,21 @@ export const workSystems: WorkSystem[] = [
       "Grew to 1,700+ readers and followers with syndicated publication on accessible collector options under $250.",
     stack: ["Writing", "SEO", "Social", "Editorial"],
     tags: ["Media", "Writing", "Horology"],
-    liveUrl: "https://quillandpad.com/author/campus-watch-chronicle/",
-    logoSrc: "/logos/gwu.png",
-    logoAlt: "Campus Watch Chronicle",
-    featured: false,
+    liveUrl: "https://www.linkedin.com/company/campus-watch-chronicle/",
+    logoSrc: "/logos/campus-watch-chronicle.png",
+    logoAlt: "Campus Watch Chronicle logo",
+    homepage: {
+      tier: "selected",
+      group: "founder-work",
+      order: 3,
+      competency: "media-community",
+      competencyLabel: "Media and publishing",
+      proofType: "external-project",
+      proofLabel: "Visit LinkedIn",
+      cardDescription:
+        "A college-focused editorial system with SEO structure, social distribution, and syndication to Quill and Pad.",
+      displayTags: ["Media", "Writing", "SEO"],
+    },
     brand: {
       accent: "#002856",
       accentMuted: "#e8eef5",
@@ -662,7 +833,20 @@ export const workSystems: WorkSystem[] = [
       "Exceeded a 325 attendee convention goal with summer programming across 29 countries.",
     stack: ["Community", "Events", "Leadership"],
     tags: ["Community", "Events", "Leadership"],
-    featured: false,
+    logoSrc: "/logos/bbyo.png",
+    logoAlt: "BBYO logo",
+    homepage: {
+      tier: "index",
+      order: 5,
+      competency: "organization-operations",
+      competencyLabel: "Community and events",
+      proofType: "case-study",
+      proofLabel: "Read case study",
+      displayTitle: "BBYO Convention",
+      cardDescription:
+        "Regional convention coordination and summer leadership programming with team-based structures for onboarding and logistics.",
+      displayTags: ["Community", "Events", "Leadership"],
+    },
     brand: {
       accent: "#5c2d91",
       accentMuted: "#f0e8f5",
@@ -689,9 +873,22 @@ export const workSystems: WorkSystem[] = [
       "24/7 response operations platform deployed for partner data visualization and branding automation.",
     stack: ["JavaScript", "TypeScript", "Python", "SQL"],
     tags: ["JavaScript", "TypeScript", "Python", "SQL"],
-    liveUrl: "https://www.conveniencecares.org/24-7-Day",
-    caseStudyPath: "/case-studies/nacs-foundation-partner-map.html",
-    featured: false,
+    liveUrl: "https://247daymap.conveniencecares.org/",
+    previewSrc: "/images/nacs-foundation-map.png",
+    previewAlt: "NACS Foundation 24/7 Day store locator map",
+    homepage: {
+      tier: "selected",
+      group: "fractional-expertise",
+      order: 1,
+      competency: "product-community",
+      competencyLabel: "Product and data",
+      proofType: "live-product",
+      proofLabel: "Visit project",
+      displayTitle: "NACS Foundation Map",
+      cardDescription:
+        "A Node and Express platform with data ingestion, geocoding, map visualization, and media-kit generation.",
+      displayTags: ["JavaScript", "Python", "SQL"],
+    },
     brand: {
       accent: "#3f624a",
       accentMuted: "#e3ece4",
@@ -718,7 +915,17 @@ export const workSystems: WorkSystem[] = [
     stack: ["R", "Python", "Data Viz", "Policy"],
     tags: ["R", "Python", "Data Viz", "Policy"],
     caseStudyPath: "/case-studies/sustainable-ai-data-centers-research.html",
-    featured: false,
+    homepage: {
+      tier: "index",
+      order: 4,
+      competency: "research-communication",
+      competencyLabel: "Research and policy",
+      proofType: "research",
+      proofLabel: "View research",
+      cardDescription:
+        "A multi-country infrastructure study comparing compliance, emissions, and energy demand through statistical analysis and data visualization.",
+      displayTags: ["R", "Python", "Policy"],
+    },
     brand: {
       accent: "#0077b6",
       accentMuted: "#e8f4fa",
@@ -730,6 +937,25 @@ export const workSystems: WorkSystem[] = [
   },
 ];
 
+function byHomepageOrder(a: WorkSystem, b: WorkSystem): number {
+  return a.homepage.order - b.homepage.order;
+}
+
+function byGroup(group: HomepageGroup) {
+  return (s: WorkSystem) => s.homepage.tier === "selected" && s.homepage.group === group;
+}
+
+export const founderWorkSystems = workSystems.filter(byGroup("founder-work")).sort(byHomepageOrder);
+
+export const fractionalExpertiseSystems = workSystems
+  .filter(byGroup("fractional-expertise"))
+  .sort(byHomepageOrder);
+
+export const selectedSystems = workSystems.filter((s) => s.homepage.tier === "selected").sort(byHomepageOrder);
+
+export const systemIndex = workSystems.filter((s) => s.homepage.tier === "index").sort(byHomepageOrder);
+
+/** @deprecated Use systemIndex */
 export type EarlierSystem = {
   slug: string;
   title: string;
@@ -742,19 +968,18 @@ export type EarlierSystem = {
   href?: string;
 };
 
-export const earlierSystems: EarlierSystem[] = workSystems
-  .filter((w) => !w.featured)
-  .map((w) => ({
-    slug: w.slug,
-    title: w.title,
-    year: w.year,
-    description: w.description,
-    challenge: w.problem,
-    recommendation: w.approach,
-    result: w.outcome,
-    tags: w.tags,
-    href: w.liveUrl ?? w.caseStudyPath,
-  }));
+/** @deprecated Use systemIndex */
+export const earlierSystems: EarlierSystem[] = systemIndex.map((w) => ({
+  slug: w.slug,
+  title: w.title,
+  year: w.year,
+  description: w.homepage.cardDescription,
+  challenge: w.problem,
+  recommendation: w.approach,
+  result: w.outcome,
+  tags: w.homepage.displayTags,
+  href: w.liveUrl ?? w.caseStudyPath,
+}));
 
 // Media
 
@@ -1026,29 +1251,42 @@ export const resume = background;
 /** @deprecated Use approach */
 export const about = {
   ...approach,
+  builtAt,
   title: approach.title,
   bioParagraphs: [approach.manifesto],
   narrativeThreads: threads.map((t) => ({ title: t.title, body: t.body })),
+  headshot: {
+    sources: [
+      "/images/about-headshot.jpg",
+      "/images/about-headshot-tight.jpg",
+      "/Headshot.jpeg",
+      "/headshot.jpeg",
+      "/Headshot.jpg",
+      "/headshot.jpg",
+      "/Headshot.JPG",
+      "/Headshot.JPEG",
+    ],
+    alt: "Sam Loiterstein headshot",
+    caption: "Sam Loiterstein, Washington, DC",
+  },
 };
 
-/** @deprecated Use workSystems */
-export const featuredProjects = workSystems
-  .filter((w) => w.featured)
-  .map((w) => ({
-    title: w.title,
-    year: w.year,
-    description: w.description,
-    problem: w.problem,
-    approach: w.approach,
-    stack: w.stack,
-    outcome: w.outcome,
-    stats: w.stats,
-    tags: w.tags,
-    href: w.liveUrl ?? w.caseStudyPath ?? "#",
-    logoSrc: w.logoSrc ?? "/favicon.svg",
-    logoAlt: w.logoAlt ?? w.title,
-    brand: w.brand,
-  }));
+/** @deprecated Use selectedSystems */
+export const featuredProjects = selectedSystems.map((w) => ({
+  title: systemDisplayTitle(w),
+  year: w.year,
+  description: w.homepage.cardDescription,
+  problem: w.problem,
+  approach: w.approach,
+  stack: w.stack,
+  outcome: w.outcome,
+  stats: w.stats,
+  tags: w.homepage.displayTags,
+  href: w.liveUrl ?? w.caseStudyPath ?? "#",
+  logoSrc: w.logoSrc ?? "/favicon.svg",
+  logoAlt: w.logoAlt ?? w.title,
+  brand: w.brand,
+}));
 
 /** @deprecated Use earlierSystems */
 export const projects = earlierSystems.map((p) => ({
@@ -1063,5 +1301,9 @@ export const projects = earlierSystems.map((p) => ({
 }));
 
 export const projectsSection = workSection;
-export const featuredProjectsSection = { eyebrow: workSection.eyebrow, title: workSection.title, description: workSection.description };
-export const pastProjectsSection = { title: workSection.earlierTitle };
+export const featuredProjectsSection = {
+  eyebrow: workSection.eyebrow,
+  title: workSection.title,
+  description: workSection.description,
+};
+export const pastProjectsSection = { title: systemIndexSection.title };

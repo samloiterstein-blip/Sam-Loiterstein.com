@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { navItems, navDemoCta, site } from "@/data/content";
+import { navItems, site } from "@/data/content";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { cn } from "@/lib/cn";
 
@@ -83,13 +83,6 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <a
-              href="#work"
-              onClick={(e) => handleNavClick(e, "work")}
-              className="hidden rounded-full border border-ink-200 px-3.5 py-1.5 text-sm text-ink-700 transition hover:border-sage-400 hover:text-sage-800 lg:inline-block"
-            >
-              {navDemoCta}
-            </a>
             <a
               href={site.socials.linkedin}
               target="_blank"
