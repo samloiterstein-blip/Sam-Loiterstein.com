@@ -22,7 +22,7 @@ export function Background() {
     >
       <UnifiedTimeline experience={background.experience} education={background.education} />
 
-      <details className="group mt-14 rounded-2xl border border-ink-100 bg-white shadow-soft">
+      <details className="group mt-10 rounded-2xl border border-ink-100 bg-white shadow-soft">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
           <div>
             <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-ink-500">

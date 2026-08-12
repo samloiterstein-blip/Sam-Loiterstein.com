@@ -3,7 +3,7 @@ import { footer, site } from "@/data/content";
 
 export function Footer() {
   return (
-    <footer className="border-t border-ink-100 bg-cream py-12">
+    <footer className="border-t border-ink-100 bg-cream py-8">
       <div className="container-page flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="font-display text-lg text-ink-900">{site.name}</div>

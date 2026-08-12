@@ -332,7 +332,6 @@ export function SystemsSection() {
       eyebrow={workSection.eyebrow}
       title={workSection.title}
       description={workSection.description}
-      className="py-14 sm:py-16 lg:py-20"
     >
       <div>
         <h3 className="font-display text-2xl text-ink-900">{founderWorkSection.title}</h3>
@@ -341,14 +340,14 @@ export function SystemsSection() {
         </div>
       </div>
 
-      <div className="mt-12 border-t border-ink-100/80 pt-10">
+      <div className="mt-8 border-t border-ink-100/80 pt-8">
         <h3 className="font-display text-2xl text-ink-900">{fractionalExpertiseSection.title}</h3>
         <div className="mt-6">
           <FeaturedSystemsGrid systems={fractionalExpertiseSystems} onActivate={openPanel} />
         </div>
       </div>
 
-      <div className="mt-12 border-t border-ink-100/80 pt-10">
+      <div className="mt-8 border-t border-ink-100/80 pt-8">
         <h3 className="font-display text-2xl text-ink-900">{systemIndexSection.title}</h3>
         <p className="subheading mt-2">{systemIndexSection.description}</p>
         <ul className="mt-6 list-none rounded-2xl border border-ink-100/80 bg-white/70 px-5">

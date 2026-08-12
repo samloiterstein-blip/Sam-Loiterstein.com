@@ -333,6 +333,95 @@ export const background = {
   pdfButtonLabel: "Download Resume PDF",
 } as const;
 
+export type LogoFit = "mark" | "wordmark" | "lockup";
+
+export type WorkedWithLogo = {
+  name: string;
+  logoSrc: string;
+  fit: LogoFit;
+  invert?: boolean;
+};
+
+export const workedWithSection = {
+  label: builtAt.label,
+} as const;
+
+function dedupeWorkedWithLogos(logos: WorkedWithLogo[]): WorkedWithLogo[] {
+  const seen = new Set<string>();
+  return logos.filter((logo) => {
+    if (seen.has(logo.logoSrc)) return false;
+    seen.add(logo.logoSrc);
+    return true;
+  });
+}
+
+const logoPresentation: Record<string, Pick<WorkedWithLogo, "fit" | "invert">> = {
+  "/logos/marquee/synth.png": { fit: "mark" },
+  "/logos/marquee/nexus.png": { fit: "mark" },
+  "/logos/marquee/sbi.png": { fit: "lockup", invert: true },
+  "/logos/marquee/bbyo.png": { fit: "mark", invert: true },
+  "/logos/marquee/federal-reserve.png": { fit: "lockup" },
+  "/logos/marquee/gwu.png": { fit: "lockup" },
+  "/logos/marquee/vu.png": { fit: "lockup" },
+  "/logos/marquee/jambase-wordmark.png": { fit: "lockup" },
+  "/logos/marquee/minnowtech.png": { fit: "wordmark" },
+  "/logos/marquee/stall-plus.png": { fit: "mark", invert: true },
+  "/logos/marquee/campus-watch-chronicle.png": { fit: "lockup" },
+  "/logos/marquee/nacs-foundation.png": { fit: "wordmark" },
+};
+
+function marqueeSrc(src: string): string {
+  return src.replace("/logos/", "/logos/marquee/");
+}
+
+export const workedWithLogos: WorkedWithLogo[] = dedupeWorkedWithLogos([
+  ...background.experience
+    .filter((entry) => entry.logoSrc)
+    .map((entry) => {
+      const logoSrc = marqueeSrc(entry.logoSrc!);
+      return {
+        name: entry.org,
+        logoSrc,
+        ...(logoPresentation[logoSrc] ?? { fit: "lockup" as const }),
+      };
+    }),
+  ...background.education
+    .filter((entry) => entry.logoSrc)
+    .map((entry) => {
+      const logoSrc = marqueeSrc(entry.logoSrc!);
+      return {
+        name: entry.org,
+        logoSrc,
+        ...(logoPresentation[logoSrc] ?? { fit: "lockup" as const }),
+      };
+    }),
+  {
+    name: "JamBase",
+    logoSrc: "/logos/marquee/jambase-wordmark.png",
+    ...logoPresentation["/logos/marquee/jambase-wordmark.png"],
+  },
+  {
+    name: "Minnowtech",
+    logoSrc: "/logos/marquee/minnowtech.png",
+    ...logoPresentation["/logos/marquee/minnowtech.png"],
+  },
+  {
+    name: "Stall Plus",
+    logoSrc: "/logos/marquee/stall-plus.png",
+    ...logoPresentation["/logos/marquee/stall-plus.png"],
+  },
+  {
+    name: "Campus Watch Chronicle",
+    logoSrc: "/logos/marquee/campus-watch-chronicle.png",
+    ...logoPresentation["/logos/marquee/campus-watch-chronicle.png"],
+  },
+  {
+    name: "NACS Foundation",
+    logoSrc: "/logos/marquee/nacs-foundation.png",
+    ...logoPresentation["/logos/marquee/nacs-foundation.png"],
+  },
+]);
+
 // Work systems
 
 export type CaseStudyStat = {

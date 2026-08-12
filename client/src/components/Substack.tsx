@@ -120,7 +120,7 @@ export function SubstackWriting() {
   }, [feed, pubUrl, canonicalPubUrl]);
 
   return (
-    <section id="writing" className="py-24 sm:py-28 lg:py-32">
+    <section id="writing" className="py-12 sm:py-14 lg:py-16">
       <div className="container-page">
         {schema && (
           <script
@@ -129,7 +129,7 @@ export function SubstackWriting() {
           />
         )}
 
-        <div className="mb-10 max-w-3xl">
+        <div className="mb-8 max-w-3xl">
           <span className="eyebrow">{substack.eyebrow}</span>
           <h2 className="heading mt-5">{substack.title}</h2>
           <p className="subheading">{substack.description}</p>

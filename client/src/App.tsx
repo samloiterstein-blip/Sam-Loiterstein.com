@@ -1,5 +1,6 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
+import { LogoMarquee } from "./components/LogoMarquee";
 import { Approach } from "./components/Approach";
 import { SystemsSection } from "./components/SystemsSection";
 import { EngagementsSection } from "./components/EngagementsSection";
@@ -16,6 +17,7 @@ export default function App() {
 
       <main>
         <Hero />
+        <LogoMarquee />
         <Approach />
         <SystemsSection />
         <SubstackWriting />

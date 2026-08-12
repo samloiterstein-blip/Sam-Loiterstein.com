@@ -11,7 +11,6 @@ export function EngagementsSection() {
       eyebrow={servicesSection.eyebrow}
       title={servicesSection.title}
       description={engagementsSection.description}
-      className="py-14 sm:py-16 lg:py-20"
     >
       <div className="grid gap-3 sm:grid-cols-2">
         {services.map((s, i) => {

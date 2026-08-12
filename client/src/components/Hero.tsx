@@ -87,7 +87,7 @@ export function Hero() {
     .replace(/, ([^,]+)$/, ", and $1");
 
   return (
-    <section id="top" className="relative overflow-hidden pt-32 sm:pt-40 lg:pt-48">
+    <section id="top" className="relative overflow-hidden pb-6 pt-28 sm:pb-8 sm:pt-36 lg:pb-10 lg:pt-40">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-[520px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(116,153,125,0.18),rgba(116,153,125,0)_70%)]" />
         <div className="absolute -left-32 top-40 h-72 w-72 rounded-full bg-sage-200/40 blur-3xl" />

@@ -34,7 +34,7 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("relative py-24 sm:py-28 lg:py-32", className)}
+      className={cn("relative py-12 sm:py-14 lg:py-16", className)}
     >
       <div className={cn("container-page", containerClassName)}>
         {(eyebrow || title || description) && (
@@ -43,7 +43,7 @@ export function Section({
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={headerVariants}
-            className="mb-12 max-w-3xl sm:mb-16"
+            className="mb-8 max-w-3xl sm:mb-10"
           >
             {eyebrow && <span className="eyebrow">{eyebrow}</span>}
             {title && <h2 className="heading mt-5">{title}</h2>}
