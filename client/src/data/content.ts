@@ -78,7 +78,7 @@ export type ApproachCard = {
 
 export const approachSystem = {
   summary:
-    "People set judgment and ownership. Workflow turns intent into repeatable execution. AI agents handle research, classification, and draft work at speed. Each layer feeds the others so the system stays accountable, understandable, and fast.",
+    "People set judgment and ownership. Workflow turns intent into repeatable execution. Agentic backends handle research, classification, and draft work at speed. Each layer feeds the others so the system stays accountable, understandable, and fast.",
   nodes: [
     {
       id: "people",
@@ -92,7 +92,7 @@ export const approachSystem = {
     },
     {
       id: "agent",
-      label: "AI Agent",
+      label: "Agentic Backend",
       blurb: "Automated research, enrichment, and drafting that keeps the workflow moving.",
     },
   ],
@@ -1187,7 +1187,7 @@ export const substack = {
   readLabel: "Read on Substack",
   subscribeLabel: "Subscribe on Substack",
   emptyState:
-    "Posts will appear here after the next deploy, or once the publication URL is configured.",
+    "No posts yet",
   feedPath: "/substack-feed.json",
   apiPath: "/api/substack-feed",
   postLimit: 8,
