@@ -132,6 +132,7 @@ export function Hero() {
             as="a"
             href="#work"
             size="lg"
+            data-analytics="cta:hero-explore-systems"
             onClick={(e) => {
               e.preventDefault();
               scrollTo("work");
@@ -146,6 +147,7 @@ export function Hero() {
             href="#contact"
             variant="secondary"
             size="lg"
+            data-analytics="cta:hero-start-conversation"
             onClick={(e) => {
               e.preventDefault();
               scrollTo("contact");

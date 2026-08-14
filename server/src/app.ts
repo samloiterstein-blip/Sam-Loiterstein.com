@@ -8,6 +8,7 @@ import contactRouter from "./routes/contact.js";
 import substackRouter from "./routes/substack.js";
 import musicRouter from "./routes/music.js";
 import genreFeedRouter from "./routes/genreFeed.js";
+import analyticsRouter from "./routes/analytics.js";
 
 const app = express();
 const isProd = process.env.NODE_ENV === "production";
@@ -19,7 +20,11 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:5173")
 
 app.set("trust proxy", 1);
 app.use(cookieParser());
-app.use(express.json({ limit: "32kb" }));
+app.use(
+  express.json({
+    limit: "1mb",
+  })
+);
 
 app.use(
   cors({
@@ -40,6 +45,14 @@ const apiLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const analyticsLimiter = rateLimit({
+  windowMs: 60_000,
+  limit: 120,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+});
+
+app.use("/api/analytics", analyticsLimiter, analyticsRouter);
 app.use("/api", apiLimiter);
 
 app.get("/api/health", (_req, res) => {

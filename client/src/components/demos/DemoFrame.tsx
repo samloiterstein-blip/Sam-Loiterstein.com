@@ -10,7 +10,10 @@ type DemoFrameProps = {
 
 export function DemoFrame({ children, className, variant = "default" }: DemoFrameProps) {
   return (
-    <div className={cn("demo-panel flex h-full min-h-0 w-full flex-col", className)}>
+    <div
+      data-analytics="demo:frame"
+      className={cn("demo-panel flex h-full min-h-0 w-full flex-col", className)}
+    >
       <div
         className={cn(
           "flex w-full flex-1 flex-col",

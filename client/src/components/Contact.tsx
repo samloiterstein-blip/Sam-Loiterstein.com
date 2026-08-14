@@ -95,6 +95,7 @@ export function Contact() {
           <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-soft">
             <a
               href={`mailto:${site.email}`}
+              data-analytics="contact:email"
               className="group flex items-start gap-4 text-left"
             >
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sage-100 text-sage-800 transition-colors group-hover:bg-sage-700 group-hover:text-cream">
@@ -133,7 +134,8 @@ export function Contact() {
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             onSubmit={onSubmit}
             noValidate
-            className="rounded-2xl border border-ink-100 bg-white p-6 shadow-soft sm:p-8"
+            data-analytics="form:contact"
+            className="rr-block rounded-2xl border border-ink-100 bg-white p-6 shadow-soft sm:p-8"
           >
             <div aria-hidden className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
               <label htmlFor="company" className="sr-only">
@@ -207,6 +209,7 @@ export function Contact() {
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
               <button
                 type="submit"
+                data-analytics="cta:contact-submit"
                 disabled={isSubmitting}
                 className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-sage-700 px-5 text-sm font-medium text-cream transition-all duration-200 hover:bg-sage-800 active:scale-[0.98] disabled:opacity-60"
               >
@@ -317,6 +320,7 @@ function SocialTile({
     <li>
       <a
         href={href}
+        data-analytics={`contact:${label.toLowerCase()}`}
         {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
         aria-label={label}
         className="group flex h-14 flex-col items-center justify-center rounded-2xl border border-ink-100 bg-white text-ink-700 shadow-soft transition-all duration-200 hover:border-sage-400 hover:text-sage-800"

@@ -44,6 +44,7 @@ export function Navbar() {
         >
           <a
             href="#top"
+            data-analytics="nav:logo"
             onClick={(e) => handleNavClick(e, "top")}
             className="group flex items-center gap-2 text-sm font-medium text-ink-900"
           >
@@ -60,6 +61,7 @@ export function Navbar() {
                 <li key={item.id}>
                   <a
                     href={`#${item.id}`}
+                    data-analytics={`nav:${item.id}`}
                     onClick={(e) => handleNavClick(e, item.id)}
                     className={cn(
                       "relative rounded-full px-3 py-1.5 text-sm transition-colors",
@@ -87,12 +89,14 @@ export function Navbar() {
               href={site.socials.linkedin}
               target="_blank"
               rel="noreferrer"
+              data-analytics="nav:linkedin"
               className="hidden rounded-full border border-ink-200 px-3.5 py-1.5 text-sm text-ink-700 transition hover:border-sage-400 hover:text-sage-800 md:inline-block"
             >
               LinkedIn
             </a>
             <a
               href="#contact"
+              data-analytics="nav:contact"
               onClick={(e) => handleNavClick(e, "contact")}
               className="hidden rounded-full bg-sage-700 px-4 py-1.5 text-sm text-cream transition hover:bg-sage-800 md:inline-block"
             >
@@ -124,6 +128,7 @@ export function Navbar() {
                   <li key={item.id}>
                     <a
                       href={`#${item.id}`}
+                      data-analytics={`nav-mobile:${item.id}`}
                       onClick={(e) => handleNavClick(e, item.id)}
                       className="block rounded-xl px-4 py-3 text-sm text-ink-800 hover:bg-sage-50 hover:text-sage-900"
                     >

@@ -12,8 +12,10 @@
     "build:server": "npm --prefix server run build",
     "start": "npm --prefix server run start",
     "preview": "npm --prefix client run preview",
-    "install:all": "npm install && npm --prefix client install && npm --prefix server install",
-    "lint": "npm --prefix client run lint"
+    "install:all": "npm install && npm --prefix client install && npm --prefix server install && npm --prefix analytics install",
+    "lint": "npm --prefix client run lint",
+    "dev:analytics": "npm --prefix analytics run dev",
+    "build:analytics": "npm --prefix analytics run build"
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.16",
@@ -22,6 +24,7 @@
     "tsx": "^4.19.1"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
     "nodemailer": "^6.9.15",
     "resend": "^6.12.3"
   },
