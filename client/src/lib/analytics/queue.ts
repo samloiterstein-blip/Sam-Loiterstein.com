@@ -25,6 +25,7 @@ type SessionInfo = {
   uaBrowser: string;
   screenW: number;
   hasReplay: boolean;
+  sourceSlug?: string | null;
 };
 
 export class AnalyticsQueue {

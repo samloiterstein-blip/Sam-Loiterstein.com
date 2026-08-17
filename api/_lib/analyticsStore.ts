@@ -117,6 +117,9 @@ function parseSession(raw: unknown): CollectSession | null {
         ? Math.round(s.screenW)
         : null,
     hasReplay: Boolean(s.hasReplay),
+    country: asTrimmed(s.country, 80),
+    region: asTrimmed(s.region, 80),
+    city: asTrimmed(s.city, 120),
   };
 }
 
@@ -199,7 +202,8 @@ export function parseReplayPayload(body: unknown): ReplayPayload | null {
 }
 
 export async function ingestCollect(
-  payload: CollectPayload
+  payload: CollectPayload,
+  geo?: { country?: string | null; region?: string | null; city?: string | null }
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const sb = getAnalyticsSupabase();
   if (!sb) {
@@ -226,7 +230,11 @@ export async function ingestCollect(
     p_ua_device: session.uaDevice,
     p_ua_browser: session.uaBrowser,
     p_screen_w: session.screenW,
-    p_has_replay: session.hasReplay,
+    p_has_replay: false,
+    p_country: geo?.country || session.country || null,
+    p_region: geo?.region || session.region || null,
+    p_city: geo?.city || session.city || null,
+    p_source_slug: session.sourceSlug || null,
   });
   if (sessionError) return { ok: false, error: sessionError.message };
 

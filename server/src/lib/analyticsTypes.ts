@@ -14,6 +14,10 @@ export type CollectSession = {
   uaBrowser: string | null;
   screenW: number | null;
   hasReplay: boolean;
+  country?: string | null;
+  region?: string | null;
+  city?: string | null;
+  sourceSlug?: string | null;
 };
 
 export type CollectEvent = {

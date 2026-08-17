@@ -13,6 +13,14 @@ export const config = {
   },
 };
 
+function headerString(
+  value: string | string[] | undefined
+): string | null {
+  if (typeof value === "string" && value.trim()) return value.trim();
+  if (Array.isArray(value) && value[0]?.trim()) return value[0].trim();
+  return null;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "OPTIONS") {
     res.status(204).end();
@@ -36,7 +44,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const result = await ingestCollect(payload);
+  const geo = {
+    country: headerString(req.headers["x-vercel-ip-country"]),
+    region: headerString(req.headers["x-vercel-ip-country-region"]),
+    city: headerString(req.headers["x-vercel-ip-city"]),
+  };
+
+  const result = await ingestCollect(payload, geo);
   if (!result.ok) {
     const status = result.error.includes("not configured") ? 503 : 500;
     res.status(status).json({ ok: false, error: result.error });

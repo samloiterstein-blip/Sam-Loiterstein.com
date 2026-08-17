@@ -10,16 +10,21 @@ import {
 const router = Router();
 
 function checkOrigin(
-  req: { headers: { origin?: string } },
+  req: { headers: { origin?: string; [key: string]: unknown } },
   res: { status: (n: number) => { json: (b: unknown) => void } },
   next: () => void
 ) {
-  const origin = req.headers.origin;
+  const origin = req.headers.origin as string | undefined;
   if (!isAllowedAnalyticsOrigin(origin)) {
     res.status(403).json({ ok: false, error: "Origin not allowed" });
     return;
   }
   next();
+}
+
+function headerString(value: unknown): string | null {
+  if (typeof value === "string" && value.trim()) return value.trim();
+  return null;
 }
 
 router.post("/collect", checkOrigin, async (req, res) => {
@@ -29,7 +34,13 @@ router.post("/collect", checkOrigin, async (req, res) => {
     return;
   }
 
-  const result = await ingestCollect(payload);
+  const geo = {
+    country: headerString(req.headers["x-vercel-ip-country"]),
+    region: headerString(req.headers["x-vercel-ip-country-region"]),
+    city: headerString(req.headers["x-vercel-ip-city"]),
+  };
+
+  const result = await ingestCollect(payload, geo);
   if (!result.ok) {
     const status = result.error.includes("not configured") ? 503 : 500;
     res.status(status).json({ ok: false, error: result.error });

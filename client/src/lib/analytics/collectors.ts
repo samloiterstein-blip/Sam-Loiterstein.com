@@ -47,8 +47,6 @@ function resolveClickTarget(el: Element | null): string | null {
 
 export function attachCollectors(queue: AnalyticsQueue): () => void {
   const seenSections = new Set<string>();
-  let maxScroll = 0;
-  let lastScrollSent = 0;
 
   queue.pushEvent({ type: "pageview", path: currentPath() });
 
@@ -73,21 +71,6 @@ export function attachCollectors(queue: AnalyticsQueue): () => void {
     if (el) observer.observe(el);
   }
 
-  const onScroll = () => {
-    const doc = document.documentElement;
-    const scrollable = doc.scrollHeight - window.innerHeight;
-    if (scrollable <= 0) return;
-    const pct = Math.min(100, Math.round((window.scrollY / scrollable) * 100));
-    if (pct > maxScroll) maxScroll = pct;
-    if (maxScroll - lastScrollSent >= 25 || maxScroll === 100) {
-      lastScrollSent = maxScroll;
-      queue.pushEvent({
-        type: "scroll_depth",
-        props: { depth: maxScroll },
-      });
-    }
-  };
-
   const onClick = (e: MouseEvent) => {
     const target = e.target instanceof Element ? e.target : null;
     const label = resolveClickTarget(target);
@@ -111,19 +94,10 @@ export function attachCollectors(queue: AnalyticsQueue): () => void {
     }
   };
 
-  window.addEventListener("scroll", onScroll, { passive: true });
   document.addEventListener("click", onClick, true);
-  onScroll();
 
   return () => {
     observer.disconnect();
-    window.removeEventListener("scroll", onScroll);
     document.removeEventListener("click", onClick, true);
-    if (maxScroll > lastScrollSent) {
-      queue.pushEvent({
-        type: "scroll_depth",
-        props: { depth: maxScroll },
-      });
-    }
   };
 }

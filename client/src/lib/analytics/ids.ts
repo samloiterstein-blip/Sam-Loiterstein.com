@@ -29,11 +29,10 @@ export function getOrCreateVisitorId(): string {
 type SessionMeta = {
   id: string;
   startedAt: string;
-  hasReplay: boolean;
   lastActivity: number;
 };
 
-export function getOrCreateSession(sampleRate: number): SessionMeta {
+export function getOrCreateSession(): SessionMeta {
   const now = Date.now();
   try {
     const raw = sessionStorage.getItem(SESSION_META_KEY);
@@ -56,7 +55,6 @@ export function getOrCreateSession(sampleRate: number): SessionMeta {
   const meta: SessionMeta = {
     id: uuid(),
     startedAt: new Date().toISOString(),
-    hasReplay: Math.random() < sampleRate,
     lastActivity: now,
   };
 

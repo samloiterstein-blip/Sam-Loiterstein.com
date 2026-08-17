@@ -6,7 +6,7 @@ import {
   touchSession,
 } from "./ids";
 import { AnalyticsQueue } from "./queue";
-import { startReplay } from "./replay";
+import { captureSourceFromUrl } from "./source";
 
 declare global {
   interface Window {
@@ -19,13 +19,6 @@ function envFlag(value: string | undefined, fallback: boolean): boolean {
   return value === "1" || value.toLowerCase() === "true";
 }
 
-function sampleRate(): number {
-  const raw = import.meta.env.VITE_ANALYTICS_REPLAY_SAMPLE;
-  const n = raw != null && raw !== "" ? Number(raw) : 0.2;
-  if (!Number.isFinite(n)) return 0.2;
-  return Math.min(1, Math.max(0, n));
-}
-
 export function initAnalytics(): () => void {
   if (typeof window === "undefined") return () => undefined;
   if (window.__slAnalyticsStarted) return () => undefined;
@@ -33,14 +26,14 @@ export function initAnalytics(): () => void {
   const enabled = envFlag(import.meta.env.VITE_ANALYTICS_ENABLED, true);
   if (!enabled) return () => undefined;
 
-  // Skip during Vite prerender / bots without interaction
   if (navigator.webdriver) return () => undefined;
 
   window.__slAnalyticsStarted = true;
 
   const visitorId = getOrCreateVisitorId();
-  const sessionMeta = getOrCreateSession(sampleRate());
+  const sessionMeta = getOrCreateSession();
   const ua = parseUa();
+  const sourceSlug = captureSourceFromUrl();
 
   const queue = new AnalyticsQueue({
     id: sessionMeta.id,
@@ -51,15 +44,11 @@ export function initAnalytics(): () => void {
     uaDevice: ua.device,
     uaBrowser: ua.browser,
     screenW: window.screen?.width || window.innerWidth,
-    hasReplay: sessionMeta.hasReplay,
+    hasReplay: false,
+    sourceSlug,
   });
 
   const detachCollectors = attachCollectors(queue);
-  let stopReplay: (() => void) | null = null;
-
-  void startReplay(queue, sessionMeta.hasReplay).then((stop) => {
-    stopReplay = stop;
-  });
 
   const onActivity = () => touchSession(sessionMeta);
   window.addEventListener("pointerdown", onActivity, { passive: true });
@@ -75,7 +64,6 @@ export function initAnalytics(): () => void {
 
   return () => {
     detachCollectors();
-    stopReplay?.();
     window.removeEventListener("pointerdown", onActivity);
     window.removeEventListener("keydown", onActivity);
     window.removeEventListener("pagehide", onHide);
