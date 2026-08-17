@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { api } from "@/lib/api";
 import { DailySection } from "@/components/DailySection";
 import { LocationMap } from "@/components/LocationMap";
-import { SourcesSection } from "@/components/SourcesSection";
+import { TrackingLinksPanel } from "@/components/TrackingLinksPanel";
 import { RankedList, Stat } from "@/components/Widgets";
 
 type NamedCount = { name: string; count: number };
@@ -37,6 +37,7 @@ type DashboardData = {
 };
 
 type Preset = "7" | "30" | "90" | "all" | "custom";
+type View = "overview" | "links";
 
 const SECTION_LABELS: Record<string, string> = {
   top: "Hero",
@@ -76,6 +77,7 @@ function daysAgoUtc(n: number): string {
 }
 
 export function Dashboard({ onLogout }: { onLogout: () => void }) {
+  const [view, setView] = useState<View>("overview");
   const [preset, setPreset] = useState<Preset>("30");
   const [customFrom, setCustomFrom] = useState(daysAgoUtc(29));
   const [customTo, setCustomTo] = useState(todayUtc());
@@ -144,6 +146,20 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
     { id: "custom", label: "Custom" },
   ];
 
+  const views: { id: View; label: string }[] = [
+    { id: "overview", label: "Overview" },
+    { id: "links", label: "Tracking links" },
+  ];
+
+  const sourceStats = useMemo(
+    () =>
+      (data?.sources || []).map((s) => ({
+        name: s.name,
+        count: s.count,
+      })),
+    [data]
+  );
+
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_left,rgba(116,153,125,0.14),transparent_45%),linear-gradient(180deg,#f8f7f2,#eef1ee)]">
       <header className="border-b border-ink-200/70 bg-cream/80 backdrop-blur">
@@ -153,6 +169,35 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
             <p className="text-sm text-ink-500">sam-loiterstein.com</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={onLogout}
+              className="border border-ink-200 px-3 py-1.5 text-sm text-ink-700 hover:border-sage-500"
+            >
+              Sign out
+            </button>
+          </div>
+        </div>
+
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-4 px-6 pb-4">
+          <div className="flex gap-1">
+            {views.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setView(tab.id)}
+                className={`px-3 py-1.5 text-sm transition ${
+                  view === tab.id
+                    ? "bg-ink-900 text-cream"
+                    : "border border-ink-200 text-ink-700 hover:border-sage-500"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {view === "overview" && (
             <div className="flex flex-wrap gap-1">
               {presets.map((p) => (
                 <button
@@ -169,17 +214,10 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
                 </button>
               ))}
             </div>
-            <button
-              type="button"
-              onClick={onLogout}
-              className="border border-ink-200 px-3 py-1.5 text-sm text-ink-700 hover:border-sage-500"
-            >
-              Sign out
-            </button>
-          </div>
+          )}
         </div>
 
-        {preset === "custom" && (
+        {view === "overview" && preset === "custom" && (
           <div className="mx-auto flex max-w-6xl flex-wrap items-end gap-3 px-6 pb-4">
             <label className="text-xs uppercase tracking-[0.14em] text-ink-500">
               From
@@ -228,9 +266,15 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
             ) : null}
           </p>
         )}
-        {loading && <p className="text-sm text-ink-500">Loading…</p>}
+        {view === "links" && (
+          <TrackingLinksPanel stats={data?.sources || []} />
+        )}
 
-        {!loading && data && (
+        {view === "overview" && loading && (
+          <p className="text-sm text-ink-500">Loading…</p>
+        )}
+
+        {view === "overview" && !loading && data && (
           <>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               <Stat label="Visitors" value={data.visitors ?? 0} />
@@ -242,12 +286,19 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
 
             <DailySection days={data.daily || []} />
 
-            <SourcesSection stats={data.sources || []} />
-
             <LocationMap
               countries={data.countries || []}
               cities={data.cities || []}
             />
+
+            <div className="grid gap-4 lg:grid-cols-2">
+              <RankedList
+                title="Visitor sources"
+                items={sourceStats}
+                empty="No attributed visits yet — create tracking links and share them."
+              />
+              <RankedList title="Referrers" items={data.referrers || []} />
+            </div>
 
             <div className="grid gap-4 lg:grid-cols-2">
               <RankedList
@@ -262,10 +313,7 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
               />
             </div>
 
-            <div className="grid gap-4 lg:grid-cols-2">
-              <RankedList title="Devices" items={data.devices || []} />
-              <RankedList title="Referrers" items={data.referrers || []} />
-            </div>
+            <RankedList title="Devices" items={data.devices || []} />
           </>
         )}
       </main>
