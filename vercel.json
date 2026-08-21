@@ -1,6 +1,6 @@
 {
-  "installCommand": "npm install && npm --prefix client install --include=dev && npm --prefix server install --include=dev",
-  "buildCommand": "npm --prefix client run build",
+  "installCommand": "npm install --include=dev && npm --prefix client install --include=dev && npm --prefix server install --include=dev",
+  "buildCommand": "npx tsx scripts/fetch-substack-feed.ts && npm --prefix client run build",
   "outputDirectory": "client/dist",
   "rewrites": [
     { "source": "/go/:slug", "destination": "/api/go/:slug" }

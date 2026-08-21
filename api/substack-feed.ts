@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { fetchSubstackFeed } from "../server/src/lib/substackFeed.js";
+import { fetchSubstackFeed } from "./_lib/substackFeed.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "GET") {
