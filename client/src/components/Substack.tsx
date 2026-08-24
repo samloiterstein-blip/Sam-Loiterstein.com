@@ -36,6 +36,36 @@ function embedUrl(): string {
   return `https://${host}/embed`;
 }
 
+async function loadSubstackFeed(): Promise<FeedPayload | null> {
+  try {
+    const apiRes = await fetch(substack.apiPath, { cache: "no-store" });
+    if (apiRes.ok) {
+      const data = (await apiRes.json()) as FeedPayload & { ok?: boolean };
+      if (data.posts) {
+        return {
+          publicationHost: data.publicationHost,
+          publicationUrl: data.publicationUrl,
+          fetchedAt: data.fetchedAt,
+          posts: data.posts,
+        };
+      }
+    }
+  } catch {
+    // fall through to build snapshot
+  }
+
+  try {
+    const staticRes = await fetch(substack.feedPath);
+    if (staticRes.ok) {
+      return (await staticRes.json()) as FeedPayload;
+    }
+  } catch {
+    // ignore
+  }
+
+  return null;
+}
+
 export function SubstackWriting() {
   const [feed, setFeed] = useState<FeedPayload | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,32 +79,8 @@ export function SubstackWriting() {
 
     async function load() {
       try {
-        const staticRes = await fetch(substack.feedPath);
-        if (staticRes.ok) {
-          const data = (await staticRes.json()) as FeedPayload;
-          if (!cancelled && data.posts?.length) {
-            setFeed(data);
-            setLoading(false);
-            return;
-          }
-        }
-      } catch {
-        // fall through to API
-      }
-
-      try {
-        const apiRes = await fetch(substack.apiPath);
-        if (apiRes.ok) {
-          const data = (await apiRes.json()) as FeedPayload & { ok?: boolean };
-          if (!cancelled && data.posts) {
-            setFeed({
-              publicationHost: data.publicationHost,
-              publicationUrl: data.publicationUrl,
-              fetchedAt: data.fetchedAt,
-              posts: data.posts,
-            });
-          }
-        }
+        const data = await loadSubstackFeed();
+        if (!cancelled) setFeed(data);
       } catch {
         if (!cancelled) setFeed(null);
       } finally {

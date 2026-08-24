@@ -11,7 +11,7 @@ router.get("/", async (_req, res) => {
 
   try {
     const feed = await fetchSubstackFeed(host, 8);
-    res.setHeader("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+    res.setHeader("Cache-Control", "public, max-age=300, stale-while-revalidate=3600");
     res.json({ ok: true, ...feed });
   } catch (err) {
     console.error("[substack-feed]", err);
