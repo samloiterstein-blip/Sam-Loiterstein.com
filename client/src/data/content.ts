@@ -1088,6 +1088,13 @@ export const mediaSection = {
 
 export const media: MediaItem[] = [
   {
+    type: "Mention",
+    outlet: "GW New Venture Competition",
+    title: "Nexus Consulting named a 2025 New Venture Competition semifinalist.",
+    date: "2025",
+    href: "https://newventurecompetition.gwu.edu/2025-new-venture-competition-semifinalist",
+  },
+  {
     type: "Article",
     outlet: "GW Today",
     title: "InnovationFest showcases the breadth and depth of GW research.",

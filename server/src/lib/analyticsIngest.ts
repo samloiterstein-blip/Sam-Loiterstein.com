@@ -22,6 +22,7 @@ const MAX_CLICKS = 100;
 const MAX_REPLAY_EVENTS = 200;
 const MAX_STRING = 500;
 const MAX_TARGET = 200;
+const SOURCE_SLUG_RE = /^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$|^[a-z0-9]$/;
 
 let client: SupabaseClient | null = null;
 let lastKey = "";
@@ -103,6 +104,9 @@ function parseSession(raw: unknown): CollectSession | null {
 
   const startedAt = asTrimmed(s.startedAt, 40) || new Date().toISOString();
   const landingPath = asTrimmed(s.landingPath, MAX_STRING) || "/";
+  const rawSource = asTrimmed(s.sourceSlug, 64)?.toLowerCase() || null;
+  const sourceSlug =
+    rawSource && SOURCE_SLUG_RE.test(rawSource) ? rawSource : null;
 
   return {
     id,
@@ -120,6 +124,7 @@ function parseSession(raw: unknown): CollectSession | null {
     country: asTrimmed(s.country, 80),
     region: asTrimmed(s.region, 80),
     city: asTrimmed(s.city, 120),
+    sourceSlug,
   };
 }
 
