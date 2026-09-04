@@ -1,0 +1,9 @@
+# Sam Loiterstein
+
+> Alias of `/llms.txt`. Prefer https://sam-loiterstein.com/llms.txt as the canonical GEO index.
+
+Sam Loiterstein builds AI-powered workflows and GTM as a Service for community-facing companies in Washington, DC.
+
+- [Canonical llms.txt](https://sam-loiterstein.com/llms.txt): Curated index for AI agents
+- [Full profile](https://sam-loiterstein.com/llms-full.txt): Complete citation-ready dossier
+- [Homepage](https://sam-loiterstein.com/): Primary professional site

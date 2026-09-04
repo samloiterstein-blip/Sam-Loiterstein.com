@@ -18,7 +18,7 @@ export function Footer() {
                 <a
                   href={link.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="nofollow noreferrer"
                   className="link-underline"
                 >
                   {link.label}

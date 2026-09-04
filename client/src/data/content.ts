@@ -11,9 +11,9 @@ import { Compass, Hammer, Layers, LineChart, Shield, Sparkles, Users } from "luc
 export const site = {
   name: "Sam Loiterstein",
   initials: "SL",
-  tagline: "Community. Media. Analytics. Startups.",
+  tagline: "AI expertise. Workflows. GTM as a Service.",
   description:
-    "I build operating systems for community-facing companies. When discovery, sales, and programs run on separate tools, the whole motion slows. I design the layer that holds at scale.",
+    "I design AI-powered workflows and GTM as a Service for community-facing companies. Product, RevOps, and go-to-market systems that hold at scale.",
   email: "samloiterstein@gmail.com",
   location: "Washington, DC",
   resumeUrl: "/Sam-Loiterstein-Resume.pdf",
@@ -39,13 +39,13 @@ export const hero = {
   primaryCta: "Explore systems",
   secondaryCta: "Start a conversation",
   description:
-    "I turn early-stage ideas into usable products, repeatable revenue systems, and clear go-to-market motion. My work connects product, operations, data, and growth.",
+    "I build AI expertise into real workflows and deliver GTM as a Service for teams that need product, RevOps, and go-to-market motion in one system.",
   rotatingTitles: [
     "Founder & Operator.",
     "Product Lead.",
     "RevOps Architect.",
-    "GTM Strategist.",
-    "AI & Analytics.",
+    "GTM as a Service.",
+    "AI Workflows.",
     "Community Builder.",
   ],
 } as const;
@@ -67,7 +67,7 @@ export const approach = {
   eyebrow: "Approach",
   title: "Build the system before the scale.",
   manifesto:
-    "Across products, teams, and revenue operations, I’ve learned that growth holds only when the underlying system is clear. I build the workflows, data structures, governance, and feedback loops that turn promising work into repeatable execution.",
+    "Across products, teams, and revenue operations, growth holds when the underlying system is clear. I build the AI-assisted workflows, data structures, governance, and feedback loops that turn promising work into repeatable GTM and operations.",
 } as const;
 
 export type ApproachCard = {
@@ -196,7 +196,7 @@ export const threads: Thread[] = [
   {
     title: "AI",
     stakes: "Models amplify whatever mess they inherit.",
-    body: "I ship ML where data is cleaned first and failure modes are named: genre taxonomies, voice-controlled publishing, and signal classification with reviewer feedback loops.",
+    body: "I apply AI expertise inside workflows with clean data and named failure modes: genre taxonomies, voice-controlled publishing, and signal classification with reviewer feedback loops.",
     workSlug: "genre-intelligence",
     accent: "#ff007f",
   },
@@ -535,7 +535,7 @@ export const systemIndexSection = {
 export const engagementsSection = {
   eyebrow: "When I take an engagement",
   description:
-    "I take on a small number of builds where a team needs someone who can own the system, not only the slide deck. If the scope below matches, send a note.",
+    "I take on a small number of builds where a team needs AI expertise, workflow ownership, and GTM as a Service in one engagement. If the scope below matches, send a note.",
 } as const;
 
 export function systemDisplayTitle(system: WorkSystem): string {
@@ -1137,7 +1137,7 @@ export const servicesSection = {
   eyebrow: "Work with me",
   title: "When I take an engagement",
   description:
-    "I take on a small number of builds at a time. If anything below matches your scope, send a note.",
+    "I take on a small number of builds covering AI expertise, workflows, and GTM as a Service. If anything below matches your scope, send a note.",
   ctaPrompt: "Have a different problem?",
   ctaSubcopy: "Share what you are working on. Mismatched inquiries are referred elsewhere.",
   ctaButton: "Contact",
@@ -1145,10 +1145,16 @@ export const servicesSection = {
 
 export const services: Service[] = [
   {
-    title: "Startup GTM and growth strategy",
-    description: "For founders defining ICP, positioning, sales motion, and shipping experiments.",
+    title: "GTM as a Service",
+    description: "For founders who need ICP, positioning, sales motion, and shipping experiments without building a full GTM bench.",
     bullets: ["ICP and positioning", "Sales motion", "Experiments that ship"],
     icon: LineChart,
+  },
+  {
+    title: "AI expertise and workflows",
+    description: "For teams that need research, enrichment, classification, and drafting inside governed processes people can trust.",
+    bullets: ["Agentic backends", "Approval and ownership", "Workflow design"],
+    icon: Sparkles,
   },
   {
     title: "RevOps and CRM systems",
@@ -1161,12 +1167,6 @@ export const services: Service[] = [
     description: "For teams turning raw ideas into scoped products, prototypes, dashboards, or lightweight internal tools.",
     bullets: ["Scoping and specs", "Prototypes and MVPs", "Internal tools"],
     icon: Hammer,
-  },
-  {
-    title: "Research and execution",
-    description: "For companies running research, market mapping, competitive analysis, or execution sprints.",
-    bullets: ["Market mapping", "Competitive analysis", "Execution capacity"],
-    icon: Sparkles,
   },
 ];
 
@@ -1256,9 +1256,15 @@ export const contact = {
   intents: [
     {
       id: "gtm",
-      label: "GTM and positioning",
+      label: "GTM as a Service",
       placeholder:
-        "We are at [stage] and need help defining ICP, positioning, or sales motion. Our current challenge is…",
+        "We are at [stage] and need GTM as a Service for ICP, positioning, or sales motion. Our current challenge is…",
+    },
+    {
+      id: "ai-workflows",
+      label: "AI expertise and workflows",
+      placeholder:
+        "We need AI expertise embedded in workflows for research, classification, or drafting. Our current process is…",
     },
     {
       id: "revops",
@@ -1271,12 +1277,6 @@ export const contact = {
       label: "Product and MVP build",
       placeholder:
         "We have a product idea or internal tool need. Scope, timeline, and constraints look like…",
-    },
-    {
-      id: "research",
-      label: "Research sprint",
-      placeholder:
-        "We need market mapping, competitive analysis, or execution capacity for…",
     },
     {
       id: "founder",

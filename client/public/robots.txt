@@ -1,0 +1,38 @@
+# sam-loiterstein.com
+User-agent: *
+Allow: /
+
+# Prefer the primary site for identity queries. Personal side projects live on
+# separate subdomains and should not compete as the main Sam Loiterstein result.
+Sitemap: https://sam-loiterstein.com/sitemap.xml
+
+# Generative / AI crawlers: allow indexing of primary content and GEO files.
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /

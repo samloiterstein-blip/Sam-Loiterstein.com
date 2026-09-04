@@ -9,10 +9,12 @@ import { Media } from "./components/Media";
 import { Background } from "./components/Resume";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { SeoSchema } from "./components/SeoSchema";
 
 export default function App() {
   return (
     <div className="min-h-screen bg-cream">
+      <SeoSchema />
       <Navbar />
 
       <main>
