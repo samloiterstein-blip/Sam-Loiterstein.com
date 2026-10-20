@@ -76,46 +76,161 @@ export type ApproachCard = {
   icon: LucideIcon;
 };
 
-export const approachSystem = {
-  summary:
-    "People set judgment and ownership. Workflow turns intent into repeatable execution. Agentic backends handle research, classification, and draft work at speed. Each layer feeds the others so the system stays accountable, understandable, and fast.",
-  nodes: [
-    {
-      id: "people",
-      label: "People",
-      blurb: "Leaders and operators who set priorities, approve decisions, and own outcomes.",
-    },
-    {
-      id: "workflow",
-      label: "Workflow",
-      blurb: "The process, data model, and handoffs that turn strategy into daily execution.",
-    },
-    {
-      id: "agent",
-      label: "Agentic Backend",
-      blurb: "Automated research, enrichment, and drafting that keeps the workflow moving.",
-    },
-  ],
-  stagesTitle: "How engagements run",
-  stages: [
-    {
-      title: "Discovery and alignment",
-      body: "Map your goals, stakeholders, data, and constraints before scoping the build.",
-    },
-    {
-      title: "Design and delivery",
-      body: "Build the workflow, tools, and integrations your team runs day to day.",
-    },
-    {
-      title: "Launch and adoption",
-      body: "Train owners, document the model, and embed the system in operations.",
-    },
-    {
-      title: "Improve and expand",
-      body: "Measure outcomes, refine the system, and extend scope where value holds.",
-    },
-  ],
-} as const;
+export type ApproachNodeId = "people" | "workflow" | "agent" | "scale" | "trust" | "ai" | "academic" | "credentials" | "institution";
+
+export type ApproachTabId = "process" | "scale-security" | "credentialling";
+
+export type ApproachTab = {
+  id: ApproachTabId;
+  label: string;
+  summary: string;
+  diagramLabel: [string, string];
+  nodes: {
+    id: ApproachNodeId;
+    label: string;
+    blurb: string;
+  }[];
+  stagesTitle: string;
+  stages: {
+    title: string;
+    body: string;
+  }[];
+};
+
+export const approachTabs: ApproachTab[] = [
+  {
+    id: "process",
+    label: "Process",
+    summary:
+      "People set judgment and ownership. Workflow turns intent into repeatable execution. Agentic backends handle research, classification, and draft work at speed. Each layer feeds the others so the system stays accountable, understandable, and fast.",
+    diagramLabel: ["Feedback", "loop"],
+    nodes: [
+      {
+        id: "people",
+        label: "People",
+        blurb: "Leaders and operators who set priorities, approve decisions, and own outcomes.",
+      },
+      {
+        id: "workflow",
+        label: "Workflow",
+        blurb: "The process, data model, and handoffs that turn strategy into daily execution.",
+      },
+      {
+        id: "agent",
+        label: "Agentic Backend",
+        blurb: "Automated research, enrichment, and drafting that keeps the workflow moving.",
+      },
+    ],
+    stagesTitle: "How engagements run",
+    stages: [
+      {
+        title: "Discovery and alignment",
+        body: "Map your goals, stakeholders, data, and constraints before scoping the build.",
+      },
+      {
+        title: "Design and delivery",
+        body: "Build the workflow, tools, and integrations your team runs day to day.",
+      },
+      {
+        title: "Launch and adoption",
+        body: "Train owners, document the model, and embed the system in operations.",
+      },
+      {
+        title: "Improve and expand",
+        body: "Measure outcomes, refine the system, and extend scope where value holds.",
+      },
+    ],
+  },
+  {
+    id: "scale-security",
+    label: "Scale and security",
+    summary:
+      "I build entrepreneurially inside ecosystems where volume, multi-party access, and AI raise the cost of a weak control plane. The goal is speed with a system operators can audit: clear ownership, scoped automation, and security treated as part of delivery.",
+    diagramLabel: ["Control", "plane"],
+    nodes: [
+      {
+        id: "scale",
+        label: "Scale",
+        blurb: "Throughput, tenancy, and handoffs that hold when traffic and headcount jump.",
+      },
+      {
+        id: "trust",
+        label: "Trust boundary",
+        blurb: "Permissions, approvals, and audit trails across people, vendors, and systems.",
+      },
+      {
+        id: "ai",
+        label: "AI surface",
+        blurb: "Models and agents scoped with data access rules, logging, and human review.",
+      },
+    ],
+    stagesTitle: "How scale and security show up",
+    stages: [
+      {
+        title: "Map the trust boundary",
+        body: "Name the systems of record, who can change them, and where AI is allowed to read or write.",
+      },
+      {
+        title: "Design for volume",
+        body: "Build workflows and data models that stay legible when usage, roles, and integrations grow.",
+      },
+      {
+        title: "Scope the AI layer",
+        body: "Put agents behind contracts: allowed inputs, tool permissions, retention rules, and review gates.",
+      },
+      {
+        title: "Operate with evidence",
+        body: "Instrument outcomes so teams can spot drift, abuse, and failure modes before they compound.",
+      },
+    ],
+  },
+  {
+    id: "credentialling",
+    label: "Credentialling",
+    summary:
+      "Secure delivery depends on judgment under incomplete information. Academic training, field credentials, and institutional experience shape how I scope AI systems, data use, and operating controls when the stakes require a partner who holds up under scrutiny.",
+    diagramLabel: ["Proof of", "depth"],
+    nodes: [
+      {
+        id: "academic",
+        label: "Academic depth",
+        blurb: "Business analytics and applied ML study at GW and Vrije Universiteit Amsterdam.",
+      },
+      {
+        id: "credentials",
+        label: "Field credentials",
+        blurb: "Developer and data certifications across Salesforce, HubSpot, Apollo, LinkedIn, CFA Institute, and Federal Reserve programs.",
+      },
+      {
+        id: "institution",
+        label: "Institutional practice",
+        blurb: "Compliance-aware delivery in environments like the Federal Reserve Bank of St. Louis and large movement operations.",
+      },
+    ],
+    stagesTitle: "Why this profile holds under scrutiny",
+    stages: [
+      {
+        title: "Methods you can inspect",
+        body: "Academic analytics and ML training turn into operating models with explicit assumptions and measurable outcomes.",
+      },
+      {
+        title: "Tooling literacy without guesswork",
+        body: "Credentialed fluency across CRM, enrichment, and analytics platforms shortens integration risk.",
+      },
+      {
+        title: "Institutional habits",
+        body: "Documentation, permissions, and review gates come standard before scale, drawn from regulated and high-visibility environments.",
+      },
+      {
+        title: "Auditable engagements",
+        body: "Stakeholders can see how decisions were made, what AI touched, and who owned each handoff.",
+      },
+    ],
+  },
+];
+
+/** @deprecated Prefer approachTabs.find((t) => t.id === "process") */
+export const approachSystem = approachTabs[0];
 
 export type Principle = ApproachCard;
 
@@ -340,6 +455,7 @@ export type WorkedWithLogo = {
   logoSrc: string;
   fit: LogoFit;
   invert?: boolean;
+  href?: string;
 };
 
 export const workedWithSection = {
@@ -355,19 +471,27 @@ function dedupeWorkedWithLogos(logos: WorkedWithLogo[]): WorkedWithLogo[] {
   });
 }
 
-const logoPresentation: Record<string, Pick<WorkedWithLogo, "fit" | "invert">> = {
-  "/logos/marquee/synth.png": { fit: "mark" },
-  "/logos/marquee/nexus.png": { fit: "mark" },
-  "/logos/marquee/sbi.png": { fit: "lockup", invert: true },
-  "/logos/marquee/bbyo.png": { fit: "mark", invert: true },
-  "/logos/marquee/federal-reserve.png": { fit: "lockup" },
-  "/logos/marquee/gwu.png": { fit: "lockup" },
-  "/logos/marquee/vu.png": { fit: "lockup" },
-  "/logos/marquee/jambase-wordmark.png": { fit: "lockup" },
-  "/logos/marquee/minnowtech.png": { fit: "wordmark" },
-  "/logos/marquee/stall-plus.png": { fit: "mark", invert: true },
-  "/logos/marquee/campus-watch-chronicle.png": { fit: "lockup" },
-  "/logos/marquee/nacs-foundation.png": { fit: "wordmark" },
+const logoPresentation: Record<string, Pick<WorkedWithLogo, "fit" | "invert" | "href">> = {
+  "/logos/marquee/synth.png": { fit: "mark", href: "https://getsynth.app" },
+  "/logos/marquee/nexus.png": { fit: "mark", href: "https://nxsconsultants.com" },
+  "/logos/marquee/sbi.png": { fit: "lockup", invert: true, href: "https://sbigrowth.com" },
+  "/logos/marquee/bbyo.png": { fit: "mark", invert: true, href: "https://bbyo.org" },
+  "/logos/marquee/federal-reserve.png": { fit: "lockup", href: "https://www.stlouisfed.org" },
+  "/logos/marquee/gwu.png": { fit: "lockup", href: "https://gwu.edu" },
+  "/logos/marquee/vu.png": { fit: "lockup", href: "https://vu.nl" },
+  "/logos/marquee/jambase-wordmark.png": { fit: "lockup", href: "https://www.jambase.com" },
+  "/logos/marquee/minnowtech.png": { fit: "wordmark", href: "https://minnowtech.com" },
+  "/logos/marquee/stall-plus.png": { fit: "mark", invert: true, href: "https://stallplus.com" },
+  "/logos/marquee/campus-watch-chronicle.png": {
+    fit: "lockup",
+    href: "https://www.linkedin.com/company/campus-watch-chronicle/",
+  },
+  "/logos/marquee/nacs-foundation.png": { fit: "wordmark", href: "https://www.conveniencecares.org" },
+  "/logos/marquee/us-chamber-foundation.png": {
+    fit: "lockup",
+    href: "https://www.uschamberfoundation.org",
+  },
+  "/logos/marquee/solutions-atoz.png": { fit: "mark", href: "https://solutionsatoz.com" },
 };
 
 function marqueeSrc(src: string): string {
@@ -419,6 +543,16 @@ export const workedWithLogos: WorkedWithLogo[] = dedupeWorkedWithLogos([
     name: "NACS Foundation",
     logoSrc: "/logos/marquee/nacs-foundation.png",
     ...logoPresentation["/logos/marquee/nacs-foundation.png"],
+  },
+  {
+    name: "U.S. Chamber of Commerce Foundation",
+    logoSrc: "/logos/marquee/us-chamber-foundation.png",
+    ...logoPresentation["/logos/marquee/us-chamber-foundation.png"],
+  },
+  {
+    name: "ATOZ Solutions",
+    logoSrc: "/logos/marquee/solutions-atoz.png",
+    ...logoPresentation["/logos/marquee/solutions-atoz.png"],
   },
 ]);
 

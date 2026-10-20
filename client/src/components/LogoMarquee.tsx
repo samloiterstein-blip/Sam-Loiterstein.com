@@ -8,18 +8,36 @@ const FIT_CLASS: Record<LogoFit, string> = {
 };
 
 function LogoMark({ logo }: { logo: WorkedWithLogo }) {
+  const image = (
+    <img
+      src={logo.logoSrc}
+      alt=""
+      className={cn("logo-mark h-auto w-auto", FIT_CLASS[logo.fit], logo.invert && "logo-mark-invert")}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+
+  const className =
+    "logo-mark-slot flex h-[4.5rem] w-44 shrink-0 items-center justify-center sm:h-20 sm:w-48";
+
+  if (logo.href) {
+    return (
+      <a
+        href={logo.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${logo.name} (opens in a new tab)`}
+        className={cn(className, "logo-mark-link")}
+      >
+        {image}
+      </a>
+    );
+  }
+
   return (
-    <span
-      aria-label={logo.name}
-      className="flex h-[4.5rem] w-44 shrink-0 items-center justify-center sm:h-20 sm:w-48"
-    >
-      <img
-        src={logo.logoSrc}
-        alt=""
-        className={cn("logo-mark h-auto w-auto", FIT_CLASS[logo.fit], logo.invert && "logo-mark-invert")}
-        loading="lazy"
-        decoding="async"
-      />
+    <span aria-label={logo.name} className={className}>
+      {image}
     </span>
   );
 }

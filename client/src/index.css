@@ -97,6 +97,10 @@
     animation: logo-marquee 70s linear infinite;
   }
 
+  .logo-marquee-shell:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+
   .logo-marquee-static {
     display: none;
   }
@@ -107,10 +111,22 @@
     background-color: transparent;
     filter: grayscale(1);
     opacity: 0.62;
+    transition: filter 220ms ease, opacity 220ms ease;
   }
 
   .logo-mark-invert {
     filter: grayscale(1) invert(1);
+  }
+
+  .logo-mark-link {
+    border-radius: 0.5rem;
+    outline-offset: 4px;
+  }
+
+  .logo-mark-slot:hover .logo-mark,
+  .logo-mark-slot:focus-visible .logo-mark {
+    filter: none;
+    opacity: 1;
   }
 }
 
