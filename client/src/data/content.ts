@@ -350,7 +350,7 @@ export const background = {
       startYear: 2026,
       endYear: "present",
       barColor: "#003d7c",
-      title: "Automation and Systems",
+      title: "Automation and Systems Engineer",
       org: "U.S. Chamber of Commerce Foundation",
       logoLabel: "CC",
       logoSrc: "/logos/us-chamber-foundation.png",
