@@ -346,6 +346,18 @@ export const background = {
   description: "Roles and education behind the systems above.",
   experience: [
     {
+      period: "Sept 2026 to Present",
+      startYear: 2026,
+      endYear: "present",
+      barColor: "#003d7c",
+      title: "Automation and Systems",
+      org: "U.S. Chamber of Commerce Foundation",
+      logoLabel: "CC",
+      logoSrc: "/logos/us-chamber-foundation.png",
+      description:
+        "Newsletter automation, runtime monitoring, and operating systems for foundation programs at institutional scale.",
+    },
+    {
       period: "2025 to Present",
       startYear: 2025,
       endYear: "present",
@@ -543,11 +555,6 @@ export const workedWithLogos: WorkedWithLogo[] = dedupeWorkedWithLogos([
     name: "NACS Foundation",
     logoSrc: "/logos/marquee/nacs-foundation.png",
     ...logoPresentation["/logos/marquee/nacs-foundation.png"],
-  },
-  {
-    name: "U.S. Chamber of Commerce Foundation",
-    logoSrc: "/logos/marquee/us-chamber-foundation.png",
-    ...logoPresentation["/logos/marquee/us-chamber-foundation.png"],
   },
   {
     name: "ATOZ Solutions",
