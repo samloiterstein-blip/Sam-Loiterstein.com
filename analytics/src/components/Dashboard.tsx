@@ -284,7 +284,17 @@ export function Dashboard({ onLogout }: { onLogout: () => void }) {
               <Stat label="Pageviews" value={data.pageviews ?? 0} />
             </div>
 
-            <DailySection days={data.daily || []} />
+            <DailySection
+              days={data.daily || []}
+              from={
+                preset === "custom"
+                  ? appliedCustom.from
+                  : preset === "all"
+                    ? data.daily?.[0]?.day || todayUtc()
+                    : daysAgoUtc(Number(preset) - 1)
+              }
+              to={preset === "custom" ? appliedCustom.to : todayUtc()}
+            />
 
             <LocationMap
               countries={data.countries || []}

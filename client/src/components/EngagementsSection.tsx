@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { Section } from "./ui/Section";
-import { Button } from "./ui/Button";
-import { engagementsSection, services, servicesSection } from "@/data/content";
+import { engagementsSection, sectionCtas, services, servicesSection } from "@/data/content";
 
 export function EngagementsSection() {
   return (
@@ -49,21 +48,20 @@ export function EngagementsSection() {
         })}
       </div>
 
-      <div className="mt-6 rounded-2xl border border-sage-200/80 bg-sage-50/50 p-4 sm:p-5">
-        <div className="font-display text-lg text-ink-900">{servicesSection.ctaPrompt}</div>
-        <p className="mt-1 text-sm text-ink-600">{servicesSection.ctaSubcopy}</p>
-        <Button
-          as="a"
+      <div className="mt-8 max-w-xl">
+        <p className="text-base leading-relaxed text-ink-700">{sectionCtas.engagements.body}</p>
+        <a
           href="#contact"
+          data-analytics="cta:engagements-scope"
           onClick={(e) => {
             e.preventDefault();
-            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
-          className="mt-3"
+          className="mt-4 inline-flex h-14 items-center gap-2 bg-sage-700 px-7 text-base font-medium text-cream transition hover:bg-sage-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400 focus-visible:ring-offset-2"
         >
-          {servicesSection.ctaButton}
-          <ArrowRight size={16} />
-        </Button>
+          {sectionCtas.engagements.action}
+          <ArrowRight size={18} aria-hidden />
+        </a>
       </div>
     </Section>
   );

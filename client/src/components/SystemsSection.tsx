@@ -1,21 +1,24 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
-import { ChevronDown } from "lucide-react";
+import { useCallback, useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { Section } from "./ui/Section";
 import { Tag } from "./ui/Tag";
 import { CaseStudyPanel } from "./CaseStudyPanel";
+import { SectionCta } from "./SectionCta";
+import { GitRepos } from "./GitRepos";
 import {
-  founderWorkSection,
   founderWorkSystems,
   fractionalExpertiseSection,
   fractionalExpertiseSystems,
+  portfolioTabs,
   systemDisplayTitle,
   systemIndex,
   systemIndexSection,
   workSection,
   workSystems,
+  type PortfolioTabId,
   type ProofType,
   type WorkSystem,
 } from "@/data/content";
+import { cn } from "@/lib/cn";
 
 type PanelState = WorkSystem | null;
 
@@ -195,73 +198,6 @@ function FeaturedSystemCard({
   );
 }
 
-function SystemIndexAccordionItem({
-  system,
-  defaultOpen = false,
-  onActivate,
-}: {
-  system: WorkSystem;
-  defaultOpen?: boolean;
-  onActivate: (system: WorkSystem, proofType: ProofType, trigger: HTMLElement) => void;
-}) {
-  const hp = system.homepage;
-  const title = systemDisplayTitle(system);
-  const detailsRef = useRef<HTMLDetailsElement>(null);
-
-  useEffect(() => {
-    if (defaultOpen && detailsRef.current) {
-      detailsRef.current.open = true;
-    }
-  }, [defaultOpen]);
-
-  return (
-    <li id={`index-${system.slug}`} className="border-b border-ink-100/80 last:border-b-0">
-      <details ref={detailsRef} className="group">
-        <summary className="flex cursor-pointer list-none items-center gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden sm:gap-6">
-          <span className="w-12 shrink-0 text-[10px] font-medium uppercase tracking-[0.14em] text-ink-500 sm:w-20">
-            {system.year}
-          </span>
-          <span className="min-w-0 flex-1 font-display text-lg text-ink-900">{title}</span>
-          <ChevronDown
-            size={16}
-            className="shrink-0 text-ink-400 transition-transform duration-300 group-open:rotate-180"
-            aria-hidden
-          />
-        </summary>
-
-        <div className="pb-5 pl-16 sm:pl-[6.5rem]">
-          <p className="text-sm leading-relaxed text-ink-600">{hp.cardDescription}</p>
-          <p className="mt-2 text-[10px] font-medium uppercase tracking-[0.14em] text-sage-800">
-            {hp.competencyLabel}
-          </p>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {hp.displayTags.slice(0, 3).map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
-          <div className="mt-4 flex flex-col items-start gap-2">
-            <ProofAction
-              system={system}
-              proofType={hp.proofType}
-              label={hp.proofLabel}
-              onActivate={onActivate}
-            />
-            {hp.secondaryProofType && hp.secondaryProofLabel ? (
-              <ProofAction
-                system={system}
-                proofType={hp.secondaryProofType}
-                label={hp.secondaryProofLabel}
-                variant="secondary"
-                onActivate={onActivate}
-              />
-            ) : null}
-          </div>
-        </div>
-      </details>
-    </li>
-  );
-}
-
 function FeaturedSystemsGrid({
   systems,
   onActivate,
@@ -280,18 +216,31 @@ function FeaturedSystemsGrid({
   );
 }
 
+function tabForSlug(slug: string): PortfolioTabId {
+  if (founderWorkSystems.some((system) => system.slug === slug)) return "founder";
+  if (fractionalExpertiseSystems.some((system) => system.slug === slug)) return "fractional";
+  if (systemIndex.some((system) => system.slug === slug)) return "projects";
+  return "founder";
+}
+
 export function SystemsSection() {
   const [panel, setPanel] = useState<PanelState | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
-  const [indexOpenSlug] = useState(() => {
-    if (typeof window === "undefined") return null;
+  const [activeTab, setActiveTab] = useState<PortfolioTabId>(() => {
+    if (typeof window === "undefined") return "founder";
     const slug = new URLSearchParams(window.location.search).get("system");
-    return slug && systemIndex.some((s) => s.slug === slug) ? slug : null;
+    return slug ? tabForSlug(slug) : "founder";
   });
+  const baseId = useId();
+  const tabRefs = useRef<Partial<Record<PortfolioTabId, HTMLButtonElement | null>>>({});
+
+  const selectTab = (id: PortfolioTabId) => {
+    setActiveTab(id);
+    queueMicrotask(() => tabRefs.current[id]?.focus());
+  };
 
   const scrollToSystem = useCallback((slug: string) => {
-    const el = document.getElementById(`system-${slug}`) ?? document.getElementById(`index-${slug}`);
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById(`system-${slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   const openPanel = useCallback(
@@ -317,6 +266,7 @@ export function SystemsSection() {
     const system = workSystems.find((w) => w.slug === slug);
     if (!system) return;
 
+    setActiveTab(tabForSlug(slug));
     setPanel(system);
 
     if (params.get("music") === "connected") {
@@ -333,34 +283,81 @@ export function SystemsSection() {
       title={workSection.title}
       description={workSection.description}
     >
-      <div>
-        <h3 className="font-display text-2xl text-ink-900">{founderWorkSection.title}</h3>
-        <div className="mt-6">
+      <div
+        role="tablist"
+        aria-label="Portfolio: founder work, fractional and intern experience, projects, and GitHub"
+        className="flex flex-wrap gap-2"
+      >
+        {portfolioTabs.map((tab) => {
+          const selected = tab.id === activeTab;
+          return (
+            <button
+              key={tab.id}
+              id={`${baseId}-${tab.id}-tab`}
+              ref={(el) => {
+                tabRefs.current[tab.id] = el;
+              }}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              aria-controls={`${baseId}-${tab.id}-panel`}
+              tabIndex={selected ? 0 : -1}
+              onClick={() => selectTab(tab.id)}
+              onKeyDown={(event) => {
+                const currentIndex = portfolioTabs.findIndex((item) => item.id === activeTab);
+                if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+                  event.preventDefault();
+                  const delta = event.key === "ArrowRight" ? 1 : -1;
+                  const next = portfolioTabs[(currentIndex + delta + portfolioTabs.length) % portfolioTabs.length];
+                  selectTab(next.id);
+                }
+                if (event.key === "Home") {
+                  event.preventDefault();
+                  selectTab(portfolioTabs[0].id);
+                }
+                if (event.key === "End") {
+                  event.preventDefault();
+                  selectTab(portfolioTabs[portfolioTabs.length - 1].id);
+                }
+              }}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-500/40",
+                selected
+                  ? "bg-sage-700 text-cream shadow-[0_4px_14px_-6px_rgba(35,54,42,0.45)]"
+                  : "bg-white text-ink-700 ring-1 ring-ink-200 hover:bg-sage-50 hover:text-sage-800 hover:ring-sage-300"
+              )}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+
+      <div
+        id={`${baseId}-${activeTab}-panel`}
+        role="tabpanel"
+        aria-labelledby={`${baseId}-${activeTab}-tab`}
+        className="mt-6"
+      >
+        {activeTab === "founder" ? (
           <FeaturedSystemsGrid systems={founderWorkSystems} onActivate={openPanel} />
-        </div>
+        ) : null}
+        {activeTab === "fractional" ? (
+          <div>
+            <p className="mb-6 max-w-2xl text-sm leading-relaxed text-ink-600">{fractionalExpertiseSection.description}</p>
+            <FeaturedSystemsGrid systems={fractionalExpertiseSystems} onActivate={openPanel} />
+          </div>
+        ) : null}
+        {activeTab === "projects" ? (
+          <div>
+            <p className="mb-6 max-w-2xl text-sm leading-relaxed text-ink-600">{systemIndexSection.description}</p>
+            <FeaturedSystemsGrid systems={systemIndex} onActivate={openPanel} />
+          </div>
+        ) : null}
+        {activeTab === "git" ? <GitRepos /> : null}
       </div>
 
-      <div className="mt-8 border-t border-ink-100/80 pt-8">
-        <h3 className="font-display text-2xl text-ink-900">{fractionalExpertiseSection.title}</h3>
-        <div className="mt-6">
-          <FeaturedSystemsGrid systems={fractionalExpertiseSystems} onActivate={openPanel} />
-        </div>
-      </div>
-
-      <div className="mt-8 border-t border-ink-100/80 pt-8">
-        <h3 className="font-display text-2xl text-ink-900">{systemIndexSection.title}</h3>
-        <p className="subheading mt-2">{systemIndexSection.description}</p>
-        <ul className="mt-6 list-none rounded-2xl border border-ink-100/80 bg-white/70 px-5">
-          {systemIndex.map((system) => (
-            <SystemIndexAccordionItem
-              key={system.slug}
-              system={system}
-              defaultOpen={indexOpenSlug === system.slug}
-              onActivate={openPanel}
-            />
-          ))}
-        </ul>
-      </div>
+      <SectionCta place="work" />
 
       <CaseStudyPanel
         system={panel}

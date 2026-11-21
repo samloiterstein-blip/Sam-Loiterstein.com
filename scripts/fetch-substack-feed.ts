@@ -13,7 +13,7 @@ const host =
 
 async function main() {
   try {
-    const feed = await fetchSubstackFeed(host, 8);
+    const feed = await fetchSubstackFeed(host, 20);
     const outPath = path.join(root, "client/public/substack-feed.json");
     writeFileSync(outPath, `${JSON.stringify(feed, null, 2)}\n`, "utf8");
     console.log(`[substack] Wrote ${feed.posts.length} posts to ${outPath}`);

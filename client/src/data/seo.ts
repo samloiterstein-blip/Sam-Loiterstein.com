@@ -31,6 +31,7 @@ export const seo = {
     "https://www.linkedin.com/in/sam-loiterstein",
     "https://substack.com/@sloiterstein",
     "https://sloiterstein.substack.com",
+    "https://github.com/samloiterstein-blip",
     "https://nxsconsultants.com",
   ],
   jobTitle: "Founder, AI and GTM systems operator",

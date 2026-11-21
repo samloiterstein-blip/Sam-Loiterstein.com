@@ -10,6 +10,7 @@ export type SubstackFeedPayload = {
   publicationUrl: string;
   fetchedAt: string;
   posts: SubstackPost[];
+  nextCursor?: string | null;
 };
 
 function stripHtml(html: string): string {
@@ -78,6 +79,82 @@ export async function fetchSubstackFeed(host: string, limit = 8): Promise<Substa
     publicationHost,
     publicationUrl,
     fetchedAt: new Date().toISOString(),
+    posts: sortNewest(posts),
+    nextCursor: null,
+  };
+}
+
+const CURSOR_PATTERN = /^[A-Za-z0-9+/=_-]{1,500}$/;
+
+type ArchivePost = {
+  title?: string;
+  subtitle?: string | null;
+  description?: string | null;
+  canonical_url?: string;
+  post_date?: string;
+  truncated_body_text?: string | null;
+};
+
+export function sortNewest(posts: SubstackPost[]): SubstackPost[] {
+  return [...posts].sort((a, b) => {
+    const aTime = new Date(a.publishedAt).getTime();
+    const bTime = new Date(b.publishedAt).getTime();
+    return (Number.isNaN(bTime) ? 0 : bTime) - (Number.isNaN(aTime) ? 0 : aTime);
+  });
+}
+
+export function clampPageLimit(value: unknown, fallback = 4): number {
+  const parsed = typeof value === "number" ? value : Number(value);
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.min(20, Math.max(1, Math.floor(parsed)));
+}
+
+export async function fetchSubstackPage(
+  host: string,
+  options: { limit?: number; cursor?: string | null } = {},
+): Promise<SubstackFeedPayload> {
+  const publicationHost = normalizePublicationHost(host);
+  const publicationUrl = publicationUrlFromHost(publicationHost);
+  const limit = clampPageLimit(options.limit, 4);
+  const cursor = options.cursor && CURSOR_PATTERN.test(options.cursor) ? options.cursor : null;
+  const params = new URLSearchParams({ sort: "new", limit: String(limit) });
+  if (cursor) params.set("cursor", cursor);
+
+  const res = await fetch(`${publicationUrl}/api/v1/archive?${params}`, {
+    headers: {
+      "User-Agent": "sam-loiterstein.com/1.0 (Substack archive reader)",
+      Accept: "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Substack archive returned ${res.status}`);
+  }
+
+  const data = (await res.json()) as { posts?: ArchivePost[]; nextCursor?: string | null };
+  const posts = sortNewest(
+    (data.posts ?? [])
+      .map((post) => {
+        const excerptSource = post.subtitle || post.description || post.truncated_body_text || "";
+        return {
+          title: (post.title ?? "").replace(/\s+/g, " ").trim(),
+          link: (post.canonical_url ?? "").trim(),
+          publishedAt: post.post_date ?? "",
+          excerpt: excerptSource.replace(/\s+/g, " ").trim().slice(0, 300),
+        };
+      })
+      .filter((post) => post.title.length > 0 && post.link.length > 0),
+  );
+  const nextCursor =
+    posts.length >= limit && data.nextCursor && CURSOR_PATTERN.test(data.nextCursor)
+      ? data.nextCursor
+      : null;
+
+  return {
+    publicationHost,
+    publicationUrl,
+    fetchedAt: new Date().toISOString(),
     posts,
+    nextCursor,
   };
 }

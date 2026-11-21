@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/Button";
 import { hero, site } from "@/data/content";
 
@@ -111,15 +111,16 @@ export function Hero() {
           <RotatingTitle titles={hero.rotatingTitles} />
         </motion.h1>
 
-        <motion.p
+        <motion.div
           custom={2}
           initial="hidden"
           animate="visible"
           variants={fade}
-          className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 sm:text-xl"
+          className="mt-6 max-w-2xl space-y-3 text-lg leading-relaxed text-ink-700 sm:text-xl"
         >
-          {hero.description}
-        </motion.p>
+          <p className="font-medium text-ink-900">{hero.lead}</p>
+          <p>{hero.support}</p>
+        </motion.div>
 
         <motion.div
           custom={3}
@@ -139,23 +140,47 @@ export function Hero() {
             }}
           >
             {hero.primaryCta}
-            <ArrowUpRight size={16} />
+            <ArrowRight size={16} />
           </Button>
 
-          <Button
-            as="a"
+          <a
             href="#contact"
-            variant="secondary"
-            size="lg"
             data-analytics="cta:hero-start-conversation"
             onClick={(e) => {
               e.preventDefault();
               scrollTo("contact");
             }}
+            className="inline-flex h-12 items-center gap-2 rounded-full border border-ink-900 bg-white px-6 text-base font-medium text-ink-900 transition hover:bg-ink-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400 focus-visible:ring-offset-2"
           >
             {hero.secondaryCta}
             <ArrowRight size={16} />
-          </Button>
+          </a>
+        </motion.div>
+
+        <motion.div
+          custom={4}
+          initial="hidden"
+          animate="visible"
+          variants={fade}
+          className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-600"
+        >
+          <a
+            href={`mailto:${site.email}`}
+            data-analytics="cta:hero-email"
+            className="font-medium text-sage-800 hover:text-sage-900"
+          >
+            {site.email}
+          </a>
+          <a
+            href={site.socials.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            data-analytics="cta:hero-linkedin"
+            className="font-medium text-sage-800 hover:text-sage-900"
+          >
+            LinkedIn
+          </a>
+          <span>{site.location}</span>
         </motion.div>
       </div>
     </section>

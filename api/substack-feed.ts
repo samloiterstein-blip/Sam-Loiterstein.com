@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { fetchSubstackFeed } from "./_lib/substackFeed.js";
+import { clampPageLimit, fetchSubstackPage } from "./_lib/substackFeed.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "GET") {
@@ -10,10 +10,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     process.env.SUBSTACK_PUBLICATION?.trim() ||
     process.env.VITE_SUBSTACK_PUBLICATION?.trim() ||
     "sloiterstein.substack.com";
+  const cursor = typeof req.query.cursor === "string" ? req.query.cursor : null;
 
   try {
-    const feed = await fetchSubstackFeed(host, 8);
-    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=3600");
+    const feed = await fetchSubstackPage(host, {
+      limit: clampPageLimit(req.query.limit, 4),
+      cursor,
+    });
+    res.setHeader("Cache-Control", "s-maxage=120, stale-while-revalidate=600");
     return res.json({ ok: true, ...feed });
   } catch (err) {
     console.error("[substack-feed]", err);

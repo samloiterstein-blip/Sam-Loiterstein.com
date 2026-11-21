@@ -37,6 +37,9 @@ export function Footer() {
           >
             LinkedIn
           </a>
+          <a href={site.socials.github} target="_blank" rel="noreferrer" className="link-underline">
+            GitHub
+          </a>
           <a href={site.socials.email} className="link-underline">
             Email
           </a>

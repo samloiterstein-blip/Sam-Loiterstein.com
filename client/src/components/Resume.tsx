@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import { Section } from "./ui/Section";
 import { Button } from "./ui/Button";
+import { SectionCta } from "./SectionCta";
 import { background, site, type CredentialEntry, type TimelineEntry } from "@/data/content";
 
 const YEAR_HEIGHT = 100;
@@ -20,7 +21,10 @@ export function Background() {
       title={background.title}
       description={background.description}
     >
-      <UnifiedTimeline experience={background.experience} education={background.education} />
+      <SectionCta place="background" />
+      <div id="experience" className="scroll-mt-28">
+        <UnifiedTimeline experience={background.experience} education={background.education} />
+      </div>
 
       <details className="group mt-10 rounded-2xl border border-ink-100 bg-white shadow-soft">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
@@ -52,6 +56,9 @@ export function Background() {
         <Button as="a" href={site.resumeUrl} download size="md" variant="secondary">
           <Download size={16} />
           {background.pdfButtonLabel}
+        </Button>
+        <Button as="a" href={`mailto:${site.email}`} size="md" variant="ghost">
+          {site.email}
         </Button>
       </div>
     </Section>

@@ -20,26 +20,51 @@ export const site = {
   socials: {
     linkedin: "https://www.linkedin.com/in/sam-loiterstein",
     email: "mailto:samloiterstein@gmail.com",
+    github: "https://github.com/samloiterstein-blip",
   },
+  githubUser: "samloiterstein-blip",
 } as const;
 
 export const navItems = [
   { id: "approach", label: "Approach" },
-  { id: "work", label: "Systems" },
+  { id: "work", label: "Work" },
   { id: "writing", label: "Writing" },
   { id: "media", label: "Press" },
   { id: "background", label: "Background" },
   { id: "contact", label: "Contact" },
 ] as const;
 
+export const sectionCtas = {
+  approach: {
+    lead: "You can start with the problem, even if you have no idea what the solution should be.",
+    body: "Tell me where work gets stuck. I'll look at the people, process, and tools involved before proposing a build.",
+    action: "Tell me what's stuck",
+  },
+  work: {
+    lead: "See what the team needed, what I built, and what changed.",
+    action: "Discuss a similar build",
+  },
+  writing: {
+    action: "Read the latest piece",
+  },
+  background: {
+    action: "See my experience",
+  },
+  engagements: {
+    body: "I can define a focused project or ongoing product support after discussing the problem.",
+    action: "Discuss the scope",
+  },
+} as const;
+
 // Hero
 
 export const hero = {
   eyebrow: "Washington, DC. Open to new engagements.",
-  primaryCta: "Explore systems",
-  secondaryCta: "Start a conversation",
-  description:
-    "I build AI expertise into real workflows and deliver GTM as a Service for teams that need product, RevOps, and go-to-market motion in one system.",
+  primaryCta: "See selected work",
+  secondaryCta: "Discuss a project",
+  lead: "I build the tools growing teams need when their workflows outgrow spreadsheets and disconnected software.",
+  support:
+    "I work with nonprofit and early-stage leaders to find the bottleneck, decide what to build, and get it into use.",
   rotatingTitles: [
     "Founder & Operator.",
     "Product Lead.",
@@ -67,7 +92,7 @@ export const approach = {
   eyebrow: "Approach",
   title: "Build the system before the scale.",
   manifesto:
-    "Across products, teams, and revenue operations, growth holds when the underlying system is clear. I build the AI-assisted workflows, data structures, governance, and feedback loops that turn promising work into repeatable GTM and operations.",
+    "Background, how I work, security, scalability, and responsible AI. The record comes first. The system is built from there.",
 } as const;
 
 export type ApproachCard = {
@@ -76,161 +101,143 @@ export type ApproachCard = {
   icon: LucideIcon;
 };
 
-export type ApproachNodeId = "people" | "workflow" | "agent" | "scale" | "trust" | "ai" | "academic" | "credentials" | "institution";
+export type ApproachTabId = "credentials" | "process" | "security" | "scale" | "ai-ethics";
 
-export type ApproachTabId = "process" | "scale-security" | "credentialling";
+export type ApproachPoint = {
+  title: string;
+  body: string;
+};
+
+export type CredentialGroupId = "education" | "certifications" | "experience";
 
 export type ApproachTab = {
   id: ApproachTabId;
   label: string;
-  summary: string;
-  diagramLabel: [string, string];
-  nodes: {
-    id: ApproachNodeId;
+  headline: string;
+  paragraphs: string[];
+  record?: {
+    id: CredentialGroupId;
     label: string;
-    blurb: string;
+    hint: string;
   }[];
-  stagesTitle: string;
-  stages: {
-    title: string;
-    body: string;
-  }[];
+  pointsTitle?: string;
+  pointsLayout?: "stages" | "grid";
+  points?: ApproachPoint[];
+  closing?: string;
 };
 
 export const approachTabs: ApproachTab[] = [
   {
+    id: "credentials",
+    label: "Background",
+    headline: "International study in neural networks and computer science.",
+    paragraphs: [
+      "My education is rigorous and international. At Vrije Universiteit Amsterdam I studied complex neural networks and the computer science behind applied machine learning. At The George Washington University I am in the Honors Program for a BS in Business Analytics, with a minor in Buddhist Ethics.",
+      "Alongside that study, I have worked at companies of all sizes, from early-stage teams to large institutions.",
+    ],
+    record: [
+      {
+        id: "education",
+        label: "Education",
+        hint: "Academic programs and relevant coursework.",
+      },
+      {
+        id: "certifications",
+        label: "Certifications",
+        hint: "Selected technical and professional credentials.",
+      },
+    ],
+  },
+  {
     id: "process",
-    label: "Process",
-    summary:
-      "People set judgment and ownership. Workflow turns intent into repeatable execution. Agentic backends handle research, classification, and draft work at speed. Each layer feeds the others so the system stays accountable, understandable, and fast.",
-    diagramLabel: ["Feedback", "loop"],
-    nodes: [
+    label: "How I Work",
+    headline: "From an ambiguous problem to something your team can use.",
+    paragraphs: [
+      "Most teams don't need another tool. They need someone who can understand where work breaks down, define what should change, and take ownership of making it happen.",
+      "My approach follows four stages.",
+    ],
+    pointsTitle: "Four stages",
+    pointsLayout: "stages",
+    points: [
       {
-        id: "people",
-        label: "People",
-        blurb: "Leaders and operators who set priorities, approve decisions, and own outcomes.",
+        title: "Understand",
+        body: "Map the existing workflow, identify bottlenecks, and define the outcome that matters.",
       },
       {
-        id: "workflow",
-        label: "Workflow",
-        blurb: "The process, data model, and handoffs that turn strategy into daily execution.",
+        title: "Prioritize",
+        body: "Translate business needs into clear requirements, evaluate possible solutions, and identify what is worth building.",
       },
       {
-        id: "agent",
-        label: "Agentic Backend",
-        blurb: "Automated research, enrichment, and drafting that keeps the workflow moving.",
+        title: "Build",
+        body: "Develop, integrate, or configure the solution with feedback from the people who will use it.",
+      },
+      {
+        title: "Improve",
+        body: "Measure adoption, document the process, and refine what isn't working.",
       },
     ],
-    stagesTitle: "How engagements run",
-    stages: [
+    closing:
+      "The goal is a solution that fits the organization, rather than forcing the organization to adapt to the technology.",
+  },
+  {
+    id: "security",
+    label: "Security",
+    headline: "Build with the realities of your organization in mind.",
+    paragraphs: [
+      "Operational tools often touch sensitive information, internal systems, and workflows that teams depend on.",
+      "Security needs to be considered from the beginning, particularly when AI and third-party integrations are involved.",
+      "My approach prioritizes access, data, oversight, and accountability.",
+    ],
+    pointsTitle: "Priorities",
+    pointsLayout: "grid",
+    points: [
       {
-        title: "Discovery and alignment",
-        body: "Map your goals, stakeholders, data, and constraints before scoping the build.",
+        title: "Access",
+        body: "Limit permissions to the people and systems that need them.",
       },
       {
-        title: "Design and delivery",
-        body: "Build the workflow, tools, and integrations your team runs day to day.",
+        title: "Data",
+        body: "Minimize unnecessary collection, exposure, and movement of sensitive information.",
       },
       {
-        title: "Launch and adoption",
-        body: "Train owners, document the model, and embed the system in operations.",
+        title: "Oversight",
+        body: "Establish clear approval points for consequential actions and AI-generated outputs.",
       },
       {
-        title: "Improve and expand",
-        body: "Measure outcomes, refine the system, and extend scope where value holds.",
+        title: "Accountability",
+        body: "Document integrations, dependencies, and ownership so teams understand how their systems operate.",
       },
+    ],
+    closing: "Controls should reflect the organization's data, risks, and applicable requirements.",
+  },
+  {
+    id: "scale",
+    label: "Scalability",
+    headline: "Build for today's constraints without creating tomorrow's bottlenecks.",
+    paragraphs: [
+      "Early-stage companies and nonprofit teams operate with limited time, budget, and technical capacity.",
+      "A useful solution should make the current team more effective while remaining manageable as the organization changes.",
+      "I prioritize simple architecture, clear ownership, repeatable workflows, and systems that can evolve without constant rebuilding.",
+      "That means starting with the smallest solution that delivers measurable value, then improving it based on actual usage.",
+      "Success isn't measured by how much technology gets introduced. It's measured by whether the team can do its work better.",
     ],
   },
   {
-    id: "scale-security",
-    label: "Scale and security",
-    summary:
-      "I build entrepreneurially inside ecosystems where volume, multi-party access, and AI raise the cost of a weak control plane. The goal is speed with a system operators can audit: clear ownership, scoped automation, and security treated as part of delivery.",
-    diagramLabel: ["Control", "plane"],
-    nodes: [
-      {
-        id: "scale",
-        label: "Scale",
-        blurb: "Throughput, tenancy, and handoffs that hold when traffic and headcount jump.",
-      },
-      {
-        id: "trust",
-        label: "Trust boundary",
-        blurb: "Permissions, approvals, and audit trails across people, vendors, and systems.",
-      },
-      {
-        id: "ai",
-        label: "AI surface",
-        blurb: "Models and agents scoped with data access rules, logging, and human review.",
-      },
-    ],
-    stagesTitle: "How scale and security show up",
-    stages: [
-      {
-        title: "Map the trust boundary",
-        body: "Name the systems of record, who can change them, and where AI is allowed to read or write.",
-      },
-      {
-        title: "Design for volume",
-        body: "Build workflows and data models that stay legible when usage, roles, and integrations grow.",
-      },
-      {
-        title: "Scope the AI layer",
-        body: "Put agents behind contracts: allowed inputs, tool permissions, retention rules, and review gates.",
-      },
-      {
-        title: "Operate with evidence",
-        body: "Instrument outcomes so teams can spot drift, abuse, and failure modes before they compound.",
-      },
-    ],
-  },
-  {
-    id: "credentialling",
-    label: "Credentialling",
-    summary:
-      "Secure delivery depends on judgment under incomplete information. Academic training, field credentials, and institutional experience shape how I scope AI systems, data use, and operating controls when the stakes require a partner who holds up under scrutiny.",
-    diagramLabel: ["Proof of", "depth"],
-    nodes: [
-      {
-        id: "academic",
-        label: "Academic depth",
-        blurb: "Business analytics and applied ML study at GW and Vrije Universiteit Amsterdam.",
-      },
-      {
-        id: "credentials",
-        label: "Field credentials",
-        blurb: "Developer and data certifications across Salesforce, HubSpot, Apollo, LinkedIn, CFA Institute, and Federal Reserve programs.",
-      },
-      {
-        id: "institution",
-        label: "Institutional practice",
-        blurb: "Compliance-aware delivery in environments like the Federal Reserve Bank of St. Louis and large movement operations.",
-      },
-    ],
-    stagesTitle: "Why this profile holds under scrutiny",
-    stages: [
-      {
-        title: "Methods you can inspect",
-        body: "Academic analytics and ML training turn into operating models with explicit assumptions and measurable outcomes.",
-      },
-      {
-        title: "Tooling literacy without guesswork",
-        body: "Credentialed fluency across CRM, enrichment, and analytics platforms shortens integration risk.",
-      },
-      {
-        title: "Institutional habits",
-        body: "Documentation, permissions, and review gates come standard before scale, drawn from regulated and high-visibility environments.",
-      },
-      {
-        title: "Auditable engagements",
-        body: "Stakeholders can see how decisions were made, what AI touched, and who owned each handoff.",
-      },
+    id: "ai-ethics",
+    label: "Responsible AI",
+    headline: "Responsible AI starts with knowing where it belongs.",
+    paragraphs: [
+      "AI creates opportunities to reduce repetitive work, improve access to information, and help teams make better use of their time.",
+      "It also introduces questions about reliability, privacy, bias, and accountability.",
+      "I approach AI as one tool among many. Before introducing it into a workflow, I consider what problem it solves, what information it needs, how its outputs will be evaluated, and where human judgment must remain involved.",
+      "The objective is to deploy AI where it serves a clear purpose, with safeguards that reflect the people and decisions affected by it.",
+      "Sometimes the right recommendation is to use AI. Sometimes a simpler solution works better.",
     ],
   },
 ];
 
 /** @deprecated Prefer approachTabs.find((t) => t.id === "process") */
-export const approachSystem = approachTabs[0];
+export const approachSystem = approachTabs.find((tab) => tab.id === "process") ?? approachTabs[0];
 
 export type Principle = ApproachCard;
 
@@ -343,19 +350,32 @@ export type CredentialEntry = {
 export const background = {
   eyebrow: "Background",
   title: "Timeline",
-  description: "Roles and education behind the systems above.",
+  description:
+    "My work sits between the person who owns the problem and the person who builds the solution.",
   experience: [
     {
       period: "Sept 2026 to Present",
       startYear: 2026,
       endYear: "present",
       barColor: "#003d7c",
-      title: "Automation and Systems Engineer",
+      title: "Innovation Scholar",
       org: "U.S. Chamber of Commerce Foundation",
       logoLabel: "CC",
       logoSrc: "/logos/us-chamber-foundation.png",
       description:
-        "Newsletter automation, runtime monitoring, and operating systems for foundation programs at institutional scale.",
+        "Research and automation for foundation operations, including AI workflows, data ingestion, and Power Automate processes.",
+    },
+    {
+      period: "Feb 2026 to Present",
+      startYear: 2026,
+      endYear: "present",
+      barColor: "#1a1aff",
+      title: "AI GTM and Revenue Operations Lead",
+      org: "JamBase",
+      logoLabel: "JB",
+      logoSrc: "/logos/jambase.png",
+      description:
+        "SDRBase connects HubSpot, Apollo, and LinkedIn for research, outbound, forecasting, and reporting. Contributed to $5M+ in attributed sales.",
     },
     {
       period: "2025 to Present",
@@ -387,12 +407,12 @@ export const background = {
       startYear: 2025,
       endYear: 2025,
       barColor: "#1b3a6b",
-      title: "Revenue Operations",
+      title: "Revenue Operations Intern",
       org: "SBI, The Growth Advisory",
       logoLabel: "SBI",
       logoSrc: "/logos/sbi.png",
       description:
-        "Rebuilt pipeline classification and forecast reporting so stage labels matched deal behavior across product lines.",
+        "Restructured 13,000+ Salesforce records and reported on $51M+ of pipeline across 6 offerings.",
     },
     {
       period: "2024 to 2025",
@@ -404,7 +424,7 @@ export const background = {
       logoLabel: "BBYO",
       logoSrc: "/logos/bbyo.png",
       description:
-        "Programs, partnerships, grants, and convention operations across a global youth movement.",
+        "Programs, grants, and partnerships across 500+ communities in 60+ countries, and donor acknowledgments for $1M+ in assets.",
     },
     {
       period: "2023",
@@ -416,7 +436,7 @@ export const background = {
       logoLabel: "FR",
       logoSrc: "/logos/federal-reserve.png",
       description:
-        "Compliance, budgeting, procurement tracking, and reporting in an institutional environment.",
+        "Compliance audits for 600+ organizations, a $750K facilities budget, and 1,000+ procurement records.",
     },
   ] satisfies TimelineEntry[],
   education: [
@@ -425,7 +445,7 @@ export const background = {
       startYear: 2023,
       endYear: 2027,
       barColor: "#002856",
-      title: "BS, Business Analytics, Honors Program",
+      title: "BS, Business Analytics, Honors Program, Minor in Buddhist Ethics",
       org: "The George Washington University",
       logoSrc: "/logos/gwu.png",
       description:
@@ -441,7 +461,7 @@ export const background = {
       logoLabel: "VU",
       logoSrc: "/logos/vu.png",
       description:
-        "Applied ML and business research with European go to market context.",
+        "Complex neural networks and computer science, with applied machine learning research.",
     },
   ] satisfies TimelineEntry[],
   credentialsTitle: "Licenses and certifications",
@@ -492,6 +512,7 @@ const logoPresentation: Record<string, Pick<WorkedWithLogo, "fit" | "invert" | "
   "/logos/marquee/gwu.png": { fit: "lockup", href: "https://gwu.edu" },
   "/logos/marquee/vu.png": { fit: "lockup", href: "https://vu.nl" },
   "/logos/marquee/jambase-wordmark.png": { fit: "lockup", href: "https://www.jambase.com" },
+  "/logos/marquee/il-piatto.png": { fit: "lockup", href: "https://www.ilpiattodc.com" },
   "/logos/marquee/minnowtech.png": { fit: "wordmark", href: "https://minnowtech.com" },
   "/logos/marquee/stall-plus.png": { fit: "mark", invert: true, href: "https://stallplus.com" },
   "/logos/marquee/campus-watch-chronicle.png": {
@@ -535,6 +556,11 @@ export const workedWithLogos: WorkedWithLogo[] = dedupeWorkedWithLogos([
     name: "JamBase",
     logoSrc: "/logos/marquee/jambase-wordmark.png",
     ...logoPresentation["/logos/marquee/jambase-wordmark.png"],
+  },
+  {
+    name: "Il Piatto DC",
+    logoSrc: "/logos/marquee/il-piatto.png",
+    ...logoPresentation["/logos/marquee/il-piatto.png"],
   },
   {
     name: "Minnowtech",
@@ -651,32 +677,50 @@ export type ProblemPrompt = {
 };
 
 export const workSection = {
-  eyebrow: "Systems",
-  title: "Selected systems",
+  eyebrow: "Portfolio",
+  title: "Selected work",
   description:
-    "Products and operating systems built across music, revenue, and organizational growth. Each entry links to working proof or a documented case.",
+    "Founder work, fractional and intern experience, projects, and public repositories. Each entry links to working proof, a documented case, or the repository.",
   problemPickerLabel: "What are you working through?",
   briefToggleShow: "Executive brief",
   briefToggleHide: "Full case",
 } as const;
+
+export type PortfolioTabId = "founder" | "fractional" | "projects" | "git";
+
+export const portfolioTabs: { id: PortfolioTabId; label: string }[] = [
+  { id: "founder", label: "Founder Work" },
+  { id: "fractional", label: "Fractional / Intern Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "git", label: "From GitHub" },
+];
 
 export const founderWorkSection = {
   title: "Founder Work",
 } as const;
 
 export const fractionalExpertiseSection = {
-  title: "Fractional expertise",
+  title: "Fractional / Intern Experience",
+  description: "Internships and scoped operating roles inside other organizations.",
 } as const;
 
 export const systemIndexSection = {
-  title: "More systems",
+  title: "Projects",
   description: "Additional products, models, research, and publishing work.",
+} as const;
+
+export const gitSection = {
+  title: "Straight from GitHub",
+  description: "Public repositories, loaded from GitHub.",
+  profileLabel: "View GitHub profile",
+  empty: "Public repositories are unavailable right now.",
+  loading: "Loading repositories.",
 } as const;
 
 export const engagementsSection = {
   eyebrow: "When I take an engagement",
   description:
-    "I take on a small number of builds where a team needs AI expertise, workflow ownership, and GTM as a Service in one engagement. If the scope below matches, send a note.",
+    "Bring me a workflow that needs fixing, a product that needs direction, or a build your team has not had capacity to ship.",
 } as const;
 
 export function systemDisplayTitle(system: WorkSystem): string {
@@ -749,7 +793,7 @@ export const workSystems: WorkSystem[] = [
     approach:
       "Custom integrated environment connecting LinkedIn, Apollo, and HubSpot with OpenAPI contracts, typed client hooks, and RevOps dashboards.",
     outcome:
-      "One operating environment for prep, execution, outbound, and CRM management across the full JamBase sales motion.",
+      "One operating environment for prep, execution, outbound, and CRM management. Contributed to $5M+ in attributed sales and 200%+ year-over-year revenue growth on a new product.",
     constraints: "Forecast visibility required live CRM sync, reviewer feedback on AI classifications, and brand-safe outbound assets.",
     stack: ["HubSpot", "Apollo", "LinkedIn", "TypeScript", "RevOps"],
     tags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
@@ -782,10 +826,10 @@ export const workSystems: WorkSystem[] = [
       competency: "revenue-operations",
       competencyLabel: "Revenue operations",
       proofType: "case-study",
-      proofLabel: "Read case study",
+      proofLabel: "View the project",
       displayTitle: "JamBase Revenue System",
       cardDescription:
-        "A connected LinkedIn, Apollo, and HubSpot environment for research, outbound, and CRM execution.",
+        "AI GTM and revenue operations. SDRBase connects HubSpot, Apollo, and LinkedIn for research, outbound, forecasting, and reporting.",
       displayTags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
     },
     drawerSections: [
@@ -887,7 +931,7 @@ export const workSystems: WorkSystem[] = [
       competency: "data-ai",
       competencyLabel: "Data and AI",
       proofType: "case-study",
-      proofLabel: "Read case study",
+      proofLabel: "View the project",
       cardDescription:
         "A two-stage pipeline that turns artist and event metadata into genre taxonomies, embeddings, and personalized recommendations.",
       displayTags: ["Python", "SQL", "Machine Learning", "AI"],
@@ -936,7 +980,7 @@ export const workSystems: WorkSystem[] = [
       competency: "revenue-operations",
       competencyLabel: "Revenue operations",
       proofType: "case-study",
-      proofLabel: "Read case study",
+      proofLabel: "View the project",
       cardDescription:
         "A revenue analytics framework for classifying pipeline behavior, improving forecast discipline, and prioritizing high-probability opportunities.",
       displayTags: ["Analytics", "RevOps", "JavaScript"],
@@ -974,7 +1018,7 @@ export const workSystems: WorkSystem[] = [
       competency: "product-community",
       competencyLabel: "Product and publishing",
       proofType: "case-study",
-      proofLabel: "Read case study",
+      proofLabel: "View the project",
       cardDescription:
         "A multi-tenant publishing platform with AI-assisted drafting, configurable voice controls, approval workflows, and team analytics.",
       displayTags: ["AI", "Analytics", "Publishing"],
@@ -1066,15 +1110,16 @@ export const workSystems: WorkSystem[] = [
     logoSrc: "/logos/bbyo.png",
     logoAlt: "BBYO logo",
     homepage: {
-      tier: "index",
+      tier: "selected",
+      group: "fractional-expertise",
       order: 5,
       competency: "organization-operations",
       competencyLabel: "Community and events",
       proofType: "case-study",
-      proofLabel: "Read case study",
-      displayTitle: "BBYO Convention",
+      proofLabel: "View the project",
+      displayTitle: "BBYO",
       cardDescription:
-        "Regional convention coordination and summer leadership programming with team-based structures for onboarding and logistics.",
+        "Programs, grants, and partnerships across 500+ communities in 60+ countries, including convention programming and donor acknowledgments.",
       displayTags: ["Community", "Events", "Leadership"],
     },
     brand: {
@@ -1084,6 +1129,132 @@ export const workSystems: WorkSystem[] = [
       border: "#d4c5e8",
       tagBg: "#f0e8f5",
       tagText: "#5c2d91",
+      logoBackground: "#ffffff",
+    },
+  },
+  {
+    slug: "chamber-foundation",
+    title: "Innovation Scholar",
+    year: "2026",
+    description: "Research and automation for U.S. Chamber of Commerce Foundation programs.",
+    stakes: "Foundation programs need research and operating tools that staff can run.",
+    brief:
+      "I research and apply AI and automation to foundation operations, including data-ingestion workflows, Power Automate processes, and program tools for stakeholder engagement.",
+    problem:
+      "Internal operations and external programs needed research, data ingestion, and reporting that staff could run.",
+    approach:
+      "I built research, data-ingestion, and reporting workflows, including Power Automate processes and tools for stakeholder engagement.",
+    outcome:
+      "Operating workflows for foundation programs, with AI and automation applied where the process calls for them.",
+    stack: ["Power Automate", "AI", "Data", "Reporting"],
+    tags: ["AI", "Automation", "Research"],
+    liveUrl: "https://www.uschamberfoundation.org",
+    logoSrc: "/logos/us-chamber-foundation.png",
+    logoAlt: "U.S. Chamber of Commerce Foundation logo",
+    homepage: {
+      tier: "selected",
+      group: "fractional-expertise",
+      order: 1,
+      competency: "data-ai",
+      competencyLabel: "Research and automation",
+      proofType: "external-project",
+      proofLabel: "Visit foundation",
+      displayTitle: "U.S. Chamber of Commerce Foundation",
+      cardDescription:
+        "Innovation Scholar work on AI, automation, data ingestion, and reporting workflows for foundation programs.",
+      displayTags: ["AI", "Power Automate", "Research"],
+    },
+    brand: {
+      accent: "#003d7c",
+      accentMuted: "#e6eef6",
+      surface: "#f5f8fb",
+      border: "#c5d5e6",
+      tagBg: "#e6eef6",
+      tagText: "#003d7c",
+      logoBackground: "#ffffff",
+    },
+  },
+  {
+    slug: "sbi-revops",
+    title: "Revenue Operations Intern",
+    year: "2025",
+    description: "Salesforce hygiene and pipeline reporting at SBI, The Growth Advisory.",
+    stakes: "Forecast meetings fail when the CRM no longer describes the accounts and personas in market.",
+    brief:
+      "I restructured 13,000+ Salesforce contacts, accounts, and personas, and reported weekly, quarterly, and annual forecasts across 6 offerings.",
+    problem:
+      "Salesforce contacts, accounts, and personas were too noisy to support accurate forecasts.",
+    approach:
+      "I cleaned and restructured the CRM with web research and ZoomInfo, then reported pipeline health, bookings, and revenue to firm leadership.",
+    outcome:
+      "CRM accuracy above 95%, with reporting on $51M+ of pipeline across 6 offerings.",
+    stack: ["Salesforce", "ZoomInfo", "RevOps", "Forecasting"],
+    tags: ["Salesforce", "RevOps", "Forecasting"],
+    liveUrl: "https://sbigrowth.com",
+    logoSrc: "/logos/sbi.png",
+    logoAlt: "SBI logo",
+    homepage: {
+      tier: "selected",
+      group: "fractional-expertise",
+      order: 4,
+      competency: "revenue-operations",
+      competencyLabel: "Revenue operations",
+      proofType: "external-project",
+      proofLabel: "Visit SBI",
+      displayTitle: "SBI, The Growth Advisory",
+      cardDescription:
+        "Restructured 13,000+ Salesforce contacts, accounts, and personas, and reported on $51M+ of pipeline across 6 offerings.",
+      displayTags: ["Salesforce", "RevOps", "Forecasting"],
+    },
+    brand: {
+      accent: "#1b3a6b",
+      accentMuted: "#e8eef5",
+      surface: "#f7f9fc",
+      border: "#c5d4e8",
+      tagBg: "#e8eef5",
+      tagText: "#1b3a6b",
+      logoBackground: "#ffffff",
+    },
+  },
+  {
+    slug: "fed-st-louis",
+    title: "Financial Management Intern",
+    year: "2023",
+    description: "Compliance, budgeting, and procurement reporting at the Federal Reserve Bank of St. Louis.",
+    stakes: "Institutional reporting breaks when compliance, facilities spend, and procurement records live apart.",
+    brief:
+      "I audited compliance for 600+ external organizations and managed a $750K facilities budget and 1,000+ software procurement records.",
+    problem:
+      "Compliance, facilities spend, and software procurement needed one reporting trail.",
+    approach:
+      "I audited external organizations, tracked the facilities budget, and maintained procurement records for reporting.",
+    outcome:
+      "Compliance coverage for 600+ organizations, a $750K facilities budget, and 1,000+ procurement records in the reporting set.",
+    stack: ["Compliance", "Budgeting", "Procurement", "Reporting"],
+    tags: ["Compliance", "Budgeting", "Reporting"],
+    liveUrl: "https://www.stlouisfed.org",
+    logoSrc: "/logos/federal-reserve.png",
+    logoAlt: "Federal Reserve Bank of St. Louis logo",
+    homepage: {
+      tier: "selected",
+      group: "fractional-expertise",
+      order: 6,
+      competency: "organization-operations",
+      competencyLabel: "Finance and compliance",
+      proofType: "external-project",
+      proofLabel: "Visit St. Louis Fed",
+      displayTitle: "Federal Reserve Bank of St. Louis",
+      cardDescription:
+        "Compliance audits for 600+ organizations, a $750K facilities budget, and 1,000+ software procurement records.",
+      displayTags: ["Compliance", "Budgeting", "Reporting"],
+    },
+    brand: {
+      accent: "#2d5a27",
+      accentMuted: "#e7f0e6",
+      surface: "#f6faf6",
+      border: "#c5d8c3",
+      tagBg: "#e7f0e6",
+      tagText: "#2d5a27",
       logoBackground: "#ffffff",
     },
   },
@@ -1109,7 +1280,7 @@ export const workSystems: WorkSystem[] = [
     homepage: {
       tier: "selected",
       group: "fractional-expertise",
-      order: 1,
+      order: 3,
       competency: "product-community",
       competencyLabel: "Product and data",
       proofType: "live-product",
@@ -1222,9 +1393,9 @@ export type MediaItem = {
 };
 
 export const mediaSection = {
-  eyebrow: "In the news",
-  title: "Press, podcasts, and mentions",
-  description: "Editorial, research, and civic conversations alongside the operating work.",
+  eyebrow: "In the press",
+  title: "In the press",
+  description: "Editorial, research, and civic conversations alongside the writing.",
 };
 
 export const media: MediaItem[] = [
@@ -1323,22 +1494,30 @@ export type InsightEntry = {
   body?: string[];
 };
 
+export const writingSection = {
+  eyebrow: "Writing and press",
+  title: "Notes and coverage",
+  description:
+    "I write about building products, running lean teams, and the problems that appear between strategy and execution.",
+} as const;
+
 export const substack = {
   /** RSS + embed host */
   publicationHost: "sloiterstein.substack.com",
+  publicationUrl: "https://sloiterstein.substack.com",
   /** Public profile URL */
   profileUrl: "https://substack.com/@sloiterstein",
-  eyebrow: "Writing",
-  title: "Notes from the work",
-  description:
-    "Essays on building, operating, and go to market. Published on Substack and indexed here for discovery.",
+  eyebrow: writingSection.eyebrow,
+  title: writingSection.title,
+  description: writingSection.description,
+  notesLabel: "Notes",
   readLabel: "Read on Substack",
   subscribeLabel: "Subscribe on Substack",
-  emptyState:
-    "No posts yet",
+  emptyState: "No posts yet",
+  loadingMore: "Loading more.",
   feedPath: "/substack-feed.json",
   apiPath: "/api/substack-feed",
-  postLimit: 8,
+  pageSize: 4,
 } as const;
 
 /** @deprecated Replaced by Substack feed */

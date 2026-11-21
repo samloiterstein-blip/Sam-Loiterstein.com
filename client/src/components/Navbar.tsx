@@ -86,6 +86,13 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <a
+              href={`mailto:${site.email}`}
+              data-analytics="nav:email"
+              className="hidden rounded-full px-3 py-1.5 text-sm text-ink-700 transition hover:text-sage-800 lg:inline-block"
+            >
+              Email
+            </a>
+            <a
               href={site.socials.linkedin}
               target="_blank"
               rel="noreferrer"
@@ -137,6 +144,15 @@ export function Navbar() {
                   </li>
                 ))}
                 <li className="mt-1 border-t border-ink-100 pt-1">
+                  <a
+                    href={`mailto:${site.email}`}
+                    data-analytics="nav-mobile:email"
+                    className="block rounded-xl px-4 py-3 text-sm text-ink-800 hover:bg-sage-50"
+                  >
+                    {site.email}
+                  </a>
+                </li>
+                <li>
                   <a
                     href="#contact"
                     onClick={(e) => handleNavClick(e, "contact")}
