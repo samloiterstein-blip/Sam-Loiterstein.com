@@ -21,7 +21,7 @@ function shuffled<T>(items: readonly T[]) {
 export function EngagementsSection() {
   const slides = buildSection.slides;
   const [slideIndex, setSlideIndex] = useState(0);
-  const [places, setPlaces] = useState(buildSection.places);
+  const [places, setPlaces] = useState<(typeof buildSection.places)[number][]>([...buildSection.places]);
 
   useLayoutEffect(() => {
     setPlaces(shuffled(buildSection.places));

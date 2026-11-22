@@ -92,7 +92,7 @@ export function Background() {
           >
             {tab === "education" ? (
               <ul className="grid gap-3 sm:grid-cols-2">
-                {background.education.map((item) => (
+                {background.education.map((item: TimelineEntry) => (
                   <RecordCard
                     key={item.org}
                     title={item.org}
