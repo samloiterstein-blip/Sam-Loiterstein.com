@@ -504,7 +504,7 @@ export function SubstackWriting() {
   }, [posts, publicationUrl]);
 
   return (
-    <section id="press" aria-labelledby="press-title" className="relative scroll-mt-24 py-12 sm:py-14 lg:py-8">
+    <section id="press" aria-labelledby="press-title" className="relative scroll-mt-24 pt-12 pb-4 sm:pt-14 sm:pb-6 lg:pt-8 lg:pb-2">
       <div className="container-page">
         {schema ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
@@ -638,7 +638,7 @@ export function SubstackWriting() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-sage-200/80 pt-4 text-sm">
+        <div className="mt-6 text-sm">
           <a
             href={publicationUrl}
             target="_blank"
