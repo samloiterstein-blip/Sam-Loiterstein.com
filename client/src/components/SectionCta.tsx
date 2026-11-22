@@ -1,6 +1,7 @@
 import type { MouseEvent } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { sectionCtas, substack } from "@/data/content";
+import { contactHref, openContact } from "@/lib/contactIntent";
 
 type Place = keyof typeof sectionCtas;
 
@@ -22,8 +23,11 @@ export function SectionCta({ place, href }: { place: Place; href?: string }) {
         <p className="text-base font-medium leading-relaxed text-ink-900">{copy.lead}</p>
         <p className="mt-2 text-base leading-relaxed text-ink-700">{copy.body}</p>
         <a
-          href="#contact"
-          onClick={scrollTo("contact")}
+          href={contactHref(copy.intent)}
+          onClick={(event) => {
+            event.preventDefault();
+            openContact(copy.intent);
+          }}
           data-analytics="cta:approach-contact"
           className={`${buttonBase} rounded-full bg-sage-700 text-cream shadow-[0_1px_0_rgba(255,255,255,0.08)_inset,0_8px_20px_-8px_rgba(35,54,42,0.55)] hover:bg-sage-800`}
         >
@@ -40,8 +44,11 @@ export function SectionCta({ place, href }: { place: Place; href?: string }) {
       <div className="mt-10 max-w-2xl rounded-3xl bg-sage-800 px-7 py-7 text-cream sm:px-8 sm:py-8">
         <p className="max-w-lg text-xl leading-snug">{copy.lead}</p>
         <a
-          href="#contact"
-          onClick={scrollTo("contact")}
+          href={contactHref(copy.intent)}
+          onClick={(event) => {
+            event.preventDefault();
+            openContact(copy.intent);
+          }}
           data-analytics="cta:work-contact"
           className={`${buttonBase} rounded-full bg-cream text-sage-900 hover:bg-white`}
         >

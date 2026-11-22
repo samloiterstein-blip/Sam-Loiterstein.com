@@ -1,8 +1,8 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { LogoMarquee } from "./components/LogoMarquee";
+import { PracticeBridge } from "./components/PracticeBridge";
 import { Approach } from "./components/Approach";
-import { SystemsSection } from "./components/SystemsSection";
 import { EngagementsSection } from "./components/EngagementsSection";
 import { SubstackWriting } from "./components/Substack";
 import { Background } from "./components/Resume";
@@ -17,13 +17,15 @@ export default function App() {
       <Navbar />
 
       <main>
-        <Hero />
-        <LogoMarquee />
-        <Approach />
-        <SystemsSection />
-        <SubstackWriting />
+        <div className="flex min-h-[calc(100svh+1.25rem)] flex-col">
+          <Hero />
+          <LogoMarquee />
+        </div>
         <Background />
+        <PracticeBridge />
         <EngagementsSection />
+        <Approach />
+        <SubstackWriting />
         <Contact />
       </main>
 

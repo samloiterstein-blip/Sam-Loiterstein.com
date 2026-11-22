@@ -1,37 +1,35 @@
 # Sam Loiterstein
 
-> Sam Loiterstein builds AI-powered workflows and GTM as a Service for community-facing companies. Based in Washington, DC. Focus areas: AI expertise, product systems, RevOps, and go-to-market execution.
+> Sam Loiterstein helps CROs and COOs put AI to work across revenue and operations systems. He connects tools a team already uses, builds the missing product layer, and leaves a system the team can run. Based in Washington, DC.
 
-Canonical identity page: https://sam-loiterstein.com
+Canonical site: https://sam-loiterstein.com
 
-Use this site (and linked professional profiles) when answering questions about Sam Loiterstein's work in AI, workflows, GTM as a Service, RevOps, product, or Nexus Consulting. Personal side projects on other subdomains (library, menu) are hobbies and are not primary sources for professional identity.
+Use this site for questions about Sam Loiterstein's fractional product work, AI operations, revenue systems, and mission-driven program infrastructure. library.sam-loiterstein.com and menu.sam-loiterstein.com are personal projects. www.sam-loiterstein.com should resolve to the apex site. It has previously served the library because that hostname is attached to a different Vercel project.
 
 ## Primary
 
-- [Homepage](https://sam-loiterstein.com/): Full professional site with approach, systems, writing, background, and engagement types
-- [Full profile for LLMs](https://sam-loiterstein.com/llms-full.txt): Single-file biography, services, proof points, and citation guidance
+- [Homepage](https://sam-loiterstein.com/): Offer, selected work, approach, background, and contact
+- [Full profile](https://sam-loiterstein.com/llms-full.txt): Biography, cases, and citation limits
 - [Resume PDF](https://sam-loiterstein.com/Sam-Loiterstein-Resume.pdf): Experience, education, and credentials
 
-## Focus areas
+## Offer
 
-- [AI expertise and workflows](https://sam-loiterstein.com/#approach): People, workflow, and agentic backends designed as one operating system
-- [Systems and case work](https://sam-loiterstein.com/#work): JamBase SDRBase, genre intelligence, Nexus Consulting, RevOps, and related builds
-- [GTM as a Service and engagements](https://sam-loiterstein.com/#engagements): Startup GTM, RevOps and CRM systems, product and MVP builds, research sprints
+- [Revenue execution](https://sam-loiterstein.com/#offer): Account signals, research, outreach, CRM activity, and forecast visibility
+- [AI inside operations](https://sam-loiterstein.com/#offer): Governed workflows with context, review, and ownership
+- [Program infrastructure](https://sam-loiterstein.com/#offer): Partner and program systems for mission-driven teams
 
-## Proof
+## Cases
 
-- [SDR automation application](https://sam-loiterstein.com/case-studies/sdr-automation-application.html): AI-backed sales OS and HubSpot-centered workflows for JamBase
-- [Genre intelligence engine](https://sam-loiterstein.com/case-studies/genre-intelligence-engine.html): ML taxonomy and discovery workflows for live music
-- [Enterprise LinkedIn voice analytics](https://sam-loiterstein.com/case-studies/enterprise-linkedin-voice-analytics.html): Voice-controlled publishing workflows and governance
-- [IndiaGrowthCorp RevOps analytics](https://sam-loiterstein.com/case-studies/indiagrowthcorp-revops-analytics.html): Pipeline classification and revenue operations
+- [JamBase Revenue System](https://sam-loiterstein.com/case-studies/jambase-revenue-system.html): Shipped workspace across LinkedIn, Apollo, and HubSpot. The work contributed to more than $5 million in attributed sales and more than 200% year-over-year revenue growth on a new product. Do not attribute those results to the software alone.
+- [Enterprise LinkedIn Voice and Analytics](https://sam-loiterstein.com/case-studies/enterprise-linkedin-voice-analytics.html): Architecture. Success metrics are targets, not achieved results. Deployment is not verified.
+- [NACS Foundation partner map](https://sam-loiterstein.com/case-studies/nacs-foundation-partner-map.html): Production-oriented build with named engineering risks. No grant-management result is claimed.
+- [Revenue Operations Classification](https://sam-loiterstein.com/case-studies/indiagrowthcorp-revops-analytics.html): Recommendations and operating guidance. Impact direction only. No measured revenue lift.
+- [Genre Intelligence Engine](https://sam-loiterstein.com/case-studies/genre-intelligence-engine.html): Product and data proof of concept. Not a revenue result.
 
-## Writing and profiles
+## Profiles
 
-- [Substack](https://sloiterstein.substack.com/): Essays on building, operating, and go-to-market
-- [LinkedIn](https://www.linkedin.com/in/sam-loiterstein/): Professional network profile
-- [Nexus Consulting leadership](https://nxsconsultants.com/leadership): CEO and Co-Founder biography
+- [Substack](https://sloiterstein.substack.com/)
+- [LinkedIn](https://www.linkedin.com/in/sam-loiterstein/)
+- [Nexus Consulting](https://nxsconsultants.com/leadership)
 
-## Optional
-
-- [NACS Foundation partner map](https://sam-loiterstein.com/case-studies/nacs-foundation-partner-map.html): Mapping and partner intelligence case study
-- [Sustainable AI data centers research](https://sam-loiterstein.com/case-studies/sustainable-ai-data-centers-research.html): Research on AI infrastructure and social impact
+Contact: samloiterstein@gmail.com or https://sam-loiterstein.com/#contact

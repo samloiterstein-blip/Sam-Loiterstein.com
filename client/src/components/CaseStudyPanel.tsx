@@ -110,16 +110,27 @@ export function CaseStudyPanel({
             </div>
 
             <div className="flex-1 space-y-8 p-6">
-              <p className="text-sm leading-relaxed text-ink-700">{system.stakes}</p>
-
-              <section aria-labelledby={`${titleId}-narrative`} className="space-y-5 rounded-2xl border border-ink-100/80 bg-white/70 p-5">
-                <h3 id={`${titleId}-narrative`} className="sr-only">
-                  Case narrative
-                </h3>
-                <CaseBlock label="Problem" text={system.problem} />
-                <CaseBlock label="Approach" text={system.approach} />
-                <CaseBlock label="Outcome" text={system.outcome} />
-              </section>
+              {system.narrative ? (
+                <section aria-labelledby={`${titleId}-narrative`} className="space-y-5 rounded-2xl border border-ink-100/80 bg-white/70 p-5">
+                  <h3 id={`${titleId}-narrative`} className="text-[11px] font-medium uppercase tracking-[0.14em] text-sage-800">
+                    {system.narrative.status}
+                  </h3>
+                  <CaseBlock label="The problem" text={system.narrative.problem} />
+                  <CaseBlock label="What I owned" text={system.narrative.owned} />
+                  <CaseBlock label="What changed" text={system.narrative.built} />
+                  <CaseBlock label="How the team uses it" text={system.narrative.usage} />
+                  <CaseBlock label="What we can say about the result" text={system.narrative.result} />
+                </section>
+              ) : (
+                <section aria-labelledby={`${titleId}-narrative`} className="space-y-5 rounded-2xl border border-ink-100/80 bg-white/70 p-5">
+                  <h3 id={`${titleId}-narrative`} className="sr-only">
+                    Case narrative
+                  </h3>
+                  <CaseBlock label="Problem" text={system.problem} />
+                  <CaseBlock label="Approach" text={system.approach} />
+                  <CaseBlock label="Outcome" text={system.outcome} />
+                </section>
+              )}
 
               {system.constraints ? (
                 <section className="rounded-xl border border-sage-200 bg-sage-50/60 p-4">
@@ -186,11 +197,9 @@ export function CaseStudyPanel({
                 <div className="border-t border-ink-100/80 pt-2">
                   <a
                     href={system.caseStudyPath}
-                    target="_blank"
-                    rel="noreferrer"
                     className="inline-flex items-center gap-1.5 rounded-full border border-ink-200 px-4 py-2 text-sm font-medium text-ink-700 hover:border-sage-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
                   >
-                    Read full write-up
+                    Read the case
                     <ArrowUpRight size={14} aria-hidden />
                   </a>
                 </div>

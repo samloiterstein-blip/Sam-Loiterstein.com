@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JamBase Revenue System | Sam Loiterstein</title>
+    <meta
+      name="description"
+      content="Sam Loiterstein built JamBase an operating layer across LinkedIn, Apollo, and HubSpot. The work contributed to more than $5 million in attributed sales and more than 200% year-over-year revenue growth on a new product."
+    />
+    <link rel="canonical" href="https://sam-loiterstein.com/case-studies/jambase-revenue-system.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="JamBase Revenue System | Sam Loiterstein" />
+    <meta
+      property="og:description"
+      content="An integrated sales workspace for signals, research, outreach, CRM updates, and manager visibility. Results are attributed to the work, not to software alone."
+    />
+    <meta property="og:url" content="https://sam-loiterstein.com/case-studies/jambase-revenue-system.html" />
+    <meta property="og:image" content="https://sam-loiterstein.com/images/jambase-sdr-flywheel.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/case-studies/styles.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="back" href="/#background">Back</a>
+      <h1>JamBase Revenue System</h1>
+      <div class="meta">2026. Shipped operating system for JamBase sales and revenue operations.</div>
+      <p class="status">Shipped system</p>
+
+      <section class="card">
+        <h2>The problem</h2>
+        <p>
+          LinkedIn, Apollo, and HubSpot were capable tools. Research, account context, outbound execution, CRM
+          management, signals, and forecasting were fragmented across them.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>What I owned</h2>
+        <p>
+          I owned the operating environment: how those tools connected, where AI classified signals, and where a person
+          reviewed the result before it moved work forward.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>What changed</h2>
+        <p>
+          I built one workspace for accounts, contacts, sequences, signals, and RevOps reporting. It uses live HubSpot
+          sync and AI-assisted signal classification, with a reviewer in the loop.
+        </p>
+        <figure>
+          <img class="poster" src="/images/jambase-sdr-flywheel.png" alt="JamBase prospecting flywheel from signals and enrichment through outreach and CRM feedback" />
+          <figcaption>Signals and enrichment feed outreach. CRM activity feeds the next pass and the manager view.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <h2>How the team uses it</h2>
+        <p>
+          The team researches accounts, runs outreach, updates CRM records, and reviews pipeline and forecast activity
+          in the same place. Marketing, communications prep, and customer context sit in that same motion.
+        </p>
+        <figure>
+          <img class="poster" src="/images/jambase-sdr-workflows.png" alt="JamBase revenue system workflows across sales, marketing, revenue operations, and customer intelligence" />
+          <figcaption>Workflows across sales, marketing, revenue operations, and customer intelligence.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <h2>What we can say about the result</h2>
+        <p>
+          The work contributed to more than $5 million in attributed sales and more than 200% year-over-year revenue
+          growth on a new product. The system is one part of that sales motion. It did not produce those results by itself.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>System detail</h2>
+        <ul>
+          <li>Frontend: React and Vite, TanStack Query, and a shared component system.</li>
+          <li>API: Express with Drizzle ORM over Postgres, and OpenAPI contracts checked with Zod.</li>
+          <li>Working areas: Accounts, Contacts, Sequences, Signals, News Signals, Parking Lot, and RevOps.</li>
+          <li>News Signals classifies RSS and pasted content. Reviewer overrides are kept for the next pass.</li>
+          <li>HubSpot sync covers target accounts and closed-won revenue. Apollo supports prospecting. LinkedIn supports account coverage and outbound.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Related</h2>
+        <div class="related">
+          <a href="/case-studies/indiagrowthcorp-revops-analytics.html">Revenue operations classification</a>
+          <a href="/case-studies/enterprise-linkedin-voice-analytics.html">LinkedIn voice architecture</a>
+          <a href="/#offer">The offer</a>
+          <a href="/?intent=revenue#contact">Discuss your sales system</a>
+        </div>
+      </section>
+
+      <div class="actions">
+        <a class="btn" href="https://data.jambase.com" target="_blank" rel="noreferrer">Open JamBase Data</a>
+      </div>
+    </main>
+  </body>
+</html>

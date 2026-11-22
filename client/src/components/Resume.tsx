@@ -1,9 +1,19 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+import { AudioLines, ChevronDown, ChevronUp, Gauge, Map, Music2, Server, Workflow, type LucideIcon } from "lucide-react";
 import { Section } from "./ui/Section";
-import { Button } from "./ui/Button";
-import { SectionCta } from "./SectionCta";
-import { background, site, type CredentialEntry, type TimelineEntry } from "@/data/content";
+import { background, workMenuGroups, type CredentialEntry, type TimelineEntry, type WorkMenuItem } from "@/data/content";
+import { cn } from "@/lib/cn";
+
+const backgroundTabs = [
+  { id: "experience", label: "Work Experience" },
+  { id: "founder", label: "Founder Roles" },
+  { id: "education", label: "Education" },
+  { id: "certifications", label: "Certifications & Developer Licences" },
+  { id: "projects", label: "Projects" },
+] as const;
+
+type BackgroundTabId = (typeof backgroundTabs)[number]["id"];
 
 const YEAR_HEIGHT = 100;
 const AXIS_WIDTH = 40;
@@ -14,54 +24,187 @@ const MIN_BAR_HEIGHT = 48;
 const BAR_OPACITY = 0.55;
 
 export function Background() {
+  const [tab, setTab] = useState<BackgroundTabId>("experience");
+  const [open, setOpen] = useState(false);
+
   return (
-    <Section
-      id="background"
-      eyebrow={background.eyebrow}
-      title={background.title}
-      description={background.description}
-    >
-      <SectionCta place="background" />
-      <div id="experience" className="scroll-mt-28">
-        <UnifiedTimeline experience={background.experience} education={background.education} />
-      </div>
-
-      <details className="group mt-10 rounded-2xl border border-ink-100 bg-white shadow-soft">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-          <div>
-            <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
-              {background.credentialsTitle}
-            </h3>
-            <p className="mt-1 text-sm text-ink-600">{background.credentialsSummary}</p>
-          </div>
-          <span className="flex shrink-0 -space-x-2">
-            {background.credentials.slice(0, 5).map((c) => (
-              <span
-                key={c.title}
-                className="grid h-8 w-8 place-items-center overflow-hidden rounded-full border-2 border-white bg-cream p-1"
-              >
-                {c.logoSrc ? (
-                  <img src={c.logoSrc} alt="" className="h-full w-full object-contain" />
-                ) : null}
-              </span>
-            ))}
-          </span>
-        </summary>
-        <div className="border-t border-ink-100 px-5 pb-5 pt-4">
-          <Credentials items={background.credentials} />
+    <Section id="background" eyebrow={background.eyebrow} title={background.title} displayHeader>
+      <div className="grid items-start gap-8 lg:grid-cols-[minmax(220px,22rem)_minmax(0,1fr)] lg:gap-14">
+        <img
+          src={background.portraitSrc}
+          alt={background.portraitAlt}
+          width={768}
+          height={1024}
+          className="aspect-[3/4] w-full rounded-2xl object-cover"
+        />
+        <div className="space-y-4 text-base leading-relaxed text-ink-700 sm:text-lg">
+          {background.about.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
-      </details>
-
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        <Button as="a" href={site.resumeUrl} download size="md" variant="secondary">
-          <Download size={16} />
-          {background.pdfButtonLabel}
-        </Button>
-        <Button as="a" href={`mailto:${site.email}`} size="md" variant="ghost">
-          {site.email}
-        </Button>
       </div>
+
+      <div className="mt-12">
+        <div className="relative rounded-2xl border border-ink-100 bg-white px-4 py-4 shadow-soft sm:px-5">
+        <p className="pr-10 text-sm font-medium text-ink-900">Full Experience</p>
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls="background-panel experience"
+          onClick={() => setOpen((value) => !value)}
+          className="absolute right-4 top-3.5 grid h-8 w-8 place-items-center rounded-full text-ink-500 hover:bg-cream hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
+        >
+          {open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          <span className="sr-only">{open ? "Collapse full experience" : "Expand full experience"}</span>
+        </button>
+        <div role="tablist" aria-label="Full Experience" className="mt-3 flex flex-wrap gap-2">
+            {backgroundTabs.map((item) => {
+              const selected = tab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  id={`background-tab-${item.id}`}
+                  aria-selected={selected}
+                  aria-controls="background-panel"
+                  onClick={() => {
+                    setTab(item.id);
+                    setOpen(true);
+                  }}
+                  className={cn(
+                    "rounded-full px-4 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400",
+                    selected ? "bg-ink-900 text-cream" : "border border-ink-200 bg-cream text-ink-700 hover:border-ink-400 hover:text-ink-900",
+                  )}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+          <div
+            role="tabpanel"
+            id="background-panel"
+            aria-labelledby={`background-tab-${tab}`}
+            hidden={!open}
+            className={open ? "mt-4" : undefined}
+          >
+            {tab === "education" ? (
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {background.education.map((item) => (
+                  <RecordCard
+                    key={item.org}
+                    title={item.org}
+                    description={item.description}
+                    logoSrc={item.logoSrc}
+                    logoBackground={item.logoBackground}
+                  />
+                ))}
+              </ul>
+            ) : null}
+            {tab === "certifications" ? <Credentials items={background.credentials} /> : null}
+            {tab === "projects" ? (
+              <WorkList
+                items={workMenuGroups.find((group) => group.category === "Projects")?.items ?? []}
+                useIcons
+              />
+            ) : null}
+            {tab === "founder" ? (
+              <WorkList items={workMenuGroups.find((group) => group.category === "Founder work")?.items ?? []} />
+            ) : null}
+            {tab === "experience" ? (
+              <WorkList items={workMenuGroups.find((group) => group.category === "Company roles")?.items ?? []} />
+            ) : null}
+          </div>
+      </div>
+
+      {open ? (
+        <div id="experience" className="mt-8 scroll-mt-28">
+          <UnifiedTimeline experience={background.experience} education={background.education} />
+        </div>
+      ) : (
+        <div id="experience" className="scroll-mt-28" />
+      )}
+
     </Section>
+  );
+}
+
+const projectIcons: Record<string, LucideIcon> = {
+  "jambase-sdr": Workflow,
+  "partner-map": Map,
+  "linkedin-voice": AudioLines,
+  "revops-classification": Gauge,
+  "genre-intelligence": Music2,
+  "sustainable-ai": Server,
+};
+
+function WorkList({ items, useIcons = false }: { items: readonly WorkMenuItem[]; useIcons?: boolean }) {
+  return (
+    <ul className="grid gap-3 sm:grid-cols-2">
+      {items.map((item) => (
+        <RecordCard
+          key={item.slug}
+          title={item.title}
+          description={item.description}
+          logoSrc={useIcons ? undefined : item.logoSrc}
+          logoBackground={useIcons ? undefined : item.logoBackground}
+          icon={useIcons ? projectIcons[item.slug] : undefined}
+          href={item.href}
+          linkLabel={item.linkLabel}
+          external={item.external}
+        />
+      ))}
+    </ul>
+  );
+}
+
+function RecordCard({
+  title,
+  description,
+  logoSrc,
+  logoBackground,
+  icon: Icon,
+  href,
+  linkLabel,
+  external,
+}: {
+  title: string;
+  description?: string;
+  logoSrc?: string;
+  logoBackground?: string;
+  icon?: LucideIcon;
+  href?: string;
+  linkLabel?: string;
+  external?: boolean;
+}) {
+  return (
+    <li className="flex flex-col rounded-xl border border-ink-100 bg-white p-3.5 shadow-soft">
+      {Icon ? (
+        <span className="mb-2.5 grid h-8 w-8 place-items-center rounded-lg border border-sage-200 bg-sage-50 text-sage-800">
+          <Icon size={16} strokeWidth={1.75} aria-hidden />
+        </span>
+      ) : logoSrc ? (
+        <span
+          className="mb-2.5 grid h-8 w-8 place-items-center overflow-hidden rounded-lg border border-ink-100 p-1"
+          style={{ backgroundColor: logoBackground ?? "#f7f6f2" }}
+        >
+          <img src={logoSrc} alt="" className="h-full w-full object-contain" />
+        </span>
+      ) : null}
+      <p className="text-sm font-medium leading-snug text-ink-900">{title}</p>
+      {description ? <p className="mt-1 text-xs leading-relaxed text-ink-600">{description}</p> : null}
+      {href && linkLabel ? (
+        <a
+          href={href}
+          {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+          className="mt-2.5 text-xs font-medium text-sage-800 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
+        >
+          {linkLabel} →
+        </a>
+      ) : null}
+    </li>
   );
 }
 
@@ -154,7 +297,6 @@ function UnifiedTimeline({
         </div>
       </div>
 
-      {/* Mobile fallback */}
       <div className="grid gap-12 md:hidden">
         <MobileTimeline title="Experience" items={experience} />
         <MobileTimeline title="Education" items={education} />
@@ -374,30 +516,16 @@ function OrgLogo({
 
 function Credentials({ items }: { items: readonly CredentialEntry[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item, i) => (
-        <motion.article
+    <ul className="grid gap-3 sm:grid-cols-2">
+      {items.map((item) => (
+        <RecordCard
           key={item.title + item.issuer}
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.45, delay: i * 0.03, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-2xl border border-ink-100 bg-white p-4 shadow-soft"
-        >
-          <div className="flex items-start gap-3">
-            <OrgLogo
-              src={item.logoSrc}
-              label={item.logoLabel ?? initialsFromOrg(item.issuer)}
-              org={item.issuer}
-            />
-            <div className="min-w-0">
-              <div className="font-display text-lg leading-tight text-ink-900">{item.title}</div>
-              <div className="mt-1 text-sm text-sage-800">{item.issuer}</div>
-            </div>
-          </div>
-        </motion.article>
+          title={item.title}
+          description={item.issuer}
+          logoSrc={item.logoSrc}
+        />
       ))}
-    </div>
+    </ul>
   );
 }
 

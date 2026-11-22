@@ -4,16 +4,16 @@
  */
 
 import type { LucideIcon } from "lucide-react";
-import { Compass, Hammer, Layers, LineChart, Shield, Sparkles, Users } from "lucide-react";
+import { Layers, LineChart, Shield, Users } from "lucide-react";
 
 // Site / global
 
 export const site = {
   name: "Sam Loiterstein",
   initials: "SL",
-  tagline: "AI expertise. Workflows. GTM as a Service.",
+  tagline: "Fractional product and AI systems for revenue and operations.",
   description:
-    "I design AI-powered workflows and GTM as a Service for community-facing companies. Product, RevOps, and go-to-market systems that hold at scale.",
+    "I help CROs and COOs connect the tools they already use, build the missing product layer, and put AI into workflows their teams can run.",
   email: "samloiterstein@gmail.com",
   location: "Washington, DC",
   resumeUrl: "/Sam-Loiterstein-Resume.pdf",
@@ -26,45 +26,45 @@ export const site = {
 } as const;
 
 export const navItems = [
-  { id: "approach", label: "Approach" },
-  { id: "work", label: "Work" },
-  { id: "writing", label: "Writing" },
-  { id: "media", label: "Press" },
-  { id: "background", label: "Background" },
+  { id: "background", label: "About" },
+  { id: "practice-bridge", label: "Past Work" },
+  { id: "approach", label: "Engagements" },
+  { id: "press", label: "Press" },
   { id: "contact", label: "Contact" },
 ] as const;
 
 export const sectionCtas = {
   approach: {
-    lead: "You can start with the problem, even if you have no idea what the solution should be.",
-    body: "Tell me where work gets stuck. I'll look at the people, process, and tools involved before proposing a build.",
-    action: "Tell me what's stuck",
+    lead: "Start with the operating problem.",
+    body: "Tell me which handoff is stalling. I will look at the people, the tools, and the decision before proposing a build.",
+    action: "Discuss a project",
+    intent: "custom",
   },
   work: {
-    lead: "See what the team needed, what I built, and what changed.",
-    action: "Discuss a similar build",
+    lead: "Tell me what your team is trying to change.",
+    action: "Discuss a similar system",
+    intent: "custom",
   },
   writing: {
     action: "Read the latest piece",
   },
   background: {
-    action: "See my experience",
+    action: "See the record",
   },
   engagements: {
-    body: "I can define a focused project or ongoing product support after discussing the problem.",
-    action: "Discuss the scope",
+    body: "A first conversation covers the operating problem, who owns it, and whether a scoped build is the right next step.",
+    action: "Discuss a project",
+    intent: "custom",
   },
 } as const;
 
 // Hero
 
 export const hero = {
-  eyebrow: "Washington, DC. Open to new engagements.",
-  primaryCta: "See selected work",
-  secondaryCta: "Discuss a project",
-  lead: "I build the tools growing teams need when their workflows outgrow spreadsheets and disconnected software.",
-  support:
-    "I work with nonprofit and early-stage leaders to find the bottleneck, decide what to build, and get it into use.",
+  eyebrow: "Fractional product leadership. Washington, DC.",
+  primaryCta: "Discuss a project",
+  primaryIntent: "custom",
+  secondaryCta: "See my work",
   rotatingTitles: [
     "Founder & Operator.",
     "Product Lead.",
@@ -73,6 +73,10 @@ export const hero = {
     "AI Workflows.",
     "Community Builder.",
   ],
+  headline: "I help companies left behind by AI",
+  headlineEmphasis: "get ahead",
+  portraitSrc: "/images/hero-portrait.png",
+  portraitAlt: "Sam Loiterstein",
 } as const;
 
 // Approach
@@ -90,9 +94,9 @@ const builtAt = {
 
 export const approach = {
   eyebrow: "Approach",
-  title: "Build the system before the scale.",
+  title: "From the operating problem to a system the team runs.",
   manifesto:
-    "Background, how I work, security, scalability, and responsible AI. The record comes first. The system is built from there.",
+    "I decide what to connect, what to build, and where a person still has to approve the work. Security, scale, and AI choices show up inside the cases.",
 } as const;
 
 export type ApproachCard = {
@@ -101,7 +105,7 @@ export type ApproachCard = {
   icon: LucideIcon;
 };
 
-export type ApproachTabId = "credentials" | "process" | "security" | "scale" | "ai-ethics";
+export type ApproachTabId = "process" | "security" | "scale" | "ai-ethics";
 
 export type ApproachPoint = {
   title: string;
@@ -128,33 +132,12 @@ export type ApproachTab = {
 
 export const approachTabs: ApproachTab[] = [
   {
-    id: "credentials",
-    label: "Background",
-    headline: "International study in neural networks and computer science.",
-    paragraphs: [
-      "My education is rigorous and international. At Vrije Universiteit Amsterdam I studied complex neural networks and the computer science behind applied machine learning. At The George Washington University I am in the Honors Program for a BS in Business Analytics, with a minor in Buddhist Ethics.",
-      "Alongside that study, I have worked at companies of all sizes, from early-stage teams to large institutions.",
-    ],
-    record: [
-      {
-        id: "education",
-        label: "Education",
-        hint: "Academic programs and relevant coursework.",
-      },
-      {
-        id: "certifications",
-        label: "Certifications",
-        hint: "Selected technical and professional credentials.",
-      },
-    ],
-  },
-  {
     id: "process",
-    label: "How I Work",
-    headline: "From an ambiguous problem to something your team can use.",
+    label: "How I work",
+    headline: "Understand the operating problem, then build the missing layer.",
     paragraphs: [
-      "Most teams don't need another tool. They need someone who can understand where work breaks down, define what should change, and take ownership of making it happen.",
-      "My approach follows four stages.",
+      "I map the workflow, the tools already in place, and the decision a manager has to make. Then I decide what to connect, what to build, and what the team will own after I leave.",
+      "The work follows four stages.",
     ],
     pointsTitle: "Four stages",
     pointsLayout: "stages",
@@ -177,16 +160,16 @@ export const approachTabs: ApproachTab[] = [
       },
     ],
     closing:
-      "The goal is a solution that fits the organization, rather than forcing the organization to adapt to the technology.",
+      "The result is a system the team can run with the tools and decision rights they already have.",
   },
   {
     id: "security",
     label: "Security",
-    headline: "Build with the realities of your organization in mind.",
+    headline: "Access, review, and ownership are part of the build.",
     paragraphs: [
-      "Operational tools often touch sensitive information, internal systems, and workflows that teams depend on.",
-      "Security needs to be considered from the beginning, particularly when AI and third-party integrations are involved.",
-      "My approach prioritizes access, data, oversight, and accountability.",
+      "These systems touch CRM records, account research, partner lists, and drafts that go out under someone's name.",
+      "On the JamBase revenue system, AI classifications stay in front of a reviewer, and CRM writes run through a live HubSpot sync the team can see.",
+      "The LinkedIn publishing architecture routes a draft through approval before it can be scheduled. The NACS partner map case lists open risks, including an unauthenticated delete route, so they stay visible before broader use.",
     ],
     pointsTitle: "Priorities",
     pointsLayout: "grid",
@@ -213,25 +196,22 @@ export const approachTabs: ApproachTab[] = [
   {
     id: "scale",
     label: "Scalability",
-    headline: "Build for today's constraints without creating tomorrow's bottlenecks.",
+    headline: "The first version has to fit the team that will run it.",
     paragraphs: [
-      "Early-stage companies and nonprofit teams operate with limited time, budget, and technical capacity.",
-      "A useful solution should make the current team more effective while remaining manageable as the organization changes.",
-      "I prioritize simple architecture, clear ownership, repeatable workflows, and systems that can evolve without constant rebuilding.",
-      "That means starting with the smallest solution that delivers measurable value, then improving it based on actual usage.",
-      "Success isn't measured by how much technology gets introduced. It's measured by whether the team can do its work better.",
+      "I start with the smallest system that changes the handoff: a workspace, a classification, a map, or a review step.",
+      "Ownership, documentation, and the interface are part of that version. The JamBase workspace, the partner-map ingest flow, and the LinkedIn approval path are each built so a named team can operate them.",
+      "Later changes follow actual use: which signals reviewers correct, which partner files arrive in a new format, which report a manager opens.",
     ],
   },
   {
     id: "ai-ethics",
     label: "Responsible AI",
-    headline: "Responsible AI starts with knowing where it belongs.",
+    headline: "AI stays inside a workflow a person can review.",
     paragraphs: [
-      "AI creates opportunities to reduce repetitive work, improve access to information, and help teams make better use of their time.",
-      "It also introduces questions about reliability, privacy, bias, and accountability.",
-      "I approach AI as one tool among many. Before introducing it into a workflow, I consider what problem it solves, what information it needs, how its outputs will be evaluated, and where human judgment must remain involved.",
-      "The objective is to deploy AI where it serves a clear purpose, with safeguards that reflect the people and decisions affected by it.",
-      "Sometimes the right recommendation is to use AI. Sometimes a simpler solution works better.",
+      "I use AI where the task is classification, drafting, or enrichment, and where the team can see the input and correct the output.",
+      "At JamBase, news signals are classified into deal-relevant categories and a reviewer can override the result. That override is kept so the next pass has a record.",
+      "The LinkedIn architecture fingerprints an author's writing samples and holds the draft for approval. Genre intelligence keeps taxonomy paths and cluster keys inspectable, so a recommendation can be traced.",
+      "If the decision needs a person, the system stops there. The NACS map moves partner records and media outputs without putting a model in charge of the program.",
     ],
   },
 ];
@@ -244,7 +224,7 @@ export type Principle = ApproachCard;
 export const principlesSection = {
   title: "How I build",
   cta: "Explore related systems",
-  ctaHref: "#work",
+  ctaHref: "#background",
 } as const;
 
 export const principles: Principle[] = [
@@ -348,10 +328,19 @@ export type CredentialEntry = {
 };
 
 export const background = {
-  eyebrow: "Background",
-  title: "Timeline",
+  eyebrow: "About",
+  title: "Who I Am",
   description:
-    "My work sits between the person who owns the problem and the person who builds the solution.",
+    "Product direction at Synth and Nexus. Operating systems inside JamBase and with mission-driven teams. The resume has the fuller record.",
+  portraitSrc: "/images/about-portrait.jpg",
+  portraitAlt: "Sam Loiterstein standing by a waterfront railing",
+  about: [
+    "I first moved to DC four years ago to study finance and accounting, expecting to follow the usual investment banking or consulting path. After joining the student clubs and, frankly, struggling in the classes, I quickly realized I wanted to build something of my own instead. I co-founded Nexus Consulting and found that I loved listening to people describe the messy, everyday problems their organizations faced. I also learned that I'm drawn to work that gives a mission-driven community a useful tool they can actually put to work.",
+    "The part of a project where someone shows me how the work actually gets done, including the workarounds nobody thought to mention is where I thrive. Like a business therapist, its my job to diagnose where the process breaks, and provide technical and strategicsolutions your team can use. I'm especially drawn to wicked problems that impact broad communities.",
+    "That interest has taken me from building a student consulting firm to 200+ analysts in the US, Canada, and Europe to building an ever-growing on live music with Synth.",
+    'Currently I work on a series of deep machine learning projects at the U.S. Chamber of Commerce Foundation dedicated to "harnessing the power of business for the greater good of America".',
+    "Outside of work, I love traveling, reading Buddhist philosophy, and jam bands.",
+  ],
   experience: [
     {
       period: "Sept 2026 to Present",
@@ -370,12 +359,12 @@ export const background = {
       startYear: 2026,
       endYear: "present",
       barColor: "#1a1aff",
-      title: "AI GTM and Revenue Operations Lead",
+      title: "SDR and GTM Engineer",
       org: "JamBase",
       logoLabel: "JB",
       logoSrc: "/logos/jambase.png",
       description:
-        "SDRBase connects HubSpot, Apollo, and LinkedIn for research, outbound, forecasting, and reporting. Contributed to $5M+ in attributed sales.",
+        "Built the JamBase revenue system across LinkedIn, Apollo, and HubSpot. The work contributed to more than $5 million in attributed sales and more than 200% year-over-year revenue growth on a new product.",
     },
     {
       period: "2025 to Present",
@@ -388,7 +377,7 @@ export const background = {
       logoSrc: "/logos/synth.png",
       logoBackground: "#000000",
       description:
-        "Live music discovery product with genre intelligence in production. Mobile-first community layer from show discovery through the night of the concert.",
+        "Live music discovery product at getsynth.app. Genre intelligence, including an inspectable feed proof of concept, supports personalized discovery.",
     },
     {
       period: "2024 to Present",
@@ -424,7 +413,7 @@ export const background = {
       logoLabel: "BBYO",
       logoSrc: "/logos/bbyo.png",
       description:
-        "Programs, grants, and partnerships across 500+ communities in 60+ countries, and donor acknowledgments for $1M+ in assets.",
+        "At BBYO, I worked for the community building team, prioritizing inclusive programming, member belonging, and creating an incredible experience for 75,000 teens in 75+ countries.",
     },
     {
       period: "2023",
@@ -465,7 +454,7 @@ export const background = {
     },
   ] satisfies TimelineEntry[],
   credentialsTitle: "Licenses and certifications",
-  credentialsSummary: "9 credentials across Salesforce, HubSpot, Apollo, LinkedIn, CFA Institute, and Federal Reserve data programs.",
+  credentialsSummary: "16 credentials across Salesforce, HubSpot, Apollo, LinkedIn, Cursor, Lovable, PostgreSQL, Java, Claude, Replit, AWS, CFA Institute, and Federal Reserve data programs.",
   credentials: [
     { title: "LinkedIn Developer", issuer: "LinkedIn", logoSrc: "/logos/linkedin.svg" },
     { title: "Investment Foundations Certificate", issuer: "CFA Institute", logoSrc: "/logos/cfa-institute.svg" },
@@ -476,9 +465,51 @@ export const background = {
     { title: "HubSpot Developer", issuer: "HubSpot", logoSrc: "/logos/hubspot.svg" },
     { title: "Apollo Developer", issuer: "Apollo", logoSrc: "/logos/apollo.png" },
     { title: "Salesforce Developer", issuer: "Salesforce", logoSrc: "/logos/salesforce.svg" },
+    { title: "Cursor Developer", issuer: "Cursor", logoSrc: "/logos/cursor.svg" },
+    { title: "Lovable Developer", issuer: "Lovable", logoSrc: "/logos/lovable.svg" },
+    { title: "PostgreSQL Developer", issuer: "PostgreSQL", logoSrc: "/logos/postgresql.svg" },
+    { title: "Java Developer", issuer: "Java", logoSrc: "/logos/java.svg" },
+    { title: "Claude Developer", issuer: "Claude", logoSrc: "/logos/claude.svg" },
+    { title: "Replit Developer", issuer: "Replit", logoSrc: "/logos/replit.svg" },
+    { title: "Cybersecurity", issuer: "AWS", logoSrc: "/logos/aws.svg" },
   ] satisfies CredentialEntry[],
   pdfButtonLabel: "Download Resume PDF",
 } as const;
+
+export const relationshipGroups = [
+  {
+    id: "operating",
+    label: "Operating work",
+    hint: "Work inside another organization's system.",
+    items: [
+      { name: "JamBase", logoSrc: "/logos/jambase.png", detail: "Revenue system" },
+      { name: "NACS Foundation", logoSrc: "/logos/marquee/nacs-foundation.png", detail: "Partner map" },
+      { name: "U.S. Chamber of Commerce Foundation", logoSrc: "/logos/us-chamber-foundation.png", detail: "Innovation Scholar" },
+      { name: "SBI", logoSrc: "/logos/sbi.png", detail: "Revenue operations intern" },
+      { name: "BBYO", logoSrc: "/logos/bbyo.png", detail: "Convention programming" },
+      { name: "Federal Reserve Bank of St. Louis", logoSrc: "/logos/federal-reserve.png", detail: "Financial management intern" },
+    ],
+  },
+  {
+    id: "led",
+    label: "Organizations I have led",
+    hint: "Product direction and delivery from inside the team.",
+    items: [
+      { name: "Synth", logoSrc: "/logos/synth.png", detail: "Founder" },
+      { name: "Nexus Consulting", logoSrc: "/logos/nexus.png", detail: "Co-founder and CEO" },
+      { name: "Campus Watch Chronicle", logoSrc: "/logos/campus-watch-chronicle.png", detail: "Founder" },
+    ],
+  },
+  {
+    id: "education",
+    label: "Education",
+    hint: "Degree programs. Certifications are listed below the timeline.",
+    items: [
+      { name: "The George Washington University", logoSrc: "/logos/gwu.png", detail: "BS, Business Analytics" },
+      { name: "Vrije Universiteit Amsterdam", logoSrc: "/logos/vu.png", detail: "Neural networks and machine learning" },
+    ],
+  },
+] as const;
 
 export type LogoFit = "mark" | "wordmark" | "lockup";
 
@@ -533,7 +564,7 @@ function marqueeSrc(src: string): string {
 
 export const workedWithLogos: WorkedWithLogo[] = dedupeWorkedWithLogos([
   ...background.experience
-    .filter((entry) => entry.logoSrc)
+    .filter((entry) => entry.logoSrc && entry.logoSrc !== "/logos/jambase.png")
     .map((entry) => {
       const logoSrc = marqueeSrc(entry.logoSrc!);
       return {
@@ -610,7 +641,16 @@ export type DemoKind = "interactive" | "live-product" | "narrative";
 
 export type HomepageTier = "selected" | "index";
 
-export type HomepageGroup = "founder-work" | "fractional-expertise";
+export type HomepageGroup = "buyer" | "founder-work" | "fractional-expertise" | "record";
+
+export type CaseNarrative = {
+  problem: string;
+  owned: string;
+  built: string;
+  usage: string;
+  result: string;
+  status: string;
+};
 
 export type SystemCompetency =
   | "product-community"
@@ -638,6 +678,8 @@ export type HomepagePlacement = {
   proofLabel: string;
   displayTitle?: string;
   cardDescription: string;
+  resultLine?: string;
+  statusLabel?: string;
   displayTags: string[];
   secondaryProofType?: ProofType;
   secondaryProofLabel?: string;
@@ -667,6 +709,7 @@ export type WorkSystem = {
   demo?: { kind: DemoKind; component: string };
   brand: WorkSystemBrand;
   homepage: HomepagePlacement;
+  narrative?: CaseNarrative;
   drawerSections?: { heading: string; bullets: string[] }[];
 };
 
@@ -677,10 +720,10 @@ export type ProblemPrompt = {
 };
 
 export const workSection = {
-  eyebrow: "Portfolio",
+  eyebrow: "Work",
   title: "Selected work",
-  description:
-    "Founder work, fractional and intern experience, projects, and public repositories. Each entry links to working proof, a documented case, or the repository.",
+  description: "A sales system, a live program map, and an internal workflow. Diagrams and the full record live in the cases.",
+  alsoLabel: "More work",
   problemPickerLabel: "What are you working through?",
   briefToggleShow: "Executive brief",
   briefToggleHide: "Full case",
@@ -689,10 +732,9 @@ export const workSection = {
 export type PortfolioTabId = "founder" | "fractional" | "projects" | "git";
 
 export const portfolioTabs: { id: PortfolioTabId; label: string }[] = [
-  { id: "founder", label: "Founder Work" },
-  { id: "fractional", label: "Fractional / Intern Experience" },
-  { id: "projects", label: "Projects" },
-  { id: "git", label: "From GitHub" },
+  { id: "founder", label: "Founder work" },
+  { id: "projects", label: "Research" },
+  { id: "git", label: "GitHub" },
 ];
 
 export const founderWorkSection = {
@@ -705,8 +747,8 @@ export const fractionalExpertiseSection = {
 } as const;
 
 export const systemIndexSection = {
-  title: "Projects",
-  description: "Additional products, models, research, and publishing work.",
+  title: "Research",
+  description: "Research and experiments. These are not client revenue results.",
 } as const;
 
 export const gitSection = {
@@ -718,9 +760,136 @@ export const gitSection = {
 } as const;
 
 export const engagementsSection = {
-  eyebrow: "When I take an engagement",
+  eyebrow: "Offer",
+  description: "Three operating problems. AI shows up inside the workflow when the work calls for it.",
+} as const;
+
+export const waysToWork = {
+  eyebrow: "Engagements",
+  title: "How we could work together",
+  description: "You own 100% of the work.",
+  modes: [
+    {
+      index: "01",
+      kicker: "Defined project",
+      title: "Custom product build",
+      bestWhen:
+        "Your business needs software that existing tools can't deliver, without the cost and commitment of hiring a product team or development studio.",
+      whatIDo:
+        "I take your business requirements from concept to working software, handling product strategy, design, development and deployment.",
+      outcomesLabel: "You get",
+      outcomes: ["Purpose-built software", "Direct execution", "Full ownership"],
+      cta: "Discuss a build",
+      intent: "custom",
+      tone: "build",
+    },
+    {
+      index: "02",
+      kicker: "Monthly retainer",
+      title: "Fractional operating partner",
+      bestWhen:
+        "Your company is growing faster than your team can execute, and leadership needs additional capacity without adding permanent headcount.",
+      whatIDo:
+        "I work directly with your CEO/President, CRO, or COO to own and execute critical initiatives across fundraising, go-to-market and operational efficiency.",
+      outcomesLabel: "Areas of expertise",
+      outcomes: ["Fundraising", "Go-to-market", "Operational efficiency"],
+      cta: "Start a retainer",
+      intent: "sales",
+      tone: "retainer",
+    },
+    {
+      index: "03",
+      kicker: "Focused sprint",
+      title: "Rapid prototyping",
+      bestWhen:
+        "You want to explore what custom software could do without committing significant time or capital to a full build.",
+      whatIDo:
+        "I turn ideas, business problems and workflow challenges into functional prototypes through a short, low-cost engagement.",
+      outcomesLabel: "You get",
+      outcomes: ["Working proof of concept", "Rapid validation", "Clear path to development"],
+      cta: "Scope a sprint",
+      intent: "custom",
+      tone: "sprint",
+    },
+  ],
+} as const;
+
+export const buildFlow = {
+  title: "My typical engagement process:",
   description:
-    "Bring me a workflow that needs fixing, a product that needs direction, or a build your team has not had capacity to ship.",
+    "We plan your scope, cycle through building, feedback, and improvement with you, and then monitor the product that is yours.",
+  hint: "hover over a phase to learn more",
+  phases: [
+    {
+      id: "plan",
+      index: "01",
+      label: "Plan",
+      summary: "Define what we're building for you, and why.",
+      steps: [
+        "Establish your objectives and success criteria.",
+        "Define your project scope and functional requirements.",
+        "Map your journeys, workflows, and data dependencies.",
+        "Establish your product design and technical architecture.",
+        "Prioritize what we build for you first.",
+      ],
+      outcome: "A clear scope and development plan that is yours.",
+    },
+    {
+      id: "build",
+      index: "02",
+      label: "Build",
+      summary: "Get working software into your hands as quickly as possible.",
+      steps: [
+        "Develop your minimum viable product (MVP).",
+        "Build your core functionality and integrations.",
+        "Connect your data sources and existing systems.",
+        "Test the work with you and deploy a working product.",
+      ],
+      outcome: "Functional software that addresses your core need.",
+    },
+    {
+      id: "review",
+      index: "03",
+      label: "Review",
+      summary: "Use your feedback to determine what we build next.",
+      steps: [
+        "Collect feedback from you and your team.",
+        "Evaluate performance against your objectives.",
+        "Identify gaps in what you can do with the product.",
+        "Reassess requirements based on how you use the product.",
+        "Prioritize your next development cycle with us.",
+      ],
+      outcome: "Development priorities based on your real use.",
+    },
+    {
+      id: "iterate",
+      index: "04",
+      label: "Iterate",
+      summary: "Repeat the build and review cycle until the product meets your need.",
+      steps: [
+        "Refine the functionality you already have.",
+        "Develop the additional features you need.",
+        "Release incremental improvements to you.",
+        "Keep validating decisions with you.",
+        "Expand the product as you see the value.",
+      ],
+      outcome: "A mature product shaped by your use.",
+    },
+    {
+      id: "optimize",
+      index: "05",
+      label: "Optimize and analyze",
+      summary: "Maintain performance and improve the product as your needs evolve.",
+      steps: [
+        "Monitor your adoption, and how the product performs.",
+        "Resolve bugs and technical issues for you.",
+        "Find where automation can save you time.",
+        "Keep documentation so your team can run the product.",
+        "Introduce targeted improvements as you need them.",
+      ],
+      outcome: "A sustainable product that is yours, and that you can keep developing.",
+    },
+  ],
 } as const;
 
 export function systemDisplayTitle(system: WorkSystem): string {
@@ -747,7 +916,8 @@ export const workSystems: WorkSystem[] = [
       "Concert discovery is fragmented. Friends rarely coordinate around the same shows, and the live experience stops at the ticket purchase.",
     approach:
       "Mobile-first community for finding shows, matching with friends going to the same events, and sharing the experience from discovery through encore.",
-    outcome: "Platform live at getsynth.app with genre intelligence powering personalized discovery feeds.",
+    outcome:
+      "Synth is live at getsynth.app. Personalized discovery draws on the genre intelligence work, including an inspectable feed proof of concept.",
     constraints: "Consumer trust and feed quality depend on metadata pipelines that stay explainable as volume grows.",
     stack: ["React Native", "Python", "SQL", "ML", "Product"],
     tags: ["Product", "Consumer", "Music", "Mobile"],
@@ -767,7 +937,7 @@ export const workSystems: WorkSystem[] = [
       proofType: "live-product",
       proofLabel: "Visit Synth",
       cardDescription:
-        "A mobile-first product for discovering concerts, finding friends headed to the same shows, and sharing the experience.",
+        "I founded Synth to help live music fans discover shows, connect with other fans, and share their experiences.",
       displayTags: ["Product", "Consumer", "Music", "Mobile"],
     },
     brand: {
@@ -782,27 +952,27 @@ export const workSystems: WorkSystem[] = [
   },
   {
     slug: "jambase-sdr",
-    title: "SDR-as-a-Service",
+    title: "JamBase Revenue System",
     year: "2026",
     description: "Integrated sales environment across LinkedIn, Apollo, and HubSpot.",
-    stakes: "Reps lose hours switching between research, outbound, and CRM hygiene before they talk to a buyer.",
+    stakes: "Research, outbound, CRM updates, and forecast visibility were split across capable tools.",
     brief:
       "I built one operating workspace for JamBase: accounts, signals, sequences, and RevOps reporting with live HubSpot sync and AI-assisted signal classification.",
     problem:
-      "Outbound, research, CRM hygiene, and comms prep lived in separate tools, slowing one unified sales motion.",
+      "LinkedIn, Apollo, and HubSpot were capable tools. Research, account context, outbound execution, CRM management, signals, and forecasting were fragmented across them.",
     approach:
-      "Custom integrated environment connecting LinkedIn, Apollo, and HubSpot with OpenAPI contracts, typed client hooks, and RevOps dashboards.",
+      "I built an integrated operating environment with AI-assisted signal classification and human review, connected to live HubSpot data.",
     outcome:
-      "One operating environment for prep, execution, outbound, and CRM management. Contributed to $5M+ in attributed sales and 200%+ year-over-year revenue growth on a new product.",
+      "The team uses one workspace for account research, outreach, CRM updates, and manager visibility. The work contributed to more than $5 million in attributed sales and more than 200% year-over-year revenue growth on a new product.",
     constraints: "Forecast visibility required live CRM sync, reviewer feedback on AI classifications, and brand-safe outbound assets.",
     stack: ["HubSpot", "Apollo", "LinkedIn", "TypeScript", "RevOps"],
     tags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
     liveUrl: "https://data.jambase.com",
-    caseStudyPath: "/case-studies/sdr-automation-application.html",
+    caseStudyPath: "/case-studies/jambase-revenue-system.html",
     logoSrc: "/logos/jambase.png",
     logoAlt: "JamBase logo",
-    previewSrc: "/logos/jambase.png",
-    previewAlt: "JamBase logo",
+    previewSrc: "/images/jambase-revenue-steps.jpg",
+    previewAlt: "Five steps of the JamBase revenue system: research, execute, enable, audit, and improve",
     caseStudyImages: [
       {
         src: "/images/jambase-sdr-workflows.png",
@@ -821,16 +991,30 @@ export const workSystems: WorkSystem[] = [
     ],
     homepage: {
       tier: "selected",
-      group: "fractional-expertise",
-      order: 2,
+      group: "buyer",
+      order: 1,
       competency: "revenue-operations",
-      competencyLabel: "Revenue operations",
+      competencyLabel: "Revenue execution",
       proofType: "case-study",
-      proofLabel: "View the project",
+      proofLabel: "Read the case",
       displayTitle: "JamBase Revenue System",
       cardDescription:
-        "AI GTM and revenue operations. SDRBase connects HubSpot, Apollo, and LinkedIn for research, outbound, forecasting, and reporting.",
-      displayTags: ["RevOps", "HubSpot", "Apollo", "LinkedIn"],
+        "As an SDR at JamBase, I use AI to build GTM workflows that connect account signals, research, outreach, and CRM activity.",
+      statusLabel: "Shipped",
+      displayTags: ["Revenue", "HubSpot", "Apollo", "LinkedIn"],
+    },
+    narrative: {
+      problem:
+        "LinkedIn, Apollo, and HubSpot were capable tools. Research, account context, outbound execution, CRM management, signals, and forecasting were fragmented across them.",
+      owned:
+        "I owned the operating environment: how those tools connected, where AI classified signals, and where a person reviewed the result before it moved work forward.",
+      built:
+        "An integrated workspace for accounts, contacts, sequences, signals, and RevOps reporting, with live HubSpot sync and AI-assisted signal classification.",
+      usage:
+        "The team uses it to research accounts, run outreach, update CRM records, and see pipeline and forecast activity in one place.",
+      result:
+        "The work contributed to more than $5 million in attributed sales and more than 200% year-over-year revenue growth on a new product. The software is one part of that sales motion.",
+      status: "Shipped system",
     },
     drawerSections: [
       {
@@ -894,7 +1078,7 @@ export const workSystems: WorkSystem[] = [
       proofType: "external-project",
       proofLabel: "Visit Nexus",
       cardDescription:
-        "An operating model for training analysts, managing delivery, and serving clients as the organization scaled.",
+        "I co-founded and grew Nexus Consulting to 200+ analysts serving 20+ clients, building the training and delivery systems behind the team.",
       displayTags: ["Consulting", "Operations", "Growth", "Training"],
     },
     brand: {
@@ -920,21 +1104,32 @@ export const workSystems: WorkSystem[] = [
     approach:
       "Two stage pipeline: clean and normalize signals, then build taxonomies, embeddings, and cluster affinity for feed ranking.",
     outcome:
-      "Production pipeline transforming metadata into genre taxonomies, embeddings, and personalized feed outputs.",
+      "Taxonomies, embeddings, cluster keys, and an inspectable personalized feed proof of concept. This is product and data proof, not a revenue result.",
     constraints: "Explainability mattered: taxonomy paths and cluster keys had to be inspectable by product and ops teams.",
     stack: ["Python", "SQL", "ML", "R"],
     tags: ["Python", "SQL", "ML", "AI"],
     caseStudyPath: "/case-studies/genre-intelligence-engine.html",
     homepage: {
-      tier: "index",
-      order: 1,
+      tier: "selected",
+      group: "buyer",
+      order: 5,
       competency: "data-ai",
-      competencyLabel: "Data and AI",
+      competencyLabel: "Product and data",
       proofType: "case-study",
-      proofLabel: "View the project",
+      proofLabel: "Read the case",
       cardDescription:
-        "A two-stage pipeline that turns artist and event metadata into genre taxonomies, embeddings, and personalized recommendations.",
-      displayTags: ["Python", "SQL", "Machine Learning", "AI"],
+        "I built a proof of concept that turns inconsistent genre labels into taxonomies, embeddings, and a discovery feed people can review.",
+      statusLabel: "Proof of concept",
+      displayTags: ["Data", "Taxonomy", "Recommendations"],
+    },
+    narrative: {
+      problem: "Noisy, incomplete genre labels limited discovery and recommendation quality.",
+      owned: "I built the cleaning pipeline, the taxonomy and embedding outputs, and the inspectable feed proof of concept.",
+      built:
+        "A two-stage pipeline that normalizes metadata, then produces taxonomy paths, embeddings, clusters, and a ranked personalized feed.",
+      usage: "A product or data reviewer can inspect why an item was grouped or ranked.",
+      result: "The output is product and data proof. It is not a measured revenue result.",
+      status: "Proof of concept",
     },
     drawerSections: [
       {
@@ -960,30 +1155,43 @@ export const workSystems: WorkSystem[] = [
     slug: "revops-classification",
     title: "Revenue Operations Classification",
     year: "2025",
-    description: "Analytics framework to classify pipeline behavior and improve forecast discipline.",
-    stakes: "Forecast meetings become arguments when stage names no longer describe deal behavior.",
+    description: "Classification, scoring recommendations, and operating guidance for pipeline behavior.",
+    stakes: "CRM stages and pipeline data did not show deal behavior or where a manager should step in.",
     brief:
-      "I mapped win/loss signals to probability tiers and rebuilt CRM scoring so leadership could prioritize the same opportunities reps were actually closing.",
+      "I mapped win and loss signals to probability tiers and wrote scoring recommendations and operating guidance for managers.",
     problem:
-      "Pipeline stages did not reflect actual deal behavior, weakening forecast accuracy.",
+      "CRM stages and pipeline data did not clearly show deal behavior or where managers should intervene.",
     approach:
-      "Classification framework mapping pipeline signals to probability tiers with reporting for product line views.",
+      "I developed classification, scoring recommendations, and operating guidance from win and loss behavior, segment conversion, and stage friction.",
     outcome:
-      "Improved forecast discipline and prioritization across high-probability opportunities.",
+      "The published case describes impact direction: clearer segment focus, score-based prioritization, and manager intervention points. It does not report a measured revenue lift.",
     constraints: "Scoring had to be legible to managers for intervention on stalled deals, not only for executive roll-ups.",
     stack: ["Analytics", "JavaScript", "TypeScript", "RevOps"],
     tags: ["Analytics", "JavaScript", "TypeScript", "RevOps"],
     caseStudyPath: "/case-studies/indiagrowthcorp-revops-analytics.html",
     homepage: {
-      tier: "index",
-      order: 3,
+      tier: "selected",
+      group: "buyer",
+      order: 4,
       competency: "revenue-operations",
-      competencyLabel: "Revenue operations",
+      competencyLabel: "Revenue execution",
       proofType: "case-study",
-      proofLabel: "View the project",
+      proofLabel: "Read the case",
       cardDescription:
-        "A revenue analytics framework for classifying pipeline behavior, improving forecast discipline, and prioritizing high-probability opportunities.",
-      displayTags: ["Analytics", "RevOps", "JavaScript"],
+        "I analyzed CRM deal behavior and developed scoring recommendations to help managers decide where to intervene.",
+      statusLabel: "Recommendations",
+      displayTags: ["Pipeline", "Scoring", "Forecasting"],
+    },
+    narrative: {
+      problem: "CRM stages and pipeline data did not clearly show deal behavior or where managers should intervene.",
+      owned: "I developed the classification, the scoring recommendations, and the operating guidance.",
+      built:
+        "A framework that maps win and loss signals to probability tiers, with views for product lines and playbooks for stalled or iteration-heavy deals.",
+      usage:
+        "Managers can use the scores to decide which opportunities need intervention, and teams can use the guidance for enablement planning.",
+      result:
+        "The published case describes the direction of impact. A measured revenue lift is not part of the record.",
+      status: "Recommendations and operating guidance",
     },
     brand: {
       accent: "#1b3a6b",
@@ -998,30 +1206,45 @@ export const workSystems: WorkSystem[] = [
     slug: "linkedin-voice",
     title: "Enterprise LinkedIn Voice + Analytics",
     year: "2025",
-    description: "Multi-tenant platform for AI-assisted LinkedIn publishing with team analytics.",
-    stakes: "Enterprise teams need distribution without letting AI flatten every author into the same voice.",
+    description: "Architecture for AI-assisted LinkedIn publishing with voice controls, approvals, and analytics.",
+    stakes: "Teams needed publishing help that kept each author's voice, a review step, and a view of performance.",
     brief:
-      "I designed a multi-tenant publishing system with voice fingerprinting, approval workflows, and team analytics so governance and authenticity stay in tension on purpose.",
+      "I designed a multi-tenant publishing architecture with voice fingerprinting, approval workflows, and team analytics.",
     problem:
-      "Enterprise teams needed consistent LinkedIn voice, automated posting, and visibility into team performance.",
+      "Teams needed AI-assisted publishing that preserved individual voice, approval controls, and performance visibility.",
     approach:
-      "Multi-tenant platform with configurable voice controls, automated posting workflows, and team analytics.",
+      "I designed the architecture: voice fingerprinting from writing samples, role-based review, and analytics for the person, the team, and the sponsor.",
     outcome:
-      "Platform architecture for AI-assisted publishing with automated workflows and analytics dashboards.",
+      "The published material describes platform architecture and the metrics a deployment would track. It does not report a live deployment or achieved results.",
     constraints: "Role-based workflows, pre-publish checks, and edit-distance feedback loops were required before any auto-post path went live.",
     stack: ["AI", "Analytics", "JavaScript", "TypeScript"],
     tags: ["AI", "Analytics", "JavaScript", "TypeScript"],
     caseStudyPath: "/case-studies/enterprise-linkedin-voice-analytics.html",
     homepage: {
-      tier: "index",
+      tier: "selected",
+      group: "buyer",
       order: 2,
-      competency: "product-community",
-      competencyLabel: "Product and publishing",
+      competency: "data-ai",
+      competencyLabel: "AI inside operations",
       proofType: "case-study",
-      proofLabel: "View the project",
+      proofLabel: "Read the case",
       cardDescription:
-        "A multi-tenant publishing platform with AI-assisted drafting, configurable voice controls, approval workflows, and team analytics.",
-      displayTags: ["AI", "Analytics", "Publishing"],
+        "I designed an AI-assisted publishing system to draft in each author's voice, require approval, and track performance.",
+      statusLabel: "Architecture",
+      displayTags: ["AI", "Approvals", "Analytics"],
+    },
+    narrative: {
+      problem:
+        "Teams needed AI-assisted publishing that preserved individual voice, approval controls, and performance visibility.",
+      owned:
+        "I designed the platform architecture: voice controls, the approval path, and the analytics layers.",
+      built:
+        "A multi-tenant design for drafting from a voice fingerprint, routing posts through review, and reporting engagement by person and team.",
+      usage:
+        "The intended path is draft, review, approve, then schedule. The published case does not document a team running that path in production.",
+      result:
+        "Engagement rate, follower growth, posts per user, approval rate, and pipeline attribution are intended measures. They are not reported outcomes.",
+      status: "Architecture",
     },
     drawerSections: [
       {
@@ -1078,7 +1301,7 @@ export const workSystems: WorkSystem[] = [
       proofType: "external-project",
       proofLabel: "Visit LinkedIn",
       cardDescription:
-        "A college-focused editorial system with SEO structure, social distribution, and syndication to Quill and Pad.",
+        "I founded Campus Watch Chronicle to write about affordable horology, from accessible watches to the business and culture of watchmaking, with work syndicated to Quill and Pad.",
       displayTags: ["Media", "Writing", "SEO"],
     },
     brand: {
@@ -1111,7 +1334,7 @@ export const workSystems: WorkSystem[] = [
     logoAlt: "BBYO logo",
     homepage: {
       tier: "selected",
-      group: "fractional-expertise",
+      group: "record",
       order: 5,
       competency: "organization-operations",
       competencyLabel: "Community and events",
@@ -1119,7 +1342,7 @@ export const workSystems: WorkSystem[] = [
       proofLabel: "View the project",
       displayTitle: "BBYO",
       cardDescription:
-        "Programs, grants, and partnerships across 500+ communities in 60+ countries, including convention programming and donor acknowledgments.",
+        "At BBYO, I worked for the community building team, prioritizing inclusive programming, member belonging, and creating an incredible experience for 75,000 teens in 75+ countries.",
       displayTags: ["Community", "Events", "Leadership"],
     },
     brand: {
@@ -1152,8 +1375,8 @@ export const workSystems: WorkSystem[] = [
     logoSrc: "/logos/us-chamber-foundation.png",
     logoAlt: "U.S. Chamber of Commerce Foundation logo",
     homepage: {
-      tier: "selected",
-      group: "fractional-expertise",
+      tier: "index",
+      group: "record",
       order: 1,
       competency: "data-ai",
       competencyLabel: "Research and automation",
@@ -1161,7 +1384,7 @@ export const workSystems: WorkSystem[] = [
       proofLabel: "Visit foundation",
       displayTitle: "U.S. Chamber of Commerce Foundation",
       cardDescription:
-        "Innovation Scholar work on AI, automation, data ingestion, and reporting workflows for foundation programs.",
+        "As an Innovation Scholar, I research and prototype AI and automation workflows for data ingestion, reporting, and Foundation programs.",
       displayTags: ["AI", "Power Automate", "Research"],
     },
     brand: {
@@ -1194,8 +1417,8 @@ export const workSystems: WorkSystem[] = [
     logoSrc: "/logos/sbi.png",
     logoAlt: "SBI logo",
     homepage: {
-      tier: "selected",
-      group: "fractional-expertise",
+      tier: "index",
+      group: "record",
       order: 4,
       competency: "revenue-operations",
       competencyLabel: "Revenue operations",
@@ -1203,7 +1426,7 @@ export const workSystems: WorkSystem[] = [
       proofLabel: "Visit SBI",
       displayTitle: "SBI, The Growth Advisory",
       cardDescription:
-        "Restructured 13,000+ Salesforce contacts, accounts, and personas, and reported on $51M+ of pipeline across 6 offerings.",
+        "At SBI, I restructured 13,000+ Salesforce records and reported on $51M+ of pipeline across six offerings.",
       displayTags: ["Salesforce", "RevOps", "Forecasting"],
     },
     brand: {
@@ -1236,8 +1459,8 @@ export const workSystems: WorkSystem[] = [
     logoSrc: "/logos/federal-reserve.png",
     logoAlt: "Federal Reserve Bank of St. Louis logo",
     homepage: {
-      tier: "selected",
-      group: "fractional-expertise",
+      tier: "index",
+      group: "record",
       order: 6,
       competency: "organization-operations",
       competencyLabel: "Finance and compliance",
@@ -1245,7 +1468,7 @@ export const workSystems: WorkSystem[] = [
       proofLabel: "Visit St. Louis Fed",
       displayTitle: "Federal Reserve Bank of St. Louis",
       cardDescription:
-        "Compliance audits for 600+ organizations, a $750K facilities budget, and 1,000+ software procurement records.",
+        "At the St. Louis Fed, I audited compliance for 600+ organizations, supported a $750K facilities budget, and reviewed 1,000+ software procurement records.",
       displayTags: ["Compliance", "Budgeting", "Reporting"],
     },
     brand: {
@@ -1271,24 +1494,42 @@ export const workSystems: WorkSystem[] = [
     approach:
       "Node and Express platform with ingest workflows, geocoding, media-kit generation, and optional Supabase persistence.",
     outcome:
-      "24/7 response operations platform deployed for partner data visualization and branding automation.",
+      "A production-oriented build for ingest, mapping, and media kits. The case names open engineering risks. A grant-management outcome is not part of this record.",
     stack: ["JavaScript", "TypeScript", "Python", "SQL"],
     tags: ["JavaScript", "TypeScript", "Python", "SQL"],
     liveUrl: "https://247daymap.conveniencecares.org/",
-    previewSrc: "/images/nacs-foundation-map.png",
-    previewAlt: "NACS Foundation 24/7 Day store locator map",
+    caseStudyPath: "/case-studies/nacs-foundation-partner-map.html",
+    previewSrc: "/images/nacs-data-to-delivery.png",
+    previewAlt:
+      "NACS Foundation data flow: messy files are parsed, normalized, geocoded, and reviewed, then delivered as a searchable map and custom media kits.",
     homepage: {
       tier: "selected",
-      group: "fractional-expertise",
+      group: "buyer",
       order: 3,
-      competency: "product-community",
-      competencyLabel: "Product and data",
+      competency: "organization-operations",
+      competencyLabel: "Program infrastructure",
       proofType: "live-product",
-      proofLabel: "Visit project",
-      displayTitle: "NACS Foundation Map",
+      proofLabel: "Open the map",
+      secondaryProofType: "case-study",
+      secondaryProofLabel: "Read the case",
+      displayTitle: "NACS Foundation partner map",
       cardDescription:
-        "A Node and Express platform with data ingestion, geocoding, map visualization, and media-kit generation.",
-      displayTags: ["JavaScript", "Python", "SQL"],
+        "I built a system that ingests and normalizes messy partner data across file types, geocodes locations through an external API, and produces a searchable map and media kits.",
+      statusLabel: "Live map",
+      displayTags: ["Partners", "Map", "Media kits"],
+    },
+    narrative: {
+      problem:
+        "A mission-driven team needed partner data ingested, mapped, maintained, and turned into usable program and media outputs.",
+      owned:
+        "I built the ingest, geocoding, map, and media-kit workflows, and I documented the engineering risks that should be closed before broader use.",
+      built:
+        "A production-oriented Express app. Staff can upload CSV, spreadsheet, PDF, and document files. The app geocodes locations, draws a map, and generates media kits. Persistence can use Supabase or a local file.",
+      usage:
+        "Staff upload partner lists, review locations on the map, and produce media materials from the same records.",
+      result:
+        "The case describes a production-oriented build and names open risks: an unauthenticated delete route, large upload limits, serverless session limits, and any token that is not stored in the environment. A public map URL is linked from this site. A grant-management outcome is not part of this record.",
+      status: "Production-oriented build",
     },
     brand: {
       accent: "#3f624a",
@@ -1324,7 +1565,7 @@ export const workSystems: WorkSystem[] = [
       proofType: "research",
       proofLabel: "View research",
       cardDescription:
-        "A multi-country infrastructure study comparing compliance, emissions, and energy demand through statistical analysis and data visualization.",
+        "I compared data center compliance, emissions, and energy demand across countries through statistical analysis and visualization.",
       displayTags: ["R", "Python", "Policy"],
     },
     brand: {
@@ -1352,9 +1593,102 @@ export const fractionalExpertiseSystems = workSystems
   .filter(byGroup("fractional-expertise"))
   .sort(byHomepageOrder);
 
-export const selectedSystems = workSystems.filter((s) => s.homepage.tier === "selected").sort(byHomepageOrder);
+export const buyerWorkSystems = workSystems.filter(byGroup("buyer")).sort(byHomepageOrder);
 
-export const systemIndex = workSystems.filter((s) => s.homepage.tier === "index").sort(byHomepageOrder);
+export const selectedSystems = buyerWorkSystems;
+
+export type WorkMenuCategory = "Projects" | "Founder work" | "Company roles";
+
+export type WorkMenuItem = {
+  slug: string;
+  category: WorkMenuCategory;
+  title: string;
+  description: string;
+  href: string;
+  linkLabel: string;
+  external: boolean;
+  logoSrc?: string;
+  logoBackground?: string;
+};
+
+const menuLogoBySlug: Record<string, { logoSrc: string; logoBackground?: string }> = {
+  "partner-map": { logoSrc: "/logos/nacs-foundation.png" },
+  "genre-intelligence": { logoSrc: "/logos/synth.png", logoBackground: "#000000" },
+  "sustainable-ai": { logoSrc: "/logos/gwu.png" },
+};
+
+function workMenuItem(slug: string, category: WorkMenuCategory): WorkMenuItem {
+  const system = workSystems.find((item) => item.slug === slug);
+  if (!system) {
+    throw new Error(`Missing work system: ${slug}`);
+  }
+  const design = system.homepage.statusLabel === "Architecture";
+  const href = system.caseStudyPath ?? system.liveUrl ?? (slug === "bbyo-conventions" ? "https://bbyo.org" : "#background");
+  const external = href.startsWith("http");
+  const linkLabel = system.caseStudyPath
+    ? design
+      ? "See the design"
+      : "Read the case"
+    : slug === "bbyo-conventions"
+      ? "Visit BBYO"
+      : system.homepage.proofLabel;
+  const logo = menuLogoBySlug[slug];
+  return {
+    slug,
+    category,
+    title: system.homepage.displayTitle ?? system.title,
+    description: system.homepage.cardDescription,
+    href,
+    linkLabel,
+    external,
+    logoSrc: system.logoSrc ?? logo?.logoSrc,
+    logoBackground: system.brand.logoBackground ?? logo?.logoBackground,
+  };
+}
+
+const projectMenu = [
+  "jambase-sdr",
+  "partner-map",
+  "linkedin-voice",
+  "revops-classification",
+  "genre-intelligence",
+  "sustainable-ai",
+].map((slug) => workMenuItem(slug, "Projects"));
+
+const founderMenu = ["synth", "nexus", "campus-watch"].map((slug) => workMenuItem(slug, "Founder work"));
+
+const jambaseRole: WorkMenuItem = {
+  slug: "jambase-role",
+  category: "Company roles",
+  title: "JamBase",
+  description:
+    "As an SDR at JamBase, I built the revenue system across LinkedIn, Apollo, and HubSpot, contributing to more than $5 million in attributed sales and more than 200% year-over-year revenue growth on a new product.",
+  href: "https://www.jambase.com",
+  linkLabel: "Visit JamBase",
+  external: true,
+  logoSrc: "/logos/jambase.png",
+};
+
+const roleMenu = [
+  jambaseRole,
+  ...["chamber-foundation", "sbi-revops", "bbyo-conventions", "fed-st-louis"].map((slug) =>
+    workMenuItem(slug, "Company roles"),
+  ),
+];
+
+export const workMenuGroups = [
+  { category: "Projects" as const, items: projectMenu },
+  { category: "Founder work" as const, items: founderMenu },
+  { category: "Company roles" as const, items: roleMenu },
+];
+
+export const workMenuRotation: WorkMenuItem[] = projectMenu.flatMap((item, index) =>
+  [item, founderMenu[index], roleMenu[index]].filter((entry): entry is WorkMenuItem => Boolean(entry)),
+);
+
+export const systemIndex = workSystems
+  .filter((s) => s.homepage.tier === "index" && s.homepage.group !== "record")
+  .sort(byHomepageOrder);
 
 /** @deprecated Use systemIndex */
 export type EarlierSystem = {
@@ -1400,6 +1734,13 @@ export const mediaSection = {
 
 export const media: MediaItem[] = [
   {
+    type: "Podcast",
+    outlet: "Delegate 2 Elevate",
+    title: "97 Sam Loiterstein: Gen Z Founder Energy Meets Real-World Delegation",
+    date: "September 27, 2026",
+    href: "https://open.spotify.com/episode/5SvrnBGQvqhmeuUo74SiDI",
+  },
+  {
     type: "Mention",
     outlet: "GW New Venture Competition",
     title: "Nexus Consulting named a 2025 New Venture Competition semifinalist.",
@@ -1439,46 +1780,125 @@ export const media: MediaItem[] = [
 // Services / engagements
 
 export type Service = {
+  audience: string;
   title: string;
-  description: string;
-  bullets: string[];
-  icon: LucideIcon;
+  problem: string;
+  proof: string;
+  caseLabel: string;
+  caseHref: string;
+  cta: string;
+  intent: string;
 };
 
+export const practiceBridge = {
+  eyebrow: "Past Work",
+  title: "Here's what my work looks like",
+} as const;
+
+export const buildSection = {
+  title: "What I build",
+  lineLead: "See how this could work at your",
+  places: [
+    "startup",
+    "nonprofit",
+    "consultancy",
+    "foundation",
+    "agency",
+    "association",
+    "growing company",
+    "social enterprise",
+    "venture studio",
+    "media company",
+    "program board",
+    "marketing firm",
+  ],
+  slides: [
+    {
+      image: "/images/operating-network.png",
+      imageAlt:
+        "Signal sources feed a CRM and sequencer for research, outreach, and records. Human judgment stays on every decision, and memory from engagement, outcomes, and patterns comes back to improve targeting, timing, and outreach.",
+      width: 1024,
+      height: 483,
+      headline: "Find the right accounts. Book more meetings. Keep your CRM clean and accurate.",
+      body: "SDRBase is a custom sales development system that connects HubSpot, Apollo, and LinkedIn so reps can research accounts and run outbound while managers track pipeline and forecast from the same work.",
+      linkLabel: "See the JamBase build",
+      linkHref: "/case-studies/jambase-revenue-system.html",
+    },
+    {
+      image: "/images/nexconnect-project-hub.png",
+      imageAlt:
+        "NexConnect project hub connecting RevOps, staffing, work planning, a client portal, invoicing, and reporting.",
+      width: 1024,
+      height: 581,
+      headline: "One project workspace for your firm and its clients.",
+      body: "NexConnect is a custom project management system where sales hands off scoped work, teams plan and deliver it, clients follow progress, and finance handles invoicing + reporting.",
+      linkLabel: "See the NexConnect build",
+      linkHref: "https://nxsconsultants.com",
+    },
+    {
+      image: "/images/nacs-data-to-delivery.png",
+      imageAlt:
+        "NACS Foundation data flow: messy files are parsed, normalized, geocoded, and reviewed, then delivered as a searchable map and custom media kits.",
+      width: 1024,
+      height: 503,
+      headline: "A map staff and the public can search.",
+      body: "I built a system that ingests and normalizes messy partner data across file types, geocodes locations through an external API, and produces a searchable map and media kits.",
+      linkLabel: "See the NACS build",
+      linkHref: "/case-studies/nacs-foundation-partner-map.html",
+    },
+  ],
+  catalogLabel: "All of the work",
+  portfolioCta: "See my whole portfolio and experience",
+  ctaLead: "If these problems hit close to home, a custom build might be right for you.",
+  cta: "Contact me here",
+  ctaIntent: "custom",
+} as const;
+
 export const servicesSection = {
-  eyebrow: "Work with me",
-  title: "When I take an engagement",
-  description:
-    "I take on a small number of builds covering AI expertise, workflows, and GTM as a Service. If anything below matches your scope, send a note.",
-  ctaPrompt: "Have a different problem?",
-  ctaSubcopy: "Share what you are working on. Mismatched inquiries are referred elsewhere.",
-  ctaButton: "Contact",
+  eyebrow: "Offer",
+  title: "What I build",
+  intro: [] as string[],
+  description: "See how this could work at your startup.",
+  ctaPrompt: "A different operating problem?",
+  ctaSubcopy: "Describe the handoff that is stalling. If I am the wrong person, I will say so.",
+  ctaButton: "Discuss a project",
 };
 
 export const services: Service[] = [
   {
-    title: "GTM as a Service",
-    description: "For founders who need ICP, positioning, sales motion, and shipping experiments without building a full GTM bench.",
-    bullets: ["ICP and positioning", "Sales motion", "Experiments that ship"],
-    icon: LineChart,
+    audience: "Revenue teams",
+    title: "Turn a capable stack into a working sales motion",
+    problem:
+      "Your team has the CRM, prospecting tools, and account data. I connect the steps between finding an opportunity and acting on it, so reps know who to contact and leaders can see what is happening in the pipeline.",
+    proof:
+      "At JamBase, I connected signals, research, outreach, and CRM activity across the existing stack. The work contributed to more than $5 million in attributed sales.",
+    caseLabel: "See the JamBase work",
+    caseHref: "/case-studies/jambase-revenue-system.html",
+    cta: "Talk about your revenue system",
+    intent: "sales",
   },
   {
-    title: "AI expertise and workflows",
-    description: "For teams that need research, enrichment, classification, and drafting inside governed processes people can trust.",
-    bullets: ["Agentic backends", "Approval and ownership", "Workflow design"],
-    icon: Sparkles,
+    audience: "Operations teams",
+    title: "Put AI into work people already own",
+    problem:
+      "A useful AI workflow needs the right information, a clear decision point, and someone accountable for the result. I build around the process your team already runs, then make the new system practical for them to use and maintain.",
+    proof:
+      "My publishing system design brings an author's voice, AI drafts, human approval, and performance data into one workflow.",
+    caseLabel: "See the workflow design",
+    caseHref: "/case-studies/enterprise-linkedin-voice-analytics.html",
+    cta: "Talk about an operations problem",
+    intent: "ai",
   },
   {
-    title: "RevOps and CRM systems",
-    description: "For teams whose pipeline, Salesforce, HubSpot, reporting, or handoffs need structure.",
-    bullets: ["Pipeline hygiene", "Apollo, Salesforce, and HubSpot", "Reporting and handoffs"],
-    icon: Compass,
-  },
-  {
-    title: "Product strategy and MVP builds",
-    description: "For teams turning raw ideas into scoped products, prototypes, dashboards, or lightweight internal tools.",
-    bullets: ["Scoping and specs", "Prototypes and MVPs", "Internal tools"],
-    icon: Hammer,
+    audience: "Mission-driven teams",
+    title: "Make program information usable",
+    problem:
+      "Program staff need to find accurate partner information, keep it current, and turn it into something the public or funders can use. I build tools around those jobs and the team's budget.",
+    proof: "The NACS Foundation's live map lets staff and the public search participating stores.",
+    caseLabel: "Open the map",
+    caseHref: "https://247daymap.conveniencecares.org/",
+    cta: "Talk about a program system",
+    intent: "other",
   },
 ];
 
@@ -1495,10 +1915,10 @@ export type InsightEntry = {
 };
 
 export const writingSection = {
-  eyebrow: "Writing and press",
-  title: "Notes and coverage",
+  eyebrow: "Press",
+  title: "Writing, Podcasts, and Press",
   description:
-    "I write about building products, running lean teams, and the problems that appear between strategy and execution.",
+  "I'm lucky to have been featured in some great podcasts and publications. If you're curious about my own writing, subscribe to my Substack!"
 } as const;
 
 export const substack = {
@@ -1540,34 +1960,30 @@ export type ContactIntent = {
 
 export const contact = {
   eyebrow: "Contact",
-  title: "Get in touch.",
-  description:
-    "Reach out about an engagement, a project, or an introduction. I read everything that lands here.",
+  title: "I'd love to hear what you're working on!",
   emailLabel: "Email",
-  emailHint: "For project and engagement inquiries.",
-  currently: {
-    heading: "Currently",
-    body: "Taking on a small number of engagements. Replies usually within 24 hours.",
-  },
+  emailHint: "If you would rather write directly.",
+  nextLabel: "What happens next",
+  nextBody:
+    "I'll read your note and reply personally within 24 hours. If I think I can help, we'll set up a short conversation about what's going on. If not I'll refer you to someone who can!",
   form: {
     intentLabel: "Topic",
-    intentDefault: "Select a topic (optional)",
+    intentDefault: "Select a topic",
     placeholders: {
       name: "Your name",
       email: "you@company.com",
-      message: "Share what you are working on.",
+      message: "What resonated, and what's going on at your organization?",
     },
     sendButton: "Send message",
     sendingLabel: "Sending",
     successHeading: "Message sent.",
-    successBody:
-      "Thanks for reaching out. I reply within 24 hours. Connect on LinkedIn in the meantime.",
+    successBody: "I have the note. I will reply to set a first conversation.",
     successAction: "Send another message",
     validation: {
       nameRequired: "Please enter your name.",
       emailRequired: "Email is required.",
       emailInvalid: "Please provide a valid email.",
-      messageShort: "Add a few more words.",
+      messageShort: "Add a few more words about the workflow.",
       messageLong: "Message is too long.",
       spam: "Spam detected.",
       generic: "Unable to send right now.",
@@ -1575,39 +1991,34 @@ export const contact = {
   },
   intents: [
     {
-      id: "gtm",
-      label: "GTM as a Service",
-      placeholder:
-        "We are at [stage] and need GTM as a Service for ICP, positioning, or sales motion. Our current challenge is…",
+      id: "sales",
+      label: "The sales system caught my eye",
+      placeholder: "What resonated, and what's going on at your organization?",
     },
     {
-      id: "ai-workflows",
-      label: "AI expertise and workflows",
-      placeholder:
-        "We need AI expertise embedded in workflows for research, classification, or drafting. Our current process is…",
+      id: "projects",
+      label: "We need a better way to manage projects",
+      placeholder: "What resonated, and what's going on at your organization?",
     },
     {
-      id: "revops",
-      label: "RevOps and CRM systems",
-      placeholder:
-        "Our pipeline and CRM stack need structure. We use [tools] and the main friction is…",
+      id: "data",
+      label: "Our data is a mess",
+      placeholder: "What resonated, and what's going on at your organization?",
     },
     {
-      id: "product",
-      label: "Product and MVP build",
-      placeholder:
-        "We have a product idea or internal tool need. Scope, timeline, and constraints look like…",
+      id: "ai",
+      label: "We want to make AI work for us",
+      placeholder: "What resonated, and what's going on at your organization?",
     },
     {
-      id: "founder",
-      label: "Founder conversation",
-      placeholder:
-        "I am building [company/product] and would like to compare notes on…",
+      id: "custom",
+      label: "I have an idea for a custom tool",
+      placeholder: "What resonated, and what's going on at your organization?",
     },
     {
       id: "other",
-      label: "Other",
-      placeholder: "Share what you are working on.",
+      label: "Something else caught my attention",
+      placeholder: "What resonated, and what's going on at your organization?",
     },
   ] satisfies ContactIntent[],
 } as const;

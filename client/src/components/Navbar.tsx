@@ -86,13 +86,6 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <a
-              href={`mailto:${site.email}`}
-              data-analytics="nav:email"
-              className="hidden rounded-full px-3 py-1.5 text-sm text-ink-700 transition hover:text-sage-800 lg:inline-block"
-            >
-              Email
-            </a>
-            <a
               href={site.socials.linkedin}
               target="_blank"
               rel="noreferrer"
@@ -100,14 +93,6 @@ export function Navbar() {
               className="hidden rounded-full border border-ink-200 px-3.5 py-1.5 text-sm text-ink-700 transition hover:border-sage-400 hover:text-sage-800 md:inline-block"
             >
               LinkedIn
-            </a>
-            <a
-              href="#contact"
-              data-analytics="nav:contact"
-              onClick={(e) => handleNavClick(e, "contact")}
-              className="hidden rounded-full bg-sage-700 px-4 py-1.5 text-sm text-cream transition hover:bg-sage-800 md:inline-block"
-            >
-              Contact
             </a>
 
             <button
@@ -150,15 +135,6 @@ export function Navbar() {
                     className="block rounded-xl px-4 py-3 text-sm text-ink-800 hover:bg-sage-50"
                   >
                     {site.email}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#contact"
-                    onClick={(e) => handleNavClick(e, "contact")}
-                    className="block rounded-xl bg-sage-700 px-4 py-3 text-center text-sm text-cream"
-                  >
-                    Contact
                   </a>
                 </li>
               </ul>

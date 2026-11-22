@@ -3,72 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Partner data ingestion, visualization and branding automation workflow Case Study</title>
+    <title>NACS Foundation Partner Map | Sam Loiterstein</title>
+    <meta
+      name="description"
+      content="A production-oriented partner map for ingest, geocoding, visualization, and media kits. The case lists open engineering risks and does not claim a grant-management result."
+    />
+    <link rel="canonical" href="https://sam-loiterstein.com/case-studies/nacs-foundation-partner-map.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="NACS Foundation Partner Map | Sam Loiterstein" />
+    <meta
+      property="og:description"
+      content="Partner data ingested, mapped, and turned into media outputs. Deployment is production-oriented, with engineering risks still named in the case."
+    />
+    <meta property="og:url" content="https://sam-loiterstein.com/case-studies/nacs-foundation-partner-map.html" />
+    <meta property="og:image" content="https://sam-loiterstein.com/images/nacs-foundation-map.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="/case-studies/styles.css" />
   </head>
   <body>
     <main class="wrap">
-      <a class="back" href="/">Back to site</a>
-      <h1>Partner data ingestion, visualization and branding automation workflow</h1>
-      <div class="meta">2025. Mapping platform, ingestion pipeline, and operations analytics</div>
-      <div class="stack">
-        <span class="chip">JavaScript</span>
-        <span class="chip">TypeScript</span>
-        <span class="chip">Python</span>
-        <span class="chip">SQL</span>
-        <span class="chip">Node</span>
-      </div>
+      <a class="back" href="/#background">Back</a>
+      <h1>NACS Foundation partner map</h1>
+      <div class="meta">2025. Production-oriented partner data, map, and media-kit system.</div>
+      <p class="status">Production-oriented build</p>
 
       <section class="card">
-        <h2>Project Summary</h2>
+        <h2>The problem</h2>
         <p>
-          Built a production-oriented partner mapping platform for 24/7 response operations, with upload-driven ingest,
-          geocoding, media-kit generation, and optional Supabase persistence. The app runs as a single Express service and
-          deploys to Vercel using one serverless entrypoint.
+          A mission-driven team needed partner data ingested, mapped, maintained, and turned into usable program and
+          media outputs. Location files arrived in inconsistent formats.
         </p>
       </section>
 
       <section class="card">
-        <h2>Architecture</h2>
+        <h2>What I owned</h2>
+        <p>
+          I built the ingest, geocoding, map, and media-kit workflows, and I documented the engineering risks that should
+          be closed before broader use.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>What changed</h2>
+        <p>
+          The app is a single Express service for local running and for a Vercel serverless entry. Staff can upload CSV,
+          spreadsheet, PDF, and document files. The app geocodes locations, draws a Leaflet map, and generates media kits.
+          Records can live in Supabase or in a local JSON file.
+        </p>
+        <figure>
+          <img class="poster" src="/images/nacs-foundation-map.png" alt="NACS Foundation partner map showing store locations" />
+          <figcaption>Partner locations on the map produced from ingested records.</figcaption>
+        </figure>
+      </section>
+
+      <section class="card">
+        <h2>How the team uses it</h2>
+        <p>
+          Staff upload a partner list, review locations on the map, and produce media materials from the same records.
+          A public map is linked below. This case does not claim that every engineering risk has been closed in that deployment.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Deployment status</h2>
+        <p>
+          This is a production-oriented build: one Express app, file ingest, geocoding, a map, media-kit generation, and
+          an optional database. It is not described here as a finished grant-management system. No grant outcome is part
+          of this record.
+        </p>
+        <p>Open risks named with the build:</p>
         <ul>
-          <li>Express app as the primary runtime, shared by local mode and Vercel serverless mode.</li>
-          <li>Vanilla front-end with Leaflet map experience plus dedicated ingest and media-kit interfaces.</li>
-          <li>File parsing and transformation pipeline for CSV, XLSX, PDF, and DOCX inputs.</li>
-          <li>Mapbox geocoding integration with fallback and session-based ingest flow management.</li>
-          <li>Media-kit compositing pipeline using Sharp and canvas tooling.</li>
+          <li>An unauthenticated delete route for stores should be gated or removed.</li>
+          <li>Large upload limits increase the abuse surface on a public deployment.</li>
+          <li>Serverless in-memory sessions can fail when more than one instance handles the flow.</li>
+          <li>Any token that is not stored in the environment should be removed before production use.</li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>Data and Integrations</h2>
+        <h2>System detail</h2>
         <ul>
-          <li>Dual persistence strategy: Supabase-backed mode or local JSON file fallback.</li>
-          <li>Supabase storage plus RPC path for confirm/commit ingest operations.</li>
-          <li>Schema and migration workflow managed under dedicated SQL migration files.</li>
-          <li>Operational scripts for import, pruning, env syncing, and media asset preparation.</li>
+          <li>Runtime: Node.js and Express, shared by local mode and Vercel.</li>
+          <li>Ingest: CSV, XLSX, PDF, and DOCX parsing, with Mapbox geocoding and a session-based review step.</li>
+          <li>Map: Leaflet and marker clustering.</li>
+          <li>Media kits: Sharp and canvas compositing.</li>
+          <li>Data: Supabase client and SQL migrations, or a local JSON fallback.</li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>Tech Stack</h2>
-        <ul>
-          <li>Backend: Node.js, Express, CommonJS modules.</li>
-          <li>Ingest: multer, csv-parser, xlsx, pdf-parse, pdfjs-dist, mammoth.</li>
-          <li>Data: Supabase JavaScript client and SQL migrations.</li>
-          <li>Frontend: HTML, CSS, JavaScript, Leaflet + MarkerCluster.</li>
-          <li>Supplemental analytics and prototyping in Python.</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Engineering Risks Identified</h2>
-        <ul>
-          <li>Unauthenticated destructive route (`DELETE /api/stores`) should be gated or removed.</li>
-          <li>Large body and upload limits increase abuse surface on public deployments.</li>
-          <li>Serverless in-memory sessions can fail across multi-instance invocation boundaries.</li>
-          <li>Any non-env token fallback should be eliminated for production safety.</li>
-        </ul>
+        <h2>Related</h2>
+        <div class="related">
+          <a href="/case-studies/jambase-revenue-system.html">JamBase revenue system</a>
+          <a href="https://247daymap.conveniencecares.org/" target="_blank" rel="noreferrer">Open the public map</a>
+          <a href="/?intent=programs#contact">Discuss your program systems</a>
+        </div>
       </section>
     </main>
   </body>
-  </html>
+</html>

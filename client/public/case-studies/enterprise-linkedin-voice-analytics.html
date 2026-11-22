@@ -3,81 +3,94 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enterprise LinkedIn Voice + Analytics Case Study</title>
+    <title>Enterprise LinkedIn Voice and Analytics | Sam Loiterstein</title>
+    <meta
+      name="description"
+      content="Architecture for AI-assisted LinkedIn publishing that keeps individual voice, approval controls, and performance visibility. Success metrics in this case are targets, not reported results."
+    />
+    <link rel="canonical" href="https://sam-loiterstein.com/case-studies/enterprise-linkedin-voice-analytics.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Enterprise LinkedIn Voice and Analytics | Sam Loiterstein" />
+    <meta
+      property="og:description"
+      content="A publishing architecture with voice fingerprinting, approval controls, and team analytics. Deployment and achieved metrics are not documented."
+    />
+    <meta property="og:url" content="https://sam-loiterstein.com/case-studies/enterprise-linkedin-voice-analytics.html" />
+    <meta property="og:image" content="https://sam-loiterstein.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="/case-studies/styles.css" />
   </head>
   <body>
     <main class="wrap">
-      <a class="back" href="/">Back to site</a>
+      <a class="back" href="/#background">Back</a>
       <h1>Enterprise LinkedIn Voice + Analytics</h1>
-      <div class="meta">2025. Multi-tenant LinkedIn publishing platform</div>
-      <div class="stack">
-        <span class="chip">Python</span>
-        <span class="chip">R</span>
-        <span class="chip">JavaScript</span>
-        <span class="chip">TypeScript</span>
-        <span class="chip">SQL</span>
-      </div>
+      <div class="meta">2025. Architecture for AI-assisted LinkedIn publishing.</div>
+      <p class="status">Architecture</p>
 
       <section class="card">
-        <h2>Overview</h2>
+        <h2>The problem</h2>
         <p>
-          Built a multi-tenant enterprise platform for LinkedIn publishing across employee and corporate accounts. The
-          system ingests company context, drafts posts with configurable voice controls, automates posting workflows,
-          and reports performance across individual, team, and executive layers.
+          Teams needed AI-assisted publishing that preserved individual voice, approval controls, and performance
+          visibility.
         </p>
       </section>
 
       <section class="card">
-        <h2>Core Value</h2>
+        <h2>What I owned</h2>
+        <p>
+          I designed the platform architecture: voice controls, the approval path, and the analytics layers for a person,
+          a team, and a sponsor.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>What the design includes</h2>
         <ul>
-          <li>Turns employees into consistent distribution channels.</li>
-          <li>Automates thought leadership while preserving author voice markers.</li>
-          <li>Gives measurable ROI visibility from post performance to campaign impact.</li>
-          <li>Balances centralized governance with individual voice control.</li>
+          <li>Voice fingerprinting from writing samples, so pacing and structure stay with the author.</li>
+          <li>Role-based paths for admin, manager, user, and viewer roles.</li>
+          <li>Draft, review, approve, and schedule as the intended path. Auto-post is a policy choice, not a default.</li>
+          <li>Checks for repetition, overlapping language, and tone before a post can move forward.</li>
+          <li>Analytics views for engagement and growth, designed to sit beside the publishing workflow.</li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>System Architecture</h2>
-        <ul>
-          <li><strong>Data layer:</strong> Google Sheets, CSV, and API ingestion for brand context and messaging inputs.</li>
-          <li><strong>AI content engine:</strong> layered context from biography, brand profile, voice fingerprint, and performance memory.</li>
-          <li><strong>Topic intelligence:</strong> trend synthesis, insight extraction, and contrarian angle generation.</li>
-          <li><strong>Posting automation:</strong> scheduled queues, best-time optimization, approvals, retries, and fallback delivery.</li>
-          <li><strong>Analytics:</strong> individual, team, and sponsor dashboards with engagement and growth metrics.</li>
-        </ul>
+        <h2>How a team would use it</h2>
+        <p>
+          The intended path is draft, review, approve, then schedule. This case does not document a team running that
+          path in production.
+        </p>
       </section>
 
       <section class="card">
-        <h2>AI Quality and Human Voice Controls</h2>
+        <h2>Intended measures</h2>
+        <p>These are the measures the design is built to track. They are not reported results.</p>
         <ul>
-          <li>Prompt-level style enforcement to avoid predictable AI phrasing and cliches.</li>
-          <li>Voice fingerprinting from writing samples to preserve pacing and structural patterns.</li>
-          <li>Edit-distance and engagement feedback loops to improve draft quality over time.</li>
-          <li>Repetition, plagiarism, and tone consistency checks before publish.</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Enterprise Controls</h2>
-        <ul>
-          <li>Role-based workflows for Admin, Manager, User, and Viewer roles.</li>
-          <li>Draft, review, approve, schedule, and auto-post options per team policy.</li>
-          <li>Multi-tenant branding configuration for domain, dashboard, and client-specific UI.</li>
-          <li>Integration-ready design for LinkedIn, OpenAI, Slack, HubSpot, and Salesforce.</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Success Metrics</h2>
-        <ul>
-          <li>Engagement rate per post and follower growth rate.</li>
+          <li>Engagement rate per post and follower growth.</li>
           <li>Posts per user per week and content approval rate.</li>
-          <li>Theme-level performance and enterprise retention signals.</li>
-          <li>Attribution to pipeline and lead quality when CRM connections are enabled.</li>
+          <li>Theme-level performance.</li>
+          <li>Pipeline and lead-quality attribution, if a CRM connection is turned on.</li>
         </ul>
+      </section>
+
+      <section class="card">
+        <h2>System detail</h2>
+        <ul>
+          <li>Context inputs: biography, brand profile, voice fingerprint, and prior performance.</li>
+          <li>Data inputs designed for sheets, CSV, and API ingestion.</li>
+          <li>Integration-ready design for LinkedIn, a model provider, Slack, HubSpot, and Salesforce.</li>
+          <li>Multi-tenant branding for a domain or a client-specific interface.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Related</h2>
+        <div class="related">
+          <a href="/case-studies/jambase-revenue-system.html">JamBase revenue system</a>
+          <a href="/case-studies/genre-intelligence-engine.html">Genre intelligence engine</a>
+          <a href="/?intent=ai-ops#contact">Discuss your workflow</a>
+        </div>
       </section>
     </main>
   </body>
-  </html>
+</html>

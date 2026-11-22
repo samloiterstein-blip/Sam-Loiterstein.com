@@ -37,7 +37,7 @@
 
 @layer components {
   .container-page {
-    @apply mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-10;
+    @apply mx-auto w-full px-6 sm:px-8 lg:px-10;
   }
 
   .eyebrow {
@@ -107,6 +107,8 @@
   .logo-marquee-shell a,
   .logo-marquee-shell img {
     cursor: inherit;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   .logo-marquee-track {
@@ -140,6 +142,51 @@
     filter: none;
     opacity: 1;
   }
+}
+
+.work-cube {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - var(--half));
+  width: calc(var(--half) * 2);
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--half) * -1));
+}
+
+.work-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e6e1d8;
+  backface-visibility: hidden;
+}
+
+.work-face-front {
+  transform: translateZ(var(--half));
+}
+
+.work-face-left,
+.work-face-right {
+  pointer-events: none;
+}
+
+.work-face-left {
+  transform: rotateY(-90deg) translateZ(var(--half));
+}
+
+.work-face-right {
+  transform: rotateY(90deg) translateZ(var(--half));
+}
+
+.work-face-card {
+  justify-content: flex-start;
+  border: 0;
+  background: transparent;
+  border-radius: 1rem;
 }
 
 @keyframes hero-title-swap {

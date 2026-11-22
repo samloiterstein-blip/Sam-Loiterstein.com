@@ -1,28 +1,27 @@
 /**
- * SEO and GEO metadata for the personal site.
- * Keep titles and descriptions in sync with public/llms.txt and public/llms-full.txt.
+ * SEO metadata for the personal site.
+ * Keep titles and descriptions in sync with public/llms.txt and index.html.
  */
 
 export const SITE_ORIGIN = "https://sam-loiterstein.com" as const;
 
 export const seo = {
-  title: "Sam Loiterstein | AI Expertise, Workflows, and GTM as a Service",
+  title: "Sam Loiterstein | Fractional product leadership for AI and revenue systems",
   description:
-    "Sam Loiterstein designs AI-powered workflows and GTM as a Service for community-facing companies. Product, RevOps, and go-to-market systems based in Washington, DC.",
+    "Fractional product lead Sam Loiterstein helps revenue and operations leaders make the tools they already use work together, with AI inside the workflows those teams run.",
   keywords: [
     "Sam Loiterstein",
-    "AI expertise",
-    "AI workflows",
-    "GTM as a Service",
-    "go-to-market",
-    "RevOps",
-    "product systems",
-    "Nexus Consulting",
+    "fractional product leadership",
+    "AI operations",
+    "revenue operations",
+    "GTM systems",
+    "nonprofit technology",
+    "custom internal tools",
     "Washington DC",
   ],
-  canonical: SITE_ORIGIN,
+  canonical: `${SITE_ORIGIN}/`,
   ogImage: `${SITE_ORIGIN}/og.png`,
-  ogImageAlt: "Sam Loiterstein: AI expertise, workflows, and GTM as a Service",
+  ogImageAlt: "Sam Loiterstein, fractional product and AI systems for revenue and operations",
   twitterHandle: undefined as string | undefined,
   locale: "en_US",
   llmsTxt: `${SITE_ORIGIN}/llms.txt`,
@@ -34,20 +33,17 @@ export const seo = {
     "https://github.com/samloiterstein-blip",
     "https://nxsconsultants.com",
   ],
-  jobTitle: "Founder, AI and GTM systems operator",
+  jobTitle: "Fractional product and AI systems lead",
   knowsAbout: [
-    "AI expertise",
-    "AI workflows",
-    "GTM as a Service",
-    "Go-to-market strategy",
+    "AI operations",
+    "Fractional product leadership",
     "Revenue operations",
-    "RevOps",
-    "Product strategy",
-    "Sales infrastructure",
+    "GTM systems",
+    "Nonprofit technology",
+    "Custom internal tools",
     "CRM systems",
     "HubSpot",
     "Salesforce",
-    "Community programs",
-    "Live music technology",
+    "Workflow design",
   ],
 } as const;

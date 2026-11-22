@@ -14,7 +14,7 @@ export function Footer() {
             <span className="text-ink-500">{footer.fanLabel}</span>{" "}
             {footer.fanLinks.map((link, i) => (
               <span key={link.href}>
-                {i > 0 ? " · " : null}
+                {i > 0 ? " and " : null}
                 <a
                   href={link.href}
                   target="_blank"

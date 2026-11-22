@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Section } from "./ui/Section";
 import { Button } from "./ui/Button";
 import { services, servicesSection } from "@/data/content";
@@ -13,42 +13,21 @@ export function Services() {
       description={servicesSection.description}
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        {services.map((s, i) => {
-          const Icon = s.icon;
-          return (
+        {services.map((s, i) => (
             <motion.div
               key={s.title}
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.55, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -2 }}
-              className="group relative overflow-hidden rounded-2xl border border-ink-100 bg-white p-7 shadow-soft transition-all duration-300 hover:border-sage-300 hover:shadow-[0_12px_32px_-12px_rgba(35,54,42,0.18)]"
+              className="rounded-2xl border border-ink-100 bg-white p-7 shadow-soft"
             >
-              <div className="flex items-start gap-4">
-                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sage-100 text-sage-800 transition-colors duration-300 group-hover:bg-sage-700 group-hover:text-cream">
-                  <Icon size={20} />
-                </div>
-                <div>
-                  <h3 className="font-display text-xl text-ink-900 sm:text-2xl">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.description}</p>
-                </div>
-              </div>
-
-              <ul className="mt-6 grid gap-2 border-t border-ink-100 pt-5 sm:grid-cols-3">
-                {s.bullets.map((b) => (
-                  <li
-                    key={b}
-                    className="flex items-center gap-2 text-sm text-ink-700"
-                  >
-                    <Check size={14} className="text-sage-700" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
+              <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-sage-800">{s.audience}</p>
+              <h3 className="mt-1 font-display text-xl text-ink-900 sm:text-2xl">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-600">{s.problem}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink-800">{s.proof}</p>
             </motion.div>
-          );
-        })}
+          ))}
       </div>
 
       <div className="mt-12 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-sage-200 bg-sage-50/60 p-6">

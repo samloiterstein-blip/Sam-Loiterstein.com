@@ -3,53 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Genre Intelligence Engine Case Study</title>
+    <title>Genre Intelligence Engine | Sam Loiterstein</title>
+    <meta
+      name="description"
+      content="A proof of concept that turns noisy music metadata into taxonomies, embeddings, and an inspectable personalized feed. Product and data proof, not a revenue result."
+    />
+    <link rel="canonical" href="https://sam-loiterstein.com/case-studies/genre-intelligence-engine.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Genre Intelligence Engine | Sam Loiterstein" />
+    <meta
+      property="og:description"
+      content="Taxonomies, embeddings, and a personalized feed proof of concept for live music discovery."
+    />
+    <meta property="og:url" content="https://sam-loiterstein.com/case-studies/genre-intelligence-engine.html" />
+    <meta property="og:image" content="https://sam-loiterstein.com/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="/case-studies/styles.css" />
   </head>
   <body>
     <main class="wrap">
-      <a class="back" href="/">Back to site</a>
+      <a class="back" href="/#background">Back</a>
       <h1>Genre Intelligence Engine</h1>
-      <div class="meta">2025. ML and analytics case study</div>
-      <div class="stack">
-        <span class="chip">Python</span>
-        <span class="chip">SQL</span>
-        <span class="chip">R</span>
-        <span class="chip">JavaScript</span>
-        <span class="chip">TypeScript</span>
-      </div>
+      <div class="meta">2025. Product and data proof for discovery and recommendations.</div>
+      <p class="status">Proof of concept</p>
 
       <section class="card">
-        <h2>Problem</h2>
+        <h2>The problem</h2>
         <p>
-          Music and event platforms often treat genres as static labels, which limits discovery and recommendation quality.
-          Built a data mining system that learns real relationships between genres from artist and event behavior.
+          Noisy, incomplete genre labels limited discovery and recommendation quality. The same artist or event could
+          carry different labels depending on the source.
         </p>
       </section>
 
       <section class="card">
-        <h2>Approach</h2>
+        <h2>What I owned</h2>
+        <p>I built the cleaning pipeline, the taxonomy and embedding outputs, and an inspectable personalized feed.</p>
+      </section>
+
+      <section class="card">
+        <h2>What changed</h2>
         <ul>
-          <li>Built a two-stage pipeline: preprocessing and mining.</li>
-          <li>Cleaned and normalized genre signals from large JamBase-style artist and event datasets.</li>
-          <li>Enriched missing metadata, built genre co-occurrence maps, and generated taxonomy paths.</li>
-          <li>Trained embeddings and clustering outputs to support user preference scoring and feed ranking.</li>
+          <li>A first stage cleans and normalizes genre signals from artist and event metadata.</li>
+          <li>A second stage builds co-occurrence maps, taxonomy paths, embeddings, and clusters.</li>
+          <li>User preference and affinity outputs rank a personalized feed.</li>
+          <li>Taxonomy paths and cluster keys stay visible, so a grouping can be inspected.</li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>Outputs</h2>
-        <ul>
-          <li>Genre taxonomy paths and cluster keys for explainable grouping.</li>
-          <li>Event clusters and artist embedding clusters for recommendation candidate generation.</li>
-          <li>User preference and affinity outputs for personalization.</li>
-          <li>A ranked personalized feed proof of concept.</li>
-        </ul>
+        <h2>How it is used</h2>
+        <p>
+          A product or data reviewer can see why an item was grouped or ranked. Synth, the live music product, uses this
+          work in personalized discovery. The feed itself is a proof of concept.
+        </p>
       </section>
 
-      <div class="actions">
-        <a class="btn" href="/reports/data-mining-report-revised.docx" target="_blank" rel="noreferrer">Open full report</a>
-      </div>
+      <section class="card">
+        <h2>What we can say about the result</h2>
+        <p>
+          The project produced taxonomies, embeddings, and an inspectable feed. That is product and data proof. It is
+          not a revenue result, and it is not presented here as a finished production recommender.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Related</h2>
+        <div class="related">
+          <a href="/reports/data-mining-report-revised.docx">Open the report</a>
+          <a href="/case-studies/enterprise-linkedin-voice-analytics.html">LinkedIn voice architecture</a>
+          <a href="https://getsynth.app" target="_blank" rel="noreferrer">Open Synth</a>
+        </div>
+      </section>
     </main>
   </body>
-  </html>
+</html>

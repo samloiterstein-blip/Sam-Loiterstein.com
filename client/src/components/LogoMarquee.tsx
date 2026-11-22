@@ -3,9 +3,9 @@ import { workedWithLogos, workedWithSection, type LogoFit, type WorkedWithLogo }
 import { cn } from "@/lib/cn";
 
 const FIT_CLASS: Record<LogoFit, string> = {
-  mark: "max-h-12 max-w-12 sm:max-h-14 sm:max-w-14",
-  wordmark: "max-h-8 max-w-[9rem] sm:max-h-9 sm:max-w-[10rem]",
-  lockup: "max-h-12 max-w-[9rem] sm:max-h-14 sm:max-w-[10rem]",
+  mark: "max-h-16 max-w-16 sm:max-h-20 sm:max-w-20",
+  wordmark: "max-h-12 max-w-[13rem] sm:max-h-14 sm:max-w-[16rem]",
+  lockup: "max-h-16 max-w-[14rem] sm:max-h-20 sm:max-w-[17rem]",
 };
 
 const LOOP_MS = 70000;
@@ -28,7 +28,7 @@ function LogoMark({ logo, duplicate = false }: { logo: WorkedWithLogo; duplicate
     />
   );
 
-  const className = "logo-mark-slot flex h-[4.5rem] w-44 shrink-0 items-center justify-center sm:h-20 sm:w-48";
+  const className = "logo-mark-slot flex h-24 shrink-0 items-center justify-center px-6 sm:h-28 sm:px-8";
 
   if (logo.href) {
     return (
@@ -116,7 +116,7 @@ export function LogoMarquee() {
     };
   }, []);
 
-  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerDown = (event: React.PointerEvent<HTMLElement>) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
     velocityRef.current = 0;
     dragRef.current = {
@@ -128,7 +128,7 @@ export function LogoMarquee() {
     };
   };
 
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+  const onPointerMove = (event: React.PointerEvent<HTMLElement>) => {
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
 
@@ -141,9 +141,10 @@ export function LogoMarquee() {
       try {
         event.currentTarget.setPointerCapture(event.pointerId);
       } catch {
-        // Some browsers reject capture until the pointer is active.
+        // Capture can fail if the pointer is already gone.
       }
     }
+    event.preventDefault();
 
     const now = performance.now();
     const dt = Math.max(now - drag.lastT, 1);
@@ -160,7 +161,7 @@ export function LogoMarquee() {
     }
   };
 
-  const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+  const endDrag = (event: React.PointerEvent<HTMLElement>) => {
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
     dragRef.current = null;
@@ -173,7 +174,7 @@ export function LogoMarquee() {
     setDragging(false);
   };
 
-  const onClickCapture = (event: React.MouseEvent<HTMLDivElement>) => {
+  const onClickCapture = (event: React.MouseEvent<HTMLElement>) => {
     if (!suppressClickRef.current) return;
     event.preventDefault();
     event.stopPropagation();
@@ -181,7 +182,21 @@ export function LogoMarquee() {
   };
 
   return (
-    <section aria-labelledby="worked-with-heading" className="py-10 sm:py-12">
+    <section
+      aria-labelledby="worked-with-heading"
+      className={cn("logo-marquee-shell pb-2 pt-2 sm:pt-4", dragging && "is-dragging")}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      onClickCapture={onClickCapture}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") pausedRef.current = true;
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") pausedRef.current = false;
+      }}
+    >
       <p
         id="worked-with-heading"
         className="flex items-center justify-center gap-3 text-xs font-medium uppercase tracking-[0.22em] text-sage-800 sm:gap-4 sm:text-sm"
@@ -191,24 +206,7 @@ export function LogoMarquee() {
         <span className="h-px w-8 bg-sage-400 sm:w-10" aria-hidden />
       </p>
 
-      <div
-        ref={shellRef}
-        className={cn(
-          "logo-marquee-shell relative mt-8 overflow-hidden select-none sm:mt-10",
-          dragging && "is-dragging"
-        )}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onClickCapture={onClickCapture}
-        onPointerEnter={(event) => {
-          if (event.pointerType === "mouse") pausedRef.current = true;
-        }}
-        onPointerLeave={(event) => {
-          if (event.pointerType === "mouse") pausedRef.current = false;
-        }}
-      >
+      <div ref={shellRef} className="relative mt-3 overflow-hidden select-none">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cream to-transparent sm:w-28"

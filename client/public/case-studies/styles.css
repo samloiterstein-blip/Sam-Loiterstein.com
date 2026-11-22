@@ -21,9 +21,9 @@ body {
 }
 
 .wrap {
-  max-width: 880px;
+  width: 100%;
   margin: 0 auto;
-  padding: 48px 20px 64px;
+  padding: 48px 40px 64px;
 }
 
 .back {
@@ -126,4 +126,26 @@ figcaption {
   font-size: 0.9rem;
   color: var(--muted, #5a6b62);
   line-height: 1.5;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--sage);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.related a {
+  color: var(--sage);
+  font-weight: 600;
 }

@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, CheckCircle2, Linkedin, Loader2, Mail } from "lucide-react";
+import { ArrowRight, CheckCircle2, Github, Linkedin, Loader2 } from "lucide-react";
 import { Section } from "./ui/Section";
-import { contact, site } from "@/data/content";
+import { contact, site, substack } from "@/data/content";
 import { cn } from "@/lib/cn";
+import { CONTACT_INTENT_EVENT, readContactIntent } from "@/lib/contactIntent";
 
 const v = contact.form.validation;
 
@@ -52,6 +53,22 @@ export function Contact() {
   const intentValue = watch("intent");
 
   useEffect(() => {
+    const apply = () => {
+      const intent = readContactIntent();
+      if (contact.intents.some((item) => item.id === intent)) {
+        setValue("intent", intent, { shouldDirty: false });
+      }
+    };
+    apply();
+    window.addEventListener(CONTACT_INTENT_EVENT, apply);
+    window.addEventListener("popstate", apply);
+    return () => {
+      window.removeEventListener(CONTACT_INTENT_EVENT, apply);
+      window.removeEventListener("popstate", apply);
+    };
+  }, [setValue]);
+
+  useEffect(() => {
     const intent = contact.intents.find((i) => i.id === intentValue);
     setMessagePlaceholder(intent?.placeholder ?? contact.form.placeholders.message);
   }, [intentValue]);
@@ -88,39 +105,68 @@ export function Contact() {
       id="contact"
       eyebrow={contact.eyebrow}
       title={contact.title}
-      description={contact.description}
+      displayHeader
     >
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-        <div>
+      <div className="grid items-start gap-6 pt-8 sm:pt-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-8">
+        <div className="flex flex-col gap-4">
           <div className="rounded-2xl border border-ink-100 bg-white p-6 shadow-soft">
             <a
               href={`mailto:${site.email}`}
               data-analytics="contact:email"
-              className="group flex items-start gap-4 text-left"
+              className="flex flex-col items-center text-center"
             >
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-sage-100 text-sage-800 transition-colors group-hover:bg-sage-700 group-hover:text-cream">
-                <Mail size={18} />
-              </div>
-              <div>
+              <img
+                src="/images/email-profile.png"
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 rounded-xl object-cover"
+              />
+              <div className="mt-3">
                 <div className="text-xs uppercase tracking-[0.16em] text-ink-500">{contact.emailLabel}</div>
                 <div className="mt-0.5 font-medium text-ink-900">{site.email}</div>
                 <div className="mt-1 text-sm text-ink-500">{contact.emailHint}</div>
               </div>
             </a>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-ink-100 pt-4">
+              <a
+                href={site.socials.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="contact:linkedin"
+                className="inline-flex items-center gap-2 text-sm font-medium text-sage-800 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
+              >
+                <Linkedin size={16} aria-hidden />
+                LinkedIn
+              </a>
+              <a
+                href={substack.publicationUrl}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="contact:substack"
+                className="inline-flex items-center gap-2 text-sm font-medium text-sage-800 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" className="fill-current">
+                  <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                </svg>
+                Substack
+              </a>
+              <a
+                href={site.socials.github}
+                target="_blank"
+                rel="noreferrer"
+                data-analytics="contact:github"
+                className="inline-flex items-center gap-2 text-sm font-medium text-sage-800 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400"
+              >
+                <Github size={16} aria-hidden />
+                GitHub
+              </a>
+            </div>
           </div>
 
-          <ul className="mt-4 grid grid-cols-2 gap-3">
-            <SocialTile href={site.socials.linkedin} label="LinkedIn">
-              <Linkedin size={18} />
-            </SocialTile>
-            <SocialTile href={site.socials.email} label="Email">
-              <Mail size={18} />
-            </SocialTile>
-          </ul>
-
-          <div className="mt-6 rounded-2xl border border-sage-200 bg-sage-50/60 p-5 text-sm text-ink-700">
-            <div className="font-medium text-ink-900">{contact.currently.heading}</div>
-            <p className="mt-1">{contact.currently.body}</p>
+          <div className="rounded-2xl border border-sage-200 bg-sage-50/60 p-5 text-sm leading-relaxed text-ink-700">
+            <p className="font-medium text-ink-900">{contact.nextLabel}</p>
+            <p className="mt-2">{contact.nextBody}</p>
           </div>
         </div>
 
@@ -133,7 +179,6 @@ export function Contact() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             onSubmit={onSubmit}
-            noValidate
             data-analytics="form:contact"
             className="rr-block rounded-2xl border border-ink-100 bg-white p-6 shadow-soft sm:p-8"
           >
@@ -173,22 +218,31 @@ export function Contact() {
             </Field>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Name" htmlFor="name" error={errors.name?.message}>
+              <Field label="Name" htmlFor="name" error={errors.name?.message} required>
                 <input
                   id="name"
                   type="text"
                   autoComplete="name"
+                  required
+                  minLength={2}
+                  aria-required="true"
+                  aria-invalid={errors.name ? true : undefined}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                   className={inputClasses(!!errors.name)}
                   placeholder={f.placeholders.name}
                   {...register("name")}
                 />
               </Field>
 
-              <Field label="Email" htmlFor="email" error={errors.email?.message}>
+              <Field label="Email" htmlFor="email" error={errors.email?.message} required>
                 <input
                   id="email"
                   type="email"
                   autoComplete="email"
+                  required
+                  aria-required="true"
+                  aria-invalid={errors.email ? true : undefined}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                   className={inputClasses(!!errors.email)}
                   placeholder={f.placeholders.email}
                   {...register("email")}
@@ -196,10 +250,15 @@ export function Contact() {
               </Field>
             </div>
 
-            <Field label="Message" htmlFor="message" error={errors.message?.message} className="mt-5">
+            <Field label="Message" htmlFor="message" error={errors.message?.message} className="mt-5" required>
               <textarea
                 id="message"
                 rows={5}
+                required
+                minLength={10}
+                aria-required="true"
+                aria-invalid={errors.message ? true : undefined}
+                aria-describedby={errors.message ? "message-error" : undefined}
                 className={cn(inputClasses(!!errors.message), "min-h-[140px] resize-y")}
                 placeholder={messagePlaceholder}
                 {...register("message")}
@@ -268,7 +327,7 @@ function SuccessCard({ onReset }: { onReset: () => void }) {
 
 function inputClasses(hasError: boolean) {
   return cn(
-    "w-full rounded-xl border bg-cream/40 px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 transition-colors focus:bg-white",
+    "w-full rounded-xl border bg-cream/40 px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 transition-colors focus:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-400",
     hasError
       ? "border-red-300 focus:border-red-500"
       : "border-ink-200 focus:border-sage-500"
@@ -281,12 +340,14 @@ function Field({
   children,
   className,
   error,
+  required = false,
 }: {
   label: string;
   htmlFor: string;
   children: React.ReactNode;
   className?: string;
   error?: string;
+  required?: boolean;
 }) {
   return (
     <div className={className}>
@@ -295,10 +356,11 @@ function Field({
         className="mb-1.5 block text-xs font-medium uppercase tracking-[0.14em] text-ink-500"
       >
         {label}
+        {required ? <span className="sr-only"> required</span> : null}
       </label>
       {children}
       {error && (
-        <p className="mt-1.5 text-xs text-red-700" role="alert">
+        <p id={`${htmlFor}-error`} className="mt-1.5 text-xs text-red-700" role="alert">
           {error}
         </p>
       )}
@@ -306,32 +368,3 @@ function Field({
   );
 }
 
-function SocialTile({
-  href,
-  label,
-  children,
-}: {
-  href: string;
-  label: string;
-  children: React.ReactNode;
-}) {
-  const isExternal = href.startsWith("http");
-  return (
-    <li>
-      <a
-        href={href}
-        data-analytics={`contact:${label.toLowerCase()}`}
-        {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-        aria-label={label}
-        className="group flex h-14 flex-col items-center justify-center rounded-2xl border border-ink-100 bg-white text-ink-700 shadow-soft transition-all duration-200 hover:border-sage-400 hover:text-sage-800"
-      >
-        <span className="transition-transform duration-200 group-hover:-translate-y-0.5">
-          {children}
-        </span>
-        <span className="mt-1 text-[11px] uppercase tracking-[0.14em] text-ink-400 group-hover:text-sage-700">
-          {label}
-        </span>
-      </a>
-    </li>
-  );
-}

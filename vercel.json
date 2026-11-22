@@ -2,6 +2,25 @@
   "installCommand": "npm install --include=dev && npm --prefix client install --include=dev && npm --prefix server install --include=dev",
   "buildCommand": "npx tsx scripts/fetch-substack-feed.ts && npm --prefix client run build",
   "outputDirectory": "client/dist",
+  "redirects": [
+    {
+      "source": "/case-studies/sdr-automation-application.html",
+      "destination": "/case-studies/jambase-revenue-system.html",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.sam-loiterstein.com" }],
+      "destination": "https://sam-loiterstein.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.sam-loiterstein.com" }],
+      "destination": "https://sam-loiterstein.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/go/:slug", "destination": "/api/go/:slug" }
   ],

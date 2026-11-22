@@ -1,6 +1,6 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Check, ChevronDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Section } from "./ui/Section";
 import { Tag } from "./ui/Tag";
 import { Button } from "./ui/Button";
@@ -100,9 +100,7 @@ export function Projects() {
           </p>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            {services.map((s, i) => {
-              const Icon = s.icon;
-              return (
+            {services.map((s, i) => (
                 <motion.div
                   key={s.title}
                   initial={{ opacity: 0, y: 12 }}
@@ -111,27 +109,11 @@ export function Projects() {
                   transition={{ duration: 0.45, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
                   className="rounded-2xl border border-ink-100 bg-cream/60 p-5"
                 >
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-sage-100 text-sage-800">
-                      <Icon size={18} />
-                    </div>
-                    <div>
-                      <h3 className="font-display text-xl text-ink-900">{s.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-ink-600">{s.description}</p>
-                    </div>
-                  </div>
-
-                  <ul className="mt-4 grid gap-1.5 text-sm text-ink-700">
-                    {s.bullets.map((b) => (
-                      <li key={b} className="flex items-center gap-2">
-                        <Check size={14} className="text-sage-700" />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-sage-800">{s.audience}</p>
+                  <h3 className="mt-1 font-display text-xl text-ink-900">{s.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-ink-600">{s.problem}</p>
                 </motion.div>
-              );
-            })}
+              ))}
           </div>
 
           <div className="mt-5 rounded-xl border border-sage-200 bg-sage-50/60 p-4">

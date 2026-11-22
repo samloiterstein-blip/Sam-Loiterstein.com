@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Java logo">
+  <rect width="64" height="64" rx="12" fill="#5382A1" />
+  <path d="M24 30h16c2 0 4 2 4 5v9c0 4-3 7-8 7h-8c-5 0-8-3-8-7v-9c0-3 2-5 4-5z" fill="#FFFFFF" />
+  <path d="M28 30v-3a4 4 0 0 1 8 0v3" fill="none" stroke="#FFFFFF" stroke-width="3" />
+  <path d="M30 18c1-3 3-3 2-6M34 17c2-2 3-1 2-4" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+</svg>

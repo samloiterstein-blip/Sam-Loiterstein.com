@@ -3,6 +3,7 @@ export type SubstackPost = {
   link: string;
   publishedAt: string;
   excerpt: string;
+  image?: string;
 };
 
 export type SubstackFeedPayload = {
@@ -28,6 +29,26 @@ function readTag(block: string, tag: string): string {
   return match?.[1]?.trim() ?? "";
 }
 
+function cleanImage(url: string | null | undefined): string | undefined {
+  const value = url?.trim();
+  if (!value || !/^https?:\/\//i.test(value)) return undefined;
+  return value;
+}
+
+function readRssImage(block: string): string | undefined {
+  const enclosure = /<enclosure\b([^>]*)\/?>/i.exec(block);
+  if (enclosure) {
+    const attrs = enclosure[1] ?? "";
+    const type = /type=["']([^"']+)["']/i.exec(attrs)?.[1] ?? "";
+    const url = /url=["']([^"']+)["']/i.exec(attrs)?.[1];
+    if (url && (!type || type.toLowerCase().startsWith("image/"))) return cleanImage(url);
+  }
+  const media = /<(?:media:content|media:thumbnail)\b[^>]*\burl=["']([^"']+)["']/i.exec(block);
+  if (media?.[1]) return cleanImage(media[1]);
+  const img = /<img\b[^>]*\bsrc=["']([^"']+)["']/i.exec(block);
+  return cleanImage(img?.[1]);
+}
+
 export function normalizePublicationHost(host: string): string {
   return host
     .trim()
@@ -51,6 +72,7 @@ export function parseSubstackRss(xml: string, limit = 8): SubstackPost[] {
         link: readTag(block!, "link"),
         publishedAt: readTag(block!, "pubDate"),
         excerpt: stripHtml(description).slice(0, 300),
+        image: readRssImage(block!),
       };
     })
     .filter((post) => post.title.length > 0 && post.link.length > 0);
@@ -93,6 +115,7 @@ type ArchivePost = {
   canonical_url?: string;
   post_date?: string;
   truncated_body_text?: string | null;
+  cover_image?: string | null;
 };
 
 export function sortNewest(posts: SubstackPost[]): SubstackPost[] {
@@ -141,6 +164,7 @@ export async function fetchSubstackPage(
           link: (post.canonical_url ?? "").trim(),
           publishedAt: post.post_date ?? "",
           excerpt: excerptSource.replace(/\s+/g, " ").trim().slice(0, 300),
+          image: cleanImage(post.cover_image),
         };
       })
       .filter((post) => post.title.length > 0 && post.link.length > 0),
